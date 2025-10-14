@@ -2,6 +2,7 @@
 
 import { createApp } from 'vue'
 import './style.css'
+import './QuienesSomos.css'
 import App from './App.vue'
 
 

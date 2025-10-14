@@ -10,11 +10,12 @@
 <script>
 
 import pagPrincipal1 from './pagPrincipal1.vue'; 
-import QuienesSomos from './quienesSomos.vue';
+import quienesSomos from './quienesSomos.vue';
 export default {
   name: 'App',
   components: {
-    pagPrincipal1
+    pagPrincipal1,
+    quienesSomos
   }
 }
 </script>
