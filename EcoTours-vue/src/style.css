@@ -1,0 +1,607 @@
+/*=====ESTILOS GLOBALES Y DE VISTA=======*/
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box; 
+    font-family: Arial, sans-serif;
+    background-color: #ffffff; 
+}
+
+/* Contenedores de la aplicación (Vue) */
+#app, .pag-principal {
+    width: 100%;
+    min-height: 100vh;
+}
+
+/*=====ESTILOS DEL HEADER COMPONENTE 1. (menuPrincipal1.vue) ======*/
+
+/* Contenedor Principal (Header) */
+.main-header {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    width: 100%;
+    position: sticky; 
+    top: 0; 
+    z-index: 1000;
+}
+
+/* Estilo del Logo (Mantenido a 80px) */
+.logo {
+    height: 80px; 
+    margin-left: 40px; 
+}
+
+/* Estilo de la Navegación (Menú) */
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    margin-right: 40px; 
+}
+
+.nav-links li {
+    margin-left: 30px;
+}
+
+/* Estilo de los Enlaces Individuales */
+.nav-link {
+    text-decoration: none;
+    color: #333333;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    display: block; 
+    padding: 5px 0;
+}
+
+.nav-link:hover {
+    color: #ff6600; 
+}
+
+/* Estilo Específico para Botones/Acciones */
+.action-button {
+    color: #ff6600; 
+    border: 1px solid #ff6600;
+    border-radius: 4px;
+    padding: 8px 15px;
+    margin-left: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.action-button:hover {
+    background-color: #ff6600;
+    color: #ffffff;
+}
+
+/*============= ESTILOS DE LA VISTA 1 (pagPrincipal1.vue) ====================*/
+
+/* Estilos del Hero Section (Banner principal con Imagen y Sombreado) */
+.hero-section {
+    background-image: url('/img/principal.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+    color: #ffffff; 
+    text-align: center;
+    width: 100%; 
+    height: 70vh;  
+    position: relative; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    padding: 0; 
+}
+
+/* Oscurecimiento de la Imagen (Sombreado) */
+.hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 1; 
+}
+
+.hero-content {
+    padding: 0 40px; 
+    position: relative; 
+    z-index: 2;
+    max-width: 900px; 
+    margin: 0 auto;
+}
+
+.hero-title {
+    font-size: 3.5em; 
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+}
+
+.hero-subtitle {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 40px; 
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* Estilos para otras secciones (Vuelos internacionales) */
+.other-section {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #ffffff; 
+    color: #333;
+}
+
+.other-section h2 {
+    font-size: 2.2em;
+    color: #ff6600; 
+    margin-bottom: 20px;
+}
+
+.other-section p {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+/*TARJETAS CON PAQUETES COMIENZAN AQUIIIIIII*/
+/*=================ESTILOS DE LA SECCIÓN PAQUETES DE VIAJE (BLOG/CARDS)===========================*/
+
+/* Contenedor de la Sección */
+.packages-section {
+    padding: 60px 40px; 
+    text-align: center;
+    background-color: #f9f9f9; 
+}
+
+.section-title {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 50px;
+    font-weight: bold;
+}
+
+/* Diseño de la Rejilla (Grid de 3 Columnas) */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 30px; 
+    max-width: 1200px; 
+    margin: 0 auto;
+    text-align: left; 
+}
+
+/* Estilos de la Tarjeta Individual */
+.package-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.package-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.card-image {
+    width: 100%;
+    height: 200px; 
+    object-fit: cover;
+}
+
+.card-info {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #ff6600; 
+    margin-bottom: 10px;
+}
+
+.card-description {
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 15px;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-link {
+    display: inline-block;
+    color: #007bff; 
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9em;
+    transition: color 0.3s ease;
+}
+
+.card-link:hover {
+    color: #ff6600;
+}
+
+/*============ ESTILOS DE LA SECCIÓN CARRUSEL DE OFERTAS =====================*/
+
+.offers-carousel-section {
+    padding: 60px 0;
+    text-align: center;
+    background-color: #ffffff; 
+}
+
+.offers-carousel-section .section-title {
+    color: #ff6600;
+    margin-bottom: 10px;
+}
+
+.section-subtitle {
+    max-width: 800px;
+    margin: 0 auto 40px;
+    font-size: 1em;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Contenedor del Carrusel */
+.carousel-container {
+    max-width: 1080px; 
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden; 
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos del Slide Individual */
+.carousel-slide {
+    width: 100%;
+    height: 300px; 
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+/* Estilos de los Puntos de Navegación */
+.carousel-dots {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-bottom: 10px;
+    z-index: 10;
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    height: 10px;
+    width: 10px;
+    background-color: #ccc;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: default;
+    transition: background-color 0.3s ease;
+}
+
+.dot.active {
+    background-color: #ff6600;
+}
+
+/* Estilos de las Flechas de Navegación */
+.carousel-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5); 
+    color: white;
+    border: none;
+    padding: 15px 10px;
+    cursor: default; 
+    z-index: 10;
+    font-size: 1.5em;
+    font-weight: bold;
+    line-height: 0; 
+    transition: background-color 0.3s;
+}
+
+.carousel-nav-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.prev-btn {
+    left: 0;
+    border-radius: 0 5px 5px 0;
+}
+
+.next-btn {
+    right: 0;
+    border-radius: 5px 0 0 5px;
+}
+
+.slide-footer {
+    background-color: rgba(30, 0, 60, 0.8); 
+    padding: 15px 40px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9em;
+}
+
+/*======= ESTILOS DE LA SECCIÓN DE PASOS CON LOGOS CREATIVOS=============*/
+
+.steps-section {
+    padding: 80px 0;
+    text-align: center;
+    background-color: #f8f8f8;
+}
+
+.steps-section .section-title {
+    color: #ff6600;           
+    margin-bottom: 50px;
+    font-size: 2em;
+}
+
+.steps-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between; 
+    gap: 30px;
+    flex-wrap: wrap; 
+}
+
+.step-card {
+    flex: 1; 
+    min-width: 200px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.step-card:hover {
+    transform: translateY(-5px); 
+}
+
+.step-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px; 
+    height: 100px;
+    border-radius: 50%; 
+    font-size: 3.5em; 
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    color: #ffffff; 
+}
+
+/* Colores de Fondo para los 4 Pasos */
+.step-icon-search {
+    background-color: #007bff;
+}
+
+.step-icon-book {
+    background-color: #28a745; 
+}
+
+.step-icon-pay {
+    background-color: #ff6600; 
+}
+
+.step-icon-fly {
+    background-color: #6f42c1;
+}
+
+/* Estilos de Texto */
+.step-title {
+    font-size: 1.3em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.step-description {
+    font-size: 0.95em;
+    color: #666;
+}
+
+/*============ESTILOS DEL BANNER PRINCIPAL (HERO SECTION)=========================*/
+
+.hero-section {
+    width: 100%;
+    height: 60vh; 
+    min-height: 400px; 
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #ffffff; 
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.4); 
+}
+
+.hero-content {
+    z-index: 10; 
+    max-width: 900px; 
+    padding: 20px;
+}
+
+.hero-logo {
+    max-width: 300px; 
+    height: auto; 
+    margin-bottom: 20px;
+    filter: drop-shadow(0px 5px 8px rgba(0, 0, 0, 0.5)); 
+}
+
+.hero-title {
+    font-size: 3.5em; 
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); 
+}
+
+.hero-subtitle {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
+}
+
+.hero-button {
+    display: inline-block;
+    background-color: #ff6600;
+    color: #ffffff;
+    padding: 15px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.hero-button:hover {
+    background-color: #e65c00; 
+}
+
+/*=================ESTILOS DEL FOOTERIni (COMPONENTE 2) =========================*/
+
+.main-footer {
+    width: 100%;
+    padding-top: 50px; 
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    color: #f0f0f0;
+}
+
+.footer-overlay {
+    background-color: rgba(30, 0, 60, 0.85); 
+    padding: 30px 0;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-wrap: wrap; 
+}
+
+.footer-column {
+    flex: 1; 
+    min-width: 200px; 
+    margin-bottom: 20px;
+}
+
+/* Columna de Contacto */
+.contact-column {
+    flex: 2; /* Le damos más espacio a la columna de contacto */
+    min-width: 300px;
+}
+
+.footer-logo {
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.contact-info {
+    font-size: 0.95em;
+    line-height: 1.6;
+    margin-bottom: 5px;
+}
+
+.info-label {
+    font-weight: bold;
+    color: #ff9900; /* Naranja para resaltar las etiquetas */
+}
+
+/* Títulos de Columna */
+.column-title {
+    font-size: 1.2em;
+    color: #ffffff;
+    border-bottom: 2px solid #ff6600; /* Línea naranja debajo del título */
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* Links de Navegación */
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 8px;
+}
+
+.footer-links a {
+    color: #c0c0c0;
+    text-decoration: none;
+    font-size: 0.95em;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #ff6600; /* Cambio a naranja al pasar el ratón */
+}
+
+/* Social Icons */
+.social-links {
+    margin-top: 20px;
+}
+
+.social-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #c0c0c0;
+    border-radius: 50%;
+    color: #c0c0c0;
+    text-decoration: none;
+    margin-right: 10px;
+    font-size: 0.8em;
+    transition: all 0.3s;
+}
+
+.social-icon:hover {
+    background-color: #ff6600;
+    border-color: #ff6600;
+    color: #ffffff;
+}
+
+/* Copyright Bar */
+.footer-copyright {
+    text-align: center;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.4); /* Barra más oscura para el copyright */
+    font-size: 0.85em;
+    color: #a0a0a0;
+}
