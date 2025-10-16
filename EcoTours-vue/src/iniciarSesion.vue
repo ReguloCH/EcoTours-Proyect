@@ -4,19 +4,43 @@
 
     <menuPrincipal1 />
     <!-- a partir de aqui, vas a comenzar-->
-     <P>INICIAR SESION VA AQUI</P>
+      <!-- Contenedor del login -->
+    <div class="contenedor-login">
+      <div class="login-box">
+        <h1>Iniciar sesión</h1>
+
+        <form @submit.prevent="login">
+          <div class="campo">
+            <label>Correo electrónico</label>
+            <input
+              v-model="email"
+              type="email"
+              required
+              placeholder="ejemplo@correo.com"
+            />
+          </div>
+
+          <div class="campo">
+            <label>Contraseña</label>
+            <input
+              v-model="password"
+              type="password"
+              required
+              placeholder="••••••••"
+            />
+          </div>
+
+          <button type="submit" class="btn-entrar">Entrar</button>
+        </form>
+
+        <p class="texto-secundario">
+          ¿No tienes cuenta?
+          <a href="#" class="enlace">Regístrate</a>
+        </p>
+      </div>
+    </div>
 
 
-
-
-
-
-
-
-
-
-
-    
     <!-- aqui se va a mostrar en la vista el footer entonces esta es la ultima parte del codigo-->
     <FooterIni />
     </div>
