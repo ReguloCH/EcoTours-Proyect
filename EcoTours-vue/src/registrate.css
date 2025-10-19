@@ -81,7 +81,7 @@
   color: white;
   border: none;
   border-radius: 12px;
-  font-size: 1.1rem;
+  font-size: 1.1rem; 
   font-weight: 700;
   cursor: pointer;
   transition: background-color 0.25s ease, transform 0.12s ease;
