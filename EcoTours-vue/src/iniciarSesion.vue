@@ -61,7 +61,11 @@ export default {
     };
   },
   methods: {
+<<<<<<< HEAD
     iniciarSesion() {
+=======
+    iniciarSesion() { 
+>>>>>>> b8b6183ac643900511c1e32c3c6022570293a287
       if (this.email && this.password) {
         // Redirige a la página de clientes
         this.$router.push('/pagina-clientes');

@@ -63,7 +63,11 @@
       
           <div class="campo">
             <label for="inputPass">Contraseña</label>
+<<<<<<< HEAD
             <input
+=======
+            <input 
+>>>>>>> b8b6183ac643900511c1e32c3c6022570293a287
               id="inputPass"
               v-model="password"
               type="password"
