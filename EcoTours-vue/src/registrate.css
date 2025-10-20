@@ -81,7 +81,15 @@
   color: white;
   border: none;
   border-radius: 12px;
+<<<<<<< HEAD
   font-size: 1.1rem;
+=======
+<<<<<<< HEAD
+  font-size: 1.1rem;
+=======
+  font-size: 1.1rem; 
+>>>>>>> b8b6183ac643900511c1e32c3c6022570293a287
+>>>>>>> a64750d393ad8c7b0c18ade6a3094136a5cd493d
   font-weight: 700;
   cursor: pointer;
   transition: background-color 0.25s ease, transform 0.12s ease;

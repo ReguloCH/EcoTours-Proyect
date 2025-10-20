@@ -101,10 +101,24 @@
 import menuPrincipal1 from "./components/menuPrincipal1.vue";
 import FooterIni from "./components/footerIni.vue";
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> a64750d393ad8c7b0c18ade6a3094136a5cd493d
 
 export default {
   name: "paginaPago",
   components: { menuPrincipal1, FooterIni },
+<<<<<<< HEAD
+=======
+=======
+export default {
+  name: "paginaPago",
+  components: { menuPrincipal1, 
+    FooterIni 
+  },
+>>>>>>> b8b6183ac643900511c1e32c3c6022570293a287
+>>>>>>> a64750d393ad8c7b0c18ade6a3094136a5cd493d
 
   data() {
     return {

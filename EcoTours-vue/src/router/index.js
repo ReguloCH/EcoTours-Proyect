@@ -58,6 +58,7 @@ const router = createRouter({
       path: '/pagina-pago',
       name: 'pagina-pago',
       component: paginaPago
+
     },
      {
       path: '/adminLOGIN',
@@ -88,6 +89,7 @@ const router = createRouter({
       path: '/hospedajePROV',
       name: '/hospedajePROV',
       component: hospedajePROV
+
     }
     ,
     {

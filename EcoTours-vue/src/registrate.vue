@@ -63,7 +63,9 @@
       
           <div class="campo">
             <label for="inputPass">Contraseña</label>
+
             <input
+
               id="inputPass"
               v-model="password"
               type="password"
