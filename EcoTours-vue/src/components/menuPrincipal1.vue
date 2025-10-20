@@ -16,6 +16,9 @@
         <li><router-link to="/registrate" class="nav-link action-button">Registrate</router-link></li>
         
         <li><router-link to="/iniciar-sesion" class="nav-link action-button">Iniciar Sesión</router-link></li>
+
+        <li><router-link to="/adminLOGIN" class="nav-link action-button">Administrador</router-link></li>
+
         
       </ul>
     </nav>
