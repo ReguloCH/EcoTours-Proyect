@@ -6,6 +6,8 @@ import quienesSomos from '../quienesSomos.vue';
 import Contactanos from '../contactanos.vue';
 import Registrate from '../registrate.vue';
 import IniciarSesion from '../iniciarSesion.vue';
+import paginaClientes from '../paginaClientes.vue'; 
+import paginaPago from '../paginaPago.vue';
 
 
 const router = createRouter({
@@ -35,6 +37,16 @@ const router = createRouter({
       path: '/iniciar-sesion',
       name: 'iniciar-sesion',
       component: IniciarSesion
+    },
+    {
+      path: '/pagina-clientes',
+      name: 'pagina-clientes',
+      component: paginaClientes 
+    },
+    {
+      path: '/pagina-pago',
+      name: 'pagina-pago',
+      component: paginaPago
     }
   ]
 });
