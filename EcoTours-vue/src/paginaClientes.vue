@@ -1,3 +1,56 @@
+<template>
+  <div class="pagina-viajes">
+    <menuPrincipal1 />
+
+    <!-- Encabezado -->
+    <header class="encabezado">
+      <h1>Reserva las mejores ofertas de viaje</h1>
+      <p>Encuentra las tarifas más bajas desde tu ciudad</p>
+    </header>
+
+    <!-- Buscador -->
+    <section class="buscador">
+      <div class="campo">
+        <label>Desde</label>
+        <input type="text" placeholder="Ingrese ciudad o código de aeropuerto" />
+      </div>
+
+      <div class="campo">
+        <label>A</label>
+        <input type="text" placeholder="Ingrese ciudad o código de aeropuerto" />
+      </div>
+
+      <div class="campo">
+        <label>Presupuesto</label>
+        <div class="presupuesto">
+          <span>USD</span>
+          <input type="number" placeholder="Introduce presupuesto máximo" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de ofertas -->
+    <section class="ofertas">
+      <h2>Mejores ofertas desde Venezuela</h2>
+
+      <div class="grid-ofertas">
+        <div class="card" v-for="(oferta, index) in ofertas" :key="index">
+          <img :src="oferta.imagen" :alt="oferta.destino" />
+          <div class="info">
+            <h3>{{ oferta.titulo }}</h3>
+            <p>{{ oferta.fecha }}</p>
+            <p class="precio">{{ oferta.precio }}</p>
+            <!-- 👇 redirección al hacer clic -->
+            <button class="btn-reservar" @click="irAPago(oferta)">Reservar ahora</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <FooterIni />
+  </div>
+</template>
+
 <script>
 import menuPrincipal1 from './components/menuPrincipal1.vue';
 import FooterIni from './components/footerIni.vue';
@@ -45,56 +98,3 @@ export default {
   },
 };
 </script>
-<template>
-  <div class="pagina-viajes">
-    <menuPrincipal1 />
-
-    <!-- Encabezado -->
-    <header class="encabezado">
-      <h1>Reserva las mejores ofertas de viaje</h1>
-      <p>Encuentra las tarifas más bajas desde tu ciudad</p>
-    </header>
-
-    <!-- Buscador -->
-    <section class="buscador">
-      <div class="campo">
-        <label>Desde</label>
-        <input type="text" placeholder="Ingrese ciudad o código de aeropuerto" />
-      </div>
-
-      <div class="campo">
-        <label>A</label>
-        <input type="text" placeholder="Ingrese ciudad o código de aeropuerto" />
-      </div>
-
-      <div class="campo">
-        <label>Presupuesto</label>
-        <div class="presupuesto">
-          <span>USD</span>
-          <input type="number" placeholder="Introduce presupuesto máximo" />
-        </div>
-      </div>
-    </section>
-
-    <!-- Sección de ofertas -->
-    <section class="ofertas">
-      <h2>Mejores ofertas desde Venezuela</h2>
-
-      <div class="grid-ofertas">
-        
-        <div class="card" v-for="(oferta, index) in ofertas" :key="index">
-          <img :src="oferta.imagen" :alt="oferta.destino" />
-          <div class="info">
-            <h3>{{ oferta.titulo }}</h3>
-            <p>{{ oferta.fecha }}</p>
-            <p class="precio">{{ oferta.precio }}</p>
-            <!-- BOTÓN: navega a la página de pago -->
-            <button class="btn-reservar" @click="irAPago(oferta)">Reservar ahora</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <FooterIni />
-  </div>
-</template>

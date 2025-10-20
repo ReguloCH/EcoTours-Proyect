@@ -1,47 +1,98 @@
 <template>
-    <div class="pag-principal">
-<!-- meti -->
-
+  <div class="pag-principal">
+    <!-- Menú principal -->
     <menuPrincipal1 />
-    <!-- a partir de aqui, vas a comenzar-->
-     <P>INICIAR SESION VA AQUI</P>
 
+    <!-- Contenedor del login -->
+    <div class="contenedor-login">
+      <div class="login-box">
+        <h1>Iniciar sesión</h1>
 
+        <form @submit.prevent="iniciarSesion">
+          <div class="campo">
+            <label>Correo electrónico</label>
+            <input
+              v-model="email"
+              type="email"
+              required
+              placeholder="ejemplo@correo.com"
+            />
+          </div>
 
+          <div class="campo">
+            <label>Contraseña</label>
+            <input
+              v-model="password"
+              type="password"
+              required
+              placeholder="••••••••"
+            />
+          </div>
 
+          <button type="submit" class="btn-entrar">Entrar</button>
+        </form>
 
-
-
-
-
-
-
-    
-    <!-- aqui se va a mostrar en la vista el footer entonces esta es la ultima parte del codigo-->
-    <FooterIni />
+        <p class="texto-secundario">
+          ¿No tienes cuenta?
+          <button @click="irARegistro" class="enlace">Regístrate</button>
+        </p>
+      </div>
     </div>
-    
 
+    <!-- Footer -->
+    <FooterIni />
+  </div>
 </template>
 
-
-
 <script>
-//ESTE SCRIPT TIENE COMO FIN definir y controlar la lógica central dE ESTA VISTA, EXPLICA QUE OTROS COMPONENTES ESTAN INCLUIDOS
-// 1. Los imports van primero
 import menuPrincipal1 from './components/menuPrincipal1.vue';
 import FooterIni from './components/footerIni.vue';
 
 export default {
-    // 2. El nombre del componente
-    name: 'iniciarSesion',
-    
-    // 3. Los componentes usados (menú)
-    components: {
-        menuPrincipal1 ,
-        FooterIni
+  name: 'iniciarSesion',
+  components: {
+    menuPrincipal1,
+    FooterIni,
+  },
+  data() {
+    return {
+      email: '',
+      password: '',
+    };
+  },
+  methods: {
+    iniciarSesion() { 
+      if (this.email && this.password) {
+        // Redirige a la página de clientes
+        this.$router.push('/pagina-clientes');
+      } else {
+        alert('Por favor, completa todos los campos.');
+      }
     },
-    
-  
+    irARegistro() {
+      // Redirige al formulario de registro
+      this.$router.push('/registrate');
+    },
+  },
 };
 </script>
+
+<style scoped>
+.texto-secundario {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.enlace {
+  background: none;
+  border: none;
+  color: #ff6600;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.enlace:hover {
+  color: #0055ff;
+}
+</style>
