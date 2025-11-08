@@ -319,6 +319,8 @@ CREATE TABLE `tarifa_por_destino` (
   `precio_vuelos` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+
 -- --------------------------------------------------------
 
 --
@@ -359,7 +361,7 @@ INSERT INTO `tipo_hospedaje` (`id_tipo_hospedaje`, `tipo_hospedaje`) VALUES
 --
 
 CREATE TABLE `usuario` (
-  `cédula_usuario` int(11) NOT NULL,
+  `cedula_usuario` int(11) NOT NULL,
   `nombre_usuario` varchar(100) NOT NULL,
   `apellido_usuario` varchar(100) NOT NULL,
   `telefono_usuario` varchar(20) DEFAULT NULL,

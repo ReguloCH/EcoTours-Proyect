@@ -2,25 +2,43 @@ const express = require ('express');
 const { sequelize, connectDB } = require('./src/config/db'); 
 const db = require('./src/models'); 
 const app = express ();
+
+
 const PORT = 3000; 
 // Llama a la conexión
 connectDB(); 
 
-db.sequelize.sync({ alter: true }) // 'alter: true' ajusta la tabla sin eliminar datos
-    .then(() => {
-        console.log('🗃️ ¡Modelos sincronizados con la base de datos!');
-
-        app.listen(PORT, () => {
-            console.log(`Servidor escuchando en http://localhost:${PORT}`);
-        });
-    })
-    .catch(error => {
-        console.error('❌ Error al sincronizar modelos:', error);
-    });
-
+// Middleware para recibir JSON
 app.use(express.json());
 
-app.get('/', (req, res) =>{
-    res.send('HOLA ESTE ES EL SERVIDOR CON EXPRESS');
+//  Conecta las rutas de usuarios
+app.use('/usuarios', require('./src/routes/usuarioRoutes'));
+
+// Conecta las rutas de paquetes turísticos
+app.use('/paquetes', require('./src/routes/paqueteTuristicoRoutes'));
+
+// Ruta de prueba
+app.get('/', (req, res) => {
+  res.send('HOLA ESTE ES EL SERVIDOR CON EXPRESS');
 });
 
+// Sincroniza modelos y arranca el servidor
+  db.sequelize.sync({ alter: true })
+  .then(() => {
+    console.log('¡Modelos sincronizados con la base de datos!');
+
+    app.post('/test', (req, res) => {
+    res.json({ mensaje: 'Ruta POST /test funcionando' });
+    });
+
+    app.listen(PORT, () => {
+
+      console.log(`Servidor escuchando en http://localhost:${PORT}`);
+
+    });
+  })
+  .catch(error => {
+
+    console.error('Error al sincronizar modelos:', error);
+
+  });
