@@ -52,10 +52,16 @@ ProveedorRestaurante.belongsTo(EstadoProveedor, { foreignKey: 'id_estado_proveed
 ProveedorRestaurante.belongsTo(CiudadRestaurante, { foreignKey: 'id_ciudad_restaurante' });
 // RELACIONES DE TARIFAS
 TarifaPorDestino.belongsTo(ProveedorAerolinea, { foreignKey: 'codigo_aerolinea' });
+ProveedorAerolinea.hasMany(TarifaPorDestino, { foreignKey: 'codigo_aerolinea' });
 TarifaPorDestino.belongsTo(DestinoManejado, { foreignKey: 'id_destino' });
 
 TarifaHospedaje.belongsTo(ProveedorHospedaje, { foreignKey: 'id_hospedaje' });
+ProveedorHospedaje.hasMany(TarifaHospedaje, { foreignKey: 'id_hospedaje' });
+
 TarifaRestaurante.belongsTo(ProveedorRestaurante, { foreignKey: 'id_restaurante' });
+ProveedorRestaurante.hasMany(TarifaRestaurante, { foreignKey: 'id_restaurante' });
+
+
 // RELACIONES PAQUETE_TURISTICO 
 PaqueteTuristico.belongsTo(TarifaPorDestino, { foreignKey: 'id_tarifa_aerolinea' });
 PaqueteTuristico.belongsTo(TarifaHospedaje, { foreignKey: 'id_tarifa_hospedaje' });

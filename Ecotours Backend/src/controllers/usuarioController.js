@@ -1,8 +1,9 @@
 const Usuario = require('../models/usuario');
+const {encriptarContraseña} = require('../utils/encriptador');
 console.log('Modelo Usuario:', Usuario);
 
 
-// Crear usuario con validaciones
+// Crear usuario 
 exports.crearUsuario = async (req, res) => {
   const {
     cedula_usuario,
@@ -35,8 +36,18 @@ exports.crearUsuario = async (req, res) => {
       return res.status(409).json({ error: 'Ya existe un usuario con esa cédula.' });
     }
 
-    const nuevoUsuario = await Usuario.create(req.body);
+    const contraseñaEncriptada = await encriptarContraseña(contraseña_usuario);
+
+    const nuevoUsuario = await Usuario.create({
+      cedula_usuario,
+      nombre_usuario,
+      apellido_usuario,
+      telefono_usuario,
+      correo_usuario,
+      contraseña_usuario: contraseñaEncriptada
+    });
     res.status(201).json(nuevoUsuario);
+    
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -46,11 +57,14 @@ exports.crearUsuario = async (req, res) => {
 // Obtener todos los usuarios
 exports.obtenerUsuarios = async (req, res) => {
   try {
-    const usuarios = await Usuario.findAll();
-    if (usuarios.length === 0) {
-      return res.status(404).json({ mensaje: 'No hay usuarios registrados.' });
-    }
-    res.json(usuarios);
+    const usuarios = await Usuario.findAll({
+    attributes: { exclude: ['contraseña_usuario'] }
+   });
+      if (usuarios.length === 0) {
+        return res.status(404).json({ mensaje: 'No hay usuarios registrados.' });
+      }
+    res.status(200).json(usuarios);
+
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -80,13 +94,26 @@ exports.actualizarUsuario = async (req, res) => {
   }
 
   try {
-    const usuario = await Usuario.findOne({ where: { cedula_usuario: cedula } });
+    console.log('Body recibido:', req.body);
+
+    const usuario = await Usuario.findByPk(cedula);
     if (!usuario) {
       return res.status(404).json({ error: 'Usuario no encontrado.' });
     }
+    const datosActualizados = { ...req.body };
 
-    await Usuario.update(req.body, { where: { cedula_usuario: cedula } });
-    res.json({ mensaje: 'Usuario actualizado correctamente.' });
+    if (datosActualizados.contraseña_usuario) {
+      usuario.contraseña_usuario = datosActualizados.contraseña_usuario;
+    }
+    if (nombre_usuario) usuario.nombre_usuario = nombre_usuario;
+    if (apellido_usuario) usuario.apellido_usuario = apellido_usuario;
+    if (telefono_usuario) usuario.telefono_usuario = telefono_usuario;
+    if (correo_usuario) usuario.correo_usuario = correo_usuario;
+
+    await usuario.save();
+
+
+    res.status(200).json({ mensaje: 'Usuario actualizado correctamente.' });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

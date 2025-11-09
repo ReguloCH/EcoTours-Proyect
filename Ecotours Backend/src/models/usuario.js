@@ -1,8 +1,9 @@
-const { DataTypes } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const { sequelize } = require('../config/db'); 
 
+class Usuario extends Model {}
 
-const Usuario = sequelize.define('Usuario', {
+Usuario.init({
 
     cedula_usuario: {
         type: DataTypes.INTEGER,
@@ -37,6 +38,8 @@ const Usuario = sequelize.define('Usuario', {
     },
 
 }, {
+    sequelize,
+    modelName: 'Usuario',
     tableName: 'usuario', 
     timestamps: false,    
 });
