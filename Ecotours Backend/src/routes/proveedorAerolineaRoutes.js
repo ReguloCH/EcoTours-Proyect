@@ -1,10 +1,10 @@
-const express = require('express');
+const express = require('express'); 
 const router = express.Router();
-const controller = require('../controllers/proveedorAerolineaController');
-const { body } = require('express-validator');
+const controller = require('../controllers/proveedorAerolineaController'); 
+const { body } = require('express-validator'); 
 
 
-const validaciones = [
+const validaciones = [ 
   body('codigo_aerolinea').notEmpty().withMessage('El código es obligatorio'),
   body('nombre_aerolinea').notEmpty().withMessage('El nombre es obligatorio'),
   body('correo_aerolinea').isEmail().withMessage('Correo inválido'),
@@ -15,9 +15,9 @@ const validaciones = [
 ];
 
 router.get('/', controller.getAll);
-router.get('/:codigo', controller.getById);
-router.post('/', controller.create);
-router.put('/:codigo', controller.update);
-router.delete('/:codigo', controller.delete);
+router.get('/', controller.getById);
+router.post('/', validaciones, controller.create);
+router.put('/', validaciones, controller.update);
+router.delete('/', controller.delete);
 
 module.exports = router;
