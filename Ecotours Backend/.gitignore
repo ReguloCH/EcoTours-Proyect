@@ -1,0 +1,15 @@
+# Node modules
+node_modules/
+
+# Dependency lock
+package-lock.json
+
+# Environment variables
+.env
+
+# Logs
+*.log
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
