@@ -72,7 +72,6 @@ exports.obtenerUsuarios = async (req, res) => {
 
 // Actualizar usuario 
 exports.actualizarUsuario = async (req, res) => {
-
   const cedula = req.params.cedula;
   const {
     nombre_usuario,
@@ -95,26 +94,28 @@ exports.actualizarUsuario = async (req, res) => {
   }
 
   try {
-        const usuario = await Usuario.findByPk(cedula);
-        if (!usuario) {
-          return res.status(404).json({ error: 'Usuario no encontrado.' });
-        }
-      
-        if (nombre_usuario) usuario.nombre_usuario = nombre_usuario;
-        if (apellido_usuario) usuario.apellido_usuario = apellido_usuario;
-        if (telefono_usuario) usuario.telefono_usuario = telefono_usuario;
-        if (correo_usuario) usuario.correo_usuario = correo_usuario;
-        
-        if (contraseña_usuario) {
-        const contraseñaEncriptada = await encriptarContraseña(contraseña_usuario);
-        usuario.contraseña_usuario = contraseñaEncriptada;
-        }
+    console.log('Body recibido:', req.body);
 
-        await usuario.save();
-        res.status(200).json({ mensaje: 'Usuario actualizado correctamente.' });
- 
-      } catch (error) {
-        res.status(500).json({ error: error.message });
+    const usuario = await Usuario.findByPk(cedula);
+    if (!usuario) {
+      return res.status(404).json({ error: 'Usuario no encontrado.' });
+    }
+    const datosActualizados = { ...req.body };
+
+    if (datosActualizados.contraseña_usuario) {
+      usuario.contraseña_usuario = datosActualizados.contraseña_usuario;
+    }
+    if (nombre_usuario) usuario.nombre_usuario = nombre_usuario;
+    if (apellido_usuario) usuario.apellido_usuario = apellido_usuario;
+    if (telefono_usuario) usuario.telefono_usuario = telefono_usuario;
+    if (correo_usuario) usuario.correo_usuario = correo_usuario;
+
+    await usuario.save();
+
+
+    res.status(200).json({ mensaje: 'Usuario actualizado correctamente.' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };
 
