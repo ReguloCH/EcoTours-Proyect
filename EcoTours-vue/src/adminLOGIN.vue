@@ -2,7 +2,7 @@
     <div class="pag-ADMIN">
 <!-- meti -->
 
-    <menuPrincipal1 />
+    <!-- <menuPrincipal1 />-->
     <!-- a partir de aqui, vas a comenzar-->
      <!-- Contenedor del login -->
     <div class="contenedor-login">
@@ -29,15 +29,12 @@
               placeholder="••••••••"
             />
           </div>
+                <router-link to="/iniADMIN" class="nav-link action-button">Acceder</router-link>   
+          </form>
 
-              <UL>
-                  <li><router-link to="/iniADMIN" class="nav-link action-button">Acceder</router-link></li>
-              </UL>        
-</form>
-        <p class="texto-secundario">
-          ¿No tienes cuenta?
-          <button @click="irARegistro" class="enlace">Regístrate</button>
-        </p>
+       <!-- <p class="texto-secundario">¿No tienes cuenta?
+          <button @click="irARegistro" class="nav-link action-button text-center">Regístrate</button>
+        </p>-->
       </div>
     </div>
 

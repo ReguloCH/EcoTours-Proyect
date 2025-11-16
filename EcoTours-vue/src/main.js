@@ -1,5 +1,3 @@
-
-
 import { createApp } from 'vue'
 import './style.css'
 import './QuienesSomos.css'
@@ -9,9 +7,6 @@ import './registrate.css'
 import './paginaClientes.css'
 import './paginaPago.css'
 import App from './App.vue'
-import 'bootstrap-icons/font/bootstrap-icons.css'
-
-
 import router from './router' 
 
 const app = createApp(App)
@@ -20,4 +15,3 @@ app.use(router)
 
 // Monta la aplicación
 app.mount('#app')
-

@@ -3,24 +3,18 @@
   <div class="pag-principal">
 
   <!-- Incluimos el primer componente, es el header, menu principal del modulo PUBLICO -->
-
 <menuPrincipal1 />
 
 <!-- luego, viene la imagen abajo del menu, con algo de texto -->
-
-
-    
 <section class="hero-section">
       <div class="hero-content">
         <h1 class="hero-title">Agencia de viajes EcoTours</h1>
         <p class="hero-subtitle">
-¿Buscas una experiencia diferente para tu próximo destino? <br>
-En EcoTours te ofrecemos paquetes turísticos completos que combinan aventura, confort y mucha diversion. <br>
-
-¡Planifica tu próxima aventura con nosotros y vive el turismo de forma ecológica y responsable!        </p>
+          ¿Buscas una experiencia diferente para tu próximo destino? <br>
+          En EcoTours te ofrecemos paquetes turísticos completos que combinan aventura, confort y mucha diversion. <br>
+          ¡Planifica tu próxima aventura con nosotros y vive el turismo de forma ecológica y responsable!</p>
         </div>
     </section>
-
     
     <section class="other-section">
       <h2>Vuelos internacionales</h2>
@@ -28,16 +22,13 @@ En EcoTours te ofrecemos paquetes turísticos completos que combinan aventura, c
     </section>
   </div>
 <div> 
-  <!-- ahora, vienen los paquetes de viaje, son tarjetas con imagenes, algo de texto y un link para mas informacion-->
-
-  
+<!-- ahora, vienen los paquetes de viaje, son tarjetas con imagenes, algo de texto y un link para mas informacion-->
 
     <section class="packages-section">
       <h2 class="section-title">Nuestros Mejores Paquetes de Viaje</h2>
       <div class="cards-grid">
-        <!-- PRIMERA COLUMNA-->
-
         
+<!-- PRIMERA COLUMNA-->
         <div class="package-card">
           <img src="/img/paquete1.jpg" alt="20 Mejores Lugares de España" class="card-image">
           <div class="card-info">
@@ -64,8 +55,8 @@ En EcoTours te ofrecemos paquetes turísticos completos que combinan aventura, c
             <a href="#" class="card-link">Leer más</a>
           </div>
         </div>
-<!-- SEGUNDA COLUMNA, 3 PAQUETES MAS-->
 
+<!-- SEGUNDA COLUMNA, 3 PAQUETES MAS-->
         <div class="package-card">
           <img src="/img/paquete4.jpg" alt="Paquete 4" class="card-image">
           <div class="card-info">
@@ -90,8 +81,8 @@ En EcoTours te ofrecemos paquetes turísticos completos que combinan aventura, c
             <a href="#" class="card-link">Leer más</a>
           </div>
         </div>
-        <!-- TERCERA COLUMNA-->
 
+        <!-- TERCERA COLUMNA-->
         <div class="package-card">
           <img src="/img/paquete7.jpg" alt="Paquete 7" class="card-image">
           <div class="card-info">
@@ -118,10 +109,8 @@ En EcoTours te ofrecemos paquetes turísticos completos que combinan aventura, c
         </div>
       </div>
     </section>
-    <!-- IMAGEN CON LOGO -->
 
-    <section class="other-section">
-      </section>
+    <!-- IMAGEN CON LOGO -->
       </div>
       <section class="hero-section" style="background-image: url('/img/playaIni.jpg');">
     <div class="hero-content">
@@ -132,18 +121,10 @@ En EcoTours te ofrecemos paquetes turísticos completos que combinan aventura, c
     </div>
   </section>
   <!-- COMPRA TU BOLETO EN 4 SENCILLOS PASOS, CON LOGO-->
-
-
-  <section class="offers-carousel-section">
-      </section>
-
-  <section class="steps-section">
-      </section>
       <section class="steps-section">
     <h2 class="section-title">Compra tu boleto en 4 sencillos pasos</h2>
     
     <div class="steps-container">
-        
         <div class="step-card">
             <span class="step-icon step-icon-search">🔎</span>
             <h3 class="step-title">1. Busca tu Destino</h3>
@@ -166,8 +147,7 @@ En EcoTours te ofrecemos paquetes turísticos completos que combinan aventura, c
             <span class="step-icon step-icon-fly">✈️</span>
             <h3 class="step-title">4. ¡A Disfrutar!</h3>
             <p class="step-description">Recibe tus boletos electrónicos y prepárate para vivir una experiencia inolvidable.</p>
-        </div>
-        
+        </div>    
     </div>
 </section> 
 <!-- CARRUSEL DE IMAGENES-->
@@ -176,43 +156,34 @@ En EcoTours te ofrecemos paquetes turísticos completos que combinan aventura, c
     <p class="section-subtitle">¡Los mejores pasajes en oferta que tenemos son para ti! Podrás elegir entre destinos exóticos, culturales, históricos o naturales y disfrutar de una experiencia única e inolvidable. No esperes más y reserva tu pasaje hoy mismo.</p>
     
     <div class="carousel-container">
-        
-        
-        
         <div class="carousel-slide" 
              v-if="currentSlide === 1" 
              style="background-image: url('/img/oferta1.jpg');">
-            
         </div>
         
         <div class="carousel-slide" 
              v-if="currentSlide === 2" 
              style="background-image: url('/img/oferta2.jpg');">
-             
         </div>
         
         <div class="carousel-slide" 
              v-if="currentSlide === 3" 
              style="background-image: url('/img/oferta3.jpg');">
-             
         </div>
 
         <div class="carousel-slide" 
              v-if="currentSlide === 4" 
              style="background-image: url('/img/oferta4.jpg');">
-             
         </div>
 
         <div class="carousel-slide" 
              v-if="currentSlide === 5" 
              style="background-image: url('/img/oferta5.jpg');">
-             
         </div>
 
         <div class="carousel-slide" 
              v-if="currentSlide === 6" 
              style="background-image: url('/img/oferta6.jpg');">
-             
         </div>
         
         <div class="carousel-dots">
@@ -232,11 +203,9 @@ En EcoTours te ofrecemos paquetes turísticos completos que combinan aventura, c
         </button>
     </div>
 </section>
+
 <!-- LLAMANDO AL OTRO COMPONENTE, EL FOOTERINI-->
-
-
 <FooterIni />
-
 </template>
 
 <script>

@@ -8,7 +8,7 @@
       <div class="row w-100 justify-content-center">
         <div class="col-md-6 col-lg-5">
           <!-- Contenedor usando lo de grid -->
-          <div class="card border-0 shadow-lg p-4 rounded-4 login-box" style="background-color: rgba(255,255,255,0.92);">
+          <div class="card border-0 shadow-lg p-4 rounded-4 login-box" style="background-color: rgba(255,255,255,0.92);margin-top: 40px;">
             <h1 class="text-center mb-4">Iniciar sesión</h1>
 
             <form @submit.prevent="iniciarSesion">
@@ -52,6 +52,7 @@
         </div>
       </div>
     </div>
+    <br>
     <FooterIni />
   </div>
 </template>

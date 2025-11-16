@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 // Importa todos los componentes (las "páginas" completas)
+import Inicio from '../Inicio.vue';
 import PagPrincipal1 from '../pagPrincipal1.vue';
 import quienesSomos from '../quienesSomos.vue';
 import Contactanos from '../contactanos.vue';
@@ -27,6 +28,11 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
+      component: Inicio 
+    },
+    {
+      path: '/PagPrincipal',
+      name: 'PagPrincipal',
       component: PagPrincipal1 
     },
     {

@@ -1,7 +1,7 @@
     <!-- SEGUNDO COMPONENTE, EL FOOTER -->
 <template>
-  <footer class="main-footer" style="background-image: url('/img/montana-fondo.jpg');">
-    <div class="footer-overlay">
+  <footer class="main-footer" style="background-image: url('/img/montana-fondo.jpg'); padding-top: 0px;">
+    <div class="footer-overlay" style="padding-bottom: 0px;">
       <div class="footer-container">
         
         <div class="footer-column contact-column">
@@ -52,7 +52,7 @@
       </div>
     </div>
     
-    <div class="footer-copyright">
+    <div class="footer-copyright bg-white">
       © 2025 EcoTours. Todos los Derechos Reservados.
     </div>
   </footer>
