@@ -45,8 +45,7 @@
              Nacida en 1970 de la visión del Sr. José Alberti, Turaser se ha consolidado como el tour
              operador líder en Venezuela con más de cinco décadas de experiencia. Herencia que sus hijos, 
              Alejandro y Eduardo Alberti, han honrado con dedicación, expandiendo la empresa y forjando alianzas 
-             estratégicas para ofrecer un servicio de excelencia inigualable. Hoy en día, Turaser expande 
-             sus horizontes hacia nuevos mercados en República Dominicana y Estados Unidos, llevando consigo 
+             estratégicas para ofrecer un servicio de excelencia inigualable. Llevando consigo 
              su pasión por los viajes y su compromiso inquebrantable con la satisfacción del cliente.
         </p>
     </div>

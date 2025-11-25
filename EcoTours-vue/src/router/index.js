@@ -61,9 +61,10 @@ const router = createRouter({
       component: paginaClientes 
     },
     {
-      path: '/pagina-pago',
-      name: 'pagina-pago',
-      component: paginaPago
+      path: "/pago",
+  name: "paginaPago",
+ component: () => import("../paginaPago.vue")
+
     },
      {
       path: '/adminLOGIN',

@@ -1,166 +1,104 @@
 <template>
-  <div class="pagina-pago d-flex flex-column min-vh-100">
-    <!-- Menú principal -->
+  <div class="pagina-viajes">
     <menuPrincipal1 />
 
-    <!-- Contenedor principal -->
-    <div class="container flex-grow-1 my-5">
-      <div class="row justify-content-center">
-        <div class="col-12 col-md-10 col-lg-8">
-          <div class="pago-box p-4 rounded-4 shadow-lg">
-            <h1 class="text-center mb-4">Página de Pago</h1>
+    <section class="formulario-pago">
 
-            <div class="row mb-4">
-              <div class="col-12 text-center">
-                <p class="descripcion-pago">
-                  Verifica tus datos y completa el pago de tu reserva
-                </p>
-              </div>
-            </div>
+      <h2>Registro de Pago</h2>
 
-            <!-- Formulario de pago -->
-            <form @submit.prevent="procesarPago">
-              <div class="row">
-                <div class="col-md-6 mb-3 campo">
-                  <label>Nombre del titular</label>
-                  <input
-                    v-model="pago.nombre"
-                    type="text"
-                    required
-                    placeholder="Nombre completo"
-                  />
-                </div>
+      <!-- DATOS PERSONALES -->
+      <div class="form-section">
+        <h3>Datos Personales</h3>
 
-                <div class="col-md-6 mb-3 campo">
-                  <label>Número de tarjeta</label>
-                  <input
-                    v-model="pago.tarjeta"
-                    type="text"
-                    required
-                    maxlength="16"
-                    placeholder="0000 0000 0000 0000"
-                  />
-                </div>
+        <label>Cédula:</label>
+        <input v-model="form.cedula" type="text" placeholder="Ej: V-12345678" />
 
-                <div class="col-md-4 mb-3 campo">
-                  <label>Fecha de expiración</label>
-                  <input
-                    v-model="pago.expiracion"
-                    type="text"
-                    required
-                    placeholder="MM/AA"
-                  />
-                </div>
+        <label>Nombre:</label>
+        <input v-model="form.nombre" type="text" placeholder="Nombre" />
 
-                <div class="col-md-4 mb-3 campo">
-                  <label>CVV</label>
-                  <input
-                    v-model="pago.cvv"
-                    type="password"
-                    required
-                    maxlength="3"
-                    placeholder="•••"
-                  />
-                </div>
+        <label>Apellido:</label>
+        <input v-model="form.apellido" type="text" placeholder="Apellido" />
 
-                <div class="col-md-4 mb-3 campo">
-                  <label>Monto a pagar</label>
-                  <input
-                    v-model="pago.monto"
-                    type="number"
-                    required
-                    placeholder="$"
-                  />
-                </div>
-
-                <div class="col-12 d-grid mt-4">
-                  <button type="submit" class="btn-pagar">
-                    Pagar ahora
-                  </button>
-                </div>
-
-                <div class="col-12 text-center mt-3">
-                  <button @click="cancelarPago" class="btn-cancelar">
-                    Cancelar
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
+        <label>Dirección:</label>
+        <input v-model="form.direccion" type="text" placeholder="Dirección completa" />
       </div>
-    </div>
 
-    <!-- Footer -->
-    <footerIni />
+      <!-- DATOS DEL PAQUETE -->
+      <div class="form-section">
+        <h3>Datos del Paquete</h3>
+
+        <label>Origen:</label>
+        <input type="text" v-model="form.origen" readonly />
+
+        <label>Destino:</label>
+        <input type="text" v-model="form.destino" readonly />
+
+        <label>Aerolínea:</label>
+        <input type="text" v-model="form.aerolinea" readonly />
+
+        <label>Hotel:</label>
+        <input type="text" v-model="form.hotel" readonly />
+
+        <label>Fecha inicio:</label>
+        <input type="text" v-model="form.fechaInicio" readonly />
+
+        <label>Fecha fin:</label>
+        <input type="text" v-model="form.fechaFin" readonly />
+      </div>
+
+      <!-- DATOS DEL PAGO -->
+      <div class="form-section">
+        <h3>Datos del Pago</h3>
+
+        <label>Precio del paquete:</label>
+        <input type="text" :value="'USD ' + form.precio" readonly />
+
+        <label>Cantidad de personas:</label>
+        <input v-model.number="form.personas" type="number" min="1" />
+
+        <label>Total a pagar:</label>
+        <input type="text" :value="'USD ' + totalPagar" readonly />
+
+        <label>Método de pago:</label>
+        <select v-model="form.metodoPago">
+          <option disabled value="">Seleccione un método</option>
+          <option>Transferencia Bancaria</option>
+          <option>Pago Móvil</option>
+          <option>Tarjeta de Crédito</option>
+          <option>PayPal</option>
+        </select>
+      </div>
+
+      <button class="btn-enviar" @click="enviarFormulario">Confirmar Reserva</button>
+    </section>
+
+    <FooterIni />
   </div>
 </template>
-
 
 <script>
 import menuPrincipal1 from "./components/menuPrincipal1.vue";
 import FooterIni from "./components/footerIni.vue";
 
-
 export default {
   name: "paginaPago",
+
   components: { menuPrincipal1, FooterIni },
 
   data() {
     return {
-      vuelos: [
-        {
-          origen: "Caracas (CCS)",
-          destino: "Panamá (PTY)",
-          fechaInicio: "Ene 22, 2026",
-          fechaFin: "Ene 27, 2026",
-          precio: 539,
-          aerolinea: "Copa Airlines",
-          hotel: "Hotel Panamá City",
-          imagen: "/img/vueloCaracas-Panama.webp",
-        },
-        {
-          origen: "Caracas (CCS)",
-          destino: "Santiago de Chile (SCL)",
-          fechaInicio: "Nov 13, 2025",
-          fechaFin: "Nov 21, 2025",
-          precio: 790,
-          aerolinea: "Latam Airlines",
-          hotel: "Hotel Andes Plaza",
-          imagen: "/img/vuelo-Caracas-Santiagoch.webp",
-        },
-        {
-          origen: "Caracas (CCS)",
-          destino: "Lima (LIM)",
-          fechaInicio: "Feb 01, 2026",
-          fechaFin: "Feb 17, 2026",
-          precio: 750,
-          aerolinea: "Avianca",
-          hotel: "Hotel Miraflores",
-          imagen: "/img/vuelo-Caracas-Lima.jpg",
-        },
-        {
-          origen: "Caracas (CCS)",
-          destino: "México - Ciudad (MEX)",
-          fechaInicio: "Dic 15, 2025",
-          fechaFin: "Ene 05, 2026",
-          precio: 791,
-          aerolinea: "Aeroméxico",
-          hotel: "Hotel Reforma Palace",
-          imagen: "/img/vuelo-Caracas-Cdmx.jpg",
-        },
-      ],
-      vueloSeleccionado: null,
       form: {
         cedula: "",
         nombre: "",
         apellido: "",
         direccion: "",
+        origen: "",
         destino: "",
         aerolinea: "",
         hotel: "",
         fechaInicio: "",
         fechaFin: "",
+        precio: 0,
         personas: 1,
         metodoPago: "",
       },
@@ -169,22 +107,27 @@ export default {
 
   computed: {
     totalPagar() {
-      return (this.vueloSeleccionado?.precio || 0) * (this.form.personas || 1);
+      return this.form.precio * this.form.personas;
     },
   },
 
+  created() {
+    const q = this.$route.query;
+
+    this.form.origen = q.origen;
+    this.form.destino = q.destino;
+    this.form.aerolinea = q.aerolinea;
+    this.form.hotel = q.hotel;
+    this.form.fechaInicio = q.fechaInicio;
+    this.form.fechaFin = q.fechaFin;
+    this.form.precio = Number(q.precio);
+  },
+
   methods: {
-    seleccionarVuelo(vuelo) {
-      this.vueloSeleccionado = vuelo;
-      this.form.destino = vuelo.destino;
-      this.form.aerolinea = vuelo.aerolinea;
-      this.form.hotel = vuelo.hotel;
-      this.form.fechaInicio = vuelo.fechaInicio;
-      this.form.fechaFin = vuelo.fechaFin;
-    },
     enviarFormulario() {
-      alert(`✅ Reserva confirmada para ${this.form.nombre} hacia ${this.form.destino}.
-Total pagado: USD ${this.totalPagar}`);
+      alert(`✅ Reserva confirmada para ${this.form.nombre}.
+Destino: ${this.form.destino}
+Total: USD ${this.totalPagar}`);
     },
   },
 };
