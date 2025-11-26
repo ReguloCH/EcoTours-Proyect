@@ -119,7 +119,7 @@
             </div>
         </main>
         
-        <FooterIni />
+        <Footer_Cliente />
     </div>
 </template>
 
@@ -127,7 +127,7 @@
 //  IMPORTS
 import { ref, reactive, computed } from 'vue'; 
 import menu_ADMIN from './components/menu_ADMIN.vue';
-import FooterIni from './components/footerIni.vue';
+import Footer_Cliente from './components/Footer_Cliente.vue';
 
 // DECLARACIÓN DE VARIABLES REACTIVAS (Simulación de BDD)
 // Uso de reactive() para un objeto de métricas (simulación de registro de BDD)

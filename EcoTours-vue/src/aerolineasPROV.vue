@@ -136,14 +136,14 @@
             </div>
         </main>
              <!--COMPONENENTE  -->
-        <FooterIni />
+        <Footer_Cliente />
     </div>
 </template>
 
 <script setup>
 import { reactive, ref } from 'vue';
 import menu_ADMIN from './components/menu_ADMIN.vue';
-import FooterIni from './components/footerIni.vue';
+import Footer_Cliente from './components/Footer_Cliente.vue';
 
 // ===============================================================
 // 1. Opciones y Simulación de BDD

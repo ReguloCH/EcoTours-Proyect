@@ -93,21 +93,21 @@
     </div>
 
     <!-- Footer -->
-    <FooterIni />
+    <Footer_Cliente />
   </div>
 </template>
 
 <script>
 import { ref } from "vue";
 import menuPrincipal1 from "./components/menuPrincipal1.vue";
-import FooterIni from "./components/footerIni.vue";
+import Footer_Cliente from "./components/Footer_Cliente.vue";
 import { soloLetras, soloNumeros, validarCorreo } from "./validacionesRegistro.js";
 
 export default {
   name: "Registro",
   components: {
     menuPrincipal1,
-    FooterIni,
+    Footer_Cliente,
   },
   setup() {
     // Campos

@@ -53,20 +53,20 @@
       </div>
     </div>
     <br>
-    <FooterIni />
+    <Footer_Cliente />
   </div>
 </template>
 
 
 <script>
 import menuPrincipal1 from './components/menuPrincipal1.vue';
-import FooterIni from './components/footerIni.vue';
+import Footer_Cliente from './components/Footer_Cliente.vue';
 
 export default {
   name: 'iniciarSesion',
   components: {
     menuPrincipal1,
-    FooterIni,
+    Footer_Cliente,
   },
   data() {
     return {

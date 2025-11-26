@@ -106,7 +106,7 @@
             </div>
         </main>
         
-        <FooterIni />
+        <Footer_Cliente />
 
     </div>
 </template>
@@ -120,7 +120,7 @@
 // IMPORTS
 import { reactive, ref } from 'vue';
 import menu_ADMIN from './components/menu_ADMIN.vue';
-import FooterIni from './components/footerIni.vue';
+import Footer_Cliente from './components/Footer_Cliente.vue';
 
 // DECLARACIÓN DE VARIABLES Y ARREGLOS (SIMULACIÓN DE BDD) //
 

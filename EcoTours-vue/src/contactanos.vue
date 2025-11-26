@@ -32,14 +32,14 @@
     </div> 
 </div>
     <!-- aqui se va a mostrar en la vista el footer entonces esta es la ultima parte del codigo-->
-    <FooterIni/>
+    <Footer_Cliente/>
 </template>
 
 <script>
 //ESTE SCRIPT TIENE COMO FIN definir y controlar la lógica central dE ESTA VISTA, EXPLICA QUE OTROS COMPONENTES ESTAN INCLUIDOS
 // 1. Los imports van primero
 import menuPrincipal1 from './components/menuPrincipal1.vue';
-import FooterIni from './components/footerIni.vue';
+import Footer_Cliente from './components/Footer_Cliente.vue';
 
 export default {
     // 2. El nombre del componente
@@ -48,7 +48,7 @@ export default {
     // 3. Los componentes usados (menú)
     components: {
         menuPrincipal1 ,
-        FooterIni
+        Footer_Cliente
     },
 };
 </script>

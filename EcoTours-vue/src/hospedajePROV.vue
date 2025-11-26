@@ -127,7 +127,7 @@
             </div>
         </main>
         
-        <FooterIni />
+        <Footer_Cliente />
     </div>
 </template>
 
@@ -135,7 +135,7 @@
 // USAMOS VUE 3 COMPOSITION API (<script setup>)
 import { reactive, ref } from 'vue';
 import menu_ADMIN from './components/menu_ADMIN.vue';
-import FooterIni from './components/footerIni.vue';
+import Footer_Cliente from './components/Footer_Cliente.vue';
 
 // Opciones y Simulación de BDD
 

@@ -25,12 +25,12 @@
 
 
 <script>
-import FooterIni from './components/footerIni.vue';
+import Footer_Cliente from './components/Footer_Cliente.vue';
 
 export default {
-  name: 'iniciarSesion',
+  name: 'Inicio',
   components: {
-    FooterIni
+    Footer_Cliente
   },
   data() {
     return {

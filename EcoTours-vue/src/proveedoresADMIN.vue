@@ -53,7 +53,7 @@
         </main>
         <!--COMPONENTE DEL FOOTER  -->
 
-        <FooterIni />
+        <Footer_Cliente />
 
     </div>
 </template>
@@ -61,7 +61,7 @@
 <script>
 // IMPORTS
 import menu_ADMIN from './components/menu_ADMIN.vue';
-import FooterIni from './components/footerIni.vue';
+import Footer_Cliente from './components/Footer_Cliente.vue';
 import aerolineasPROV from './aerolineasPROV.vue';
 import hospedajePROV from './hospedajePROV.vue';
 import alimentacionPROV from './alimentacionPROV.vue';
@@ -72,7 +72,7 @@ export default {
     //Los componentes usados, aqui observamos que hay mas de lo normal y es pq partiendo desde aqui, iremos a los proveedores de los paqutes 
     components: {
         menu_ADMIN,
-        FooterIni,
+        Footer_Cliente,
         aerolineasPROV,
         hospedajePROV,
         alimentacionPROV
