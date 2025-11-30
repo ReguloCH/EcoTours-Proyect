@@ -1,92 +1,9 @@
 <template>
     <div class="pag-ADMIN-general">
-        <menu_ADMIN />
-
+        <Sidebar_Admin />
         <main class="container-xl py-5 main-content-admin">
             <h1 class="text-center mb-5 titulo-admin">Gestión de Aerolíneas</h1>
-            <h2 class="text-center mb-4 sub-titulo-secundario">Proveedores de Vuelos</h2>
-
-            <div class="card shadow-lg mb-5 tarjeta-transparente">
-                <div class="card-header bg-naranja-principal text-white">
-                    <h3 class="card-title mb-0">
-                    <!--CONDICIONAL PARA MOSTRAR O REGISTRAR NUEVA AEROLINEA O EDITAR ALGUNA YA EXISTENTE -->
-
-                        {{ aerolineaEditandoId ? 'Editar Aerolínea' : 'Registrar Nueva Aerolínea' }}
-                    </h3>
-                </div>
-                <div class="card-body">
-                    <!--COMIENZA EL FORMULARIO EN BOOTSTRAP, MEJOR ADMINISTRACION DEL ESPACIO, CON RESPONSIVIDAD  -->
-
-                    <form @submit.prevent="agregarOActualizarAerolinea">
-                        <div class="row g-3">
-                            <div class="col-md-4">
-                                <label for="codigoAerolinea" class="form-label">Código Aerolínea</label>
-                                <input type="text" class="form-control" id="codigoAerolinea" v-model="nuevaAerolinea.codigoAerolinea" maxlength="8" required>
-                            </div>
-                            <div class="col-md-8">
-                                <label for="nombreAerolinea" class="form-label">Nombre Aerolínea</label>
-                                <input type="text" class="form-control" id="nombreAerolinea" v-model="nuevaAerolinea.nombreAerolinea" required>
-                            </div>
-                            
-                            <h5 class="mt-4 mb-2">Ciudad Base (Rutas de Salida)</h5>
-                            <div class="col-md-4" v-for="n in 3" :key="'base' + n">
-                                <label :for="'ciudadBase' + n" class="form-label sr-only">Ciudad Base {{ n }}</label>
-                                <select :id="'ciudadBase' + n" class="form-select" v-model="nuevaAerolinea.ciudadesBase[n-1]">
-                                    <option value="" disabled>-- Ciudad Base {{ n }} --</option>        
-                                    <!--RECIBE PARAMETROS DE UN ARREGLO PARA NO TENER QUE ESCRIBIR LA LISTA DE LAS CIUDADES VARIAS VECES  -->
-                                    <option v-for="ciudad in opcionesCiudades" :key="ciudad" :value="ciudad">{{ ciudad }}</option>
-                                </select>
-                            </div>
-
-                            <h5 class="mt-4 mb-2">Rutas Turísticas Principales</h5>
-                            <div class="col-md-3" v-for="n in 4" :key="'ruta' + n">
-                                <label :for="'rutaPrincipal' + n" class="form-label sr-only">Ruta {{ n }}</label>
-                                <select :id="'rutaPrincipal' + n" class="form-select" v-model="nuevaAerolinea.rutasPrincipales[n-1]">
-                                 <!--IGUAL AQUI, CON PARAMETROS  -->
-                                    <option value="" disabled>-- Ruta {{ n }} --</option>
-                                    <option v-for="ruta in opcionesRutas" :key="ruta" :value="ruta">{{ ruta }}</option>
-                                </select>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="telefonoContacto" class="form-label">Teléfono de Contacto</label>
-                                <input type="tel" class="form-control" id="telefonoContacto" v-model="nuevaAerolinea.telefonoContacto" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="correoElectronico" class="form-label">Correo Electrónico</label>
-                                <input type="email" class="form-control" id="correoElectronico" v-model="nuevaAerolinea.correoElectronico" required>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="representante" class="form-label">Representante / Persona de Contacto</label>
-                                <input type="text" class="form-control" id="representante" v-model="nuevaAerolinea.representanteContacto" required>
-                            </div>
-                            <div class="col-md-3">
-                                <label for="estado" class="form-label">Estado</label>
-                                <select id="estado" class="form-select" v-model="nuevaAerolinea.estado" required>
-                                    <option value="Activo">Activo</option>
-                                    <option value="Inactivo">Inactivo</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3">
-                                <label for="fechaRegistro" class="form-label">Fecha de Registro</label>
-                                <input type="date" class="form-control" id="fechaRegistro" v-model="nuevaAerolinea.fechaRegistro" readonly>
-                            </div>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-naranja-principal mt-4 w-100">
-                            <i :class="aerolineaEditandoId ? 'bi bi-save-fill' : 'bi bi-plus-circle-fill'" class="me-2"></i>
-                   <!--OTRO CONDICIONAL, PARA MOSTRAR EN EL BOTON O GUARDAR CAMBIOS (CUANDO SE ESTA EDITANDO) O PARAREGISTRAR AEROLINEA (CUANDO SE ESTA HACIENDO EL REGISTRO)  -->
-                            {{ aerolineaEditandoId ? 'Guardar Cambios' : 'Registrar Aerolínea' }}
-                        </button>
-                        
-                        <button v-if="aerolineaEditandoId" @click="limpiarFormulario" type="button" class="btn btn-secondary-admin mt-2 w-100">
-                            Cancelar Edición
-                        </button>
-                    </form>
-                </div>
-            </div>
-
+            <h2 class="text-center mb-4 sub-titulo-secundario text-ligth">Proveedores de Vuelos</h2>
             <div class="card shadow-lg tarjeta-transparente">
                 <div class="card-header bg-naranja-oscuro text-white">    <!--AQUI ABAJO RECIBE EL PRAMETRO EN BASE AL ID, CON UN CONTADOR QUE AUMETA EL VALOR DEL LISTADO DE AEROLINEAS REGISTRADAS  -->
                     <h3 class="card-title mb-0">Listado de Aerolíneas (Total: {{ listaAerolineas.length }})</h3>
@@ -121,37 +38,39 @@
                                     <td><span :class="{'badge bg-success': aerolinea.estado === 'Activo', 'badge bg-danger': aerolinea.estado === 'Inactivo'}">{{ aerolinea.estado }}</span></td>
                                     <td>{{ aerolinea.fechaRegistro }}</td>
                                     <td>
-                                        <button @click="cargarParaEditar(aerolinea)" class="btn btn-sm btn-warning me-2" title="Editar">
-                                            <i class="bi bi-pencil-square"></i>
+                                        <button class="btn btn-sm btn-warning me-2">
+                                            <i class="bi bi-pencil-square"></i><router-link to="/E_Aerolinea" class="dropdown-item">Editar</router-link> 
                                         </button>
                                         <button @click="eliminarAerolinea(aerolinea.id)" class="btn btn-sm btn-danger" title="Eliminar">
-                                            <i class="bi bi-trash-fill"></i>
+                                            <i class="bi bi-trash-fill"></i><a>Eliminar</a>
                                         </button>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
+                            <button type="submit" class="btn btn-naranja-principal mt-5 w-100">
+                            <i class="bi-plus-circle-fill"></i><router-link to="/C_Aerolinea" class="dropdown-item">Crear una nueva aerolinea</router-link> 
+                        </button>
+                        <br>
+                        <br>
                     </div>
                 </div>
             </div>
         </main>
              <!--COMPONENENTE  -->
-        <Footer_Cliente />
+        <Footer_Admin />
     </div>
 </template>
 
 <script setup>
 import { reactive, ref } from 'vue';
-import menu_ADMIN from './components/menu_ADMIN.vue';
-import Footer_Cliente from './components/Footer_Cliente.vue';
+import Sidebar_Admin from './components/Sidebar_Admin.vue';
+import Footer_Admin from './components/Footer_Admin.vue';
 
 // ===============================================================
 // 1. Opciones y Simulación de BDD
 // ===============================================================
 
-// Opciones fijas para los selects
-const opcionesCiudades = ['Caracas', 'Valencia', 'Barquisimeto', 'Maracaibo'];
-const opcionesRutas = ['Los Roques', 'Porlamar-Margarita', 'Ciudad Bolívar - Salto Ángel', 'La Gran Sabana', 'Amazonas', 'Mérida', 'Colonia Tovar'];
 
 // Arreglo principal (simulación BDD)
 const listaAerolineas = reactive([
@@ -240,7 +159,6 @@ function eliminarAerolinea(id) {
             listaAerolineas.splice(index, 1); 
             alert('Aerolínea eliminada.');
             if (aerolineaEditandoId.value === id) {
-                limpiarFormulario();
             }
         }
     }

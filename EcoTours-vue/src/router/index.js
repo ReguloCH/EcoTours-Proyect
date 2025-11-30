@@ -14,6 +14,8 @@ import iniADMIN from '../iniADMIN.vue';
 import clientesADMIN from '../clientesADMIN.vue';
 import proveedoresADMIN from '../proveedoresADMIN.vue';
 import aerolineasPROV from '../aerolineasPROV.vue';
+import C_Aerolinea from '../C_Aerolinea.vue';
+import E_Aerolinea from '../E_Aerolinea.vue';
 import hospedajePROV from '../hospedajePROV.vue';
 import alimentacionPROV from '../alimentacionPROV.vue';
 import paquetesTurisADMIN from '../paquetesTurisADMIN.vue';
@@ -106,9 +108,18 @@ const router = createRouter({
       name: '/paquetesTurisADMIN',
       component: paquetesTurisADMIN
     },
-
     
+    {
+      path: '/C_Aerolinea',
+      name: '/C_Aerolinea',
+      component: C_Aerolinea
+    },
     
+    {
+      path: '/E_Aerolinea',
+      name: '/E_Aerolinea',
+      component: E_Aerolinea
+    },
   ]
 });
 

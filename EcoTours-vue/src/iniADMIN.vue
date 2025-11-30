@@ -1,6 +1,6 @@
 <template>
     <div class="pag-ADMINini">
-        <menu_ADMIN />
+        <Sidebar_Admin />
         <main class="admin-dashboard-main container-xl py-5">
             <h1 class="dashboard-title text-center mb-5">
                 Bienvenido Administrador
@@ -119,15 +119,15 @@
             </div>
         </main>
         
-        <Footer_Cliente />
+        <Footer_Admin />
     </div>
 </template>
 
 <script setup>
 //  IMPORTS
 import { ref, reactive, computed } from 'vue'; 
-import menu_ADMIN from './components/menu_ADMIN.vue';
-import Footer_Cliente from './components/Footer_Cliente.vue';
+import Sidebar_Admin from './components/Sidebar_Admin.vue';
+import Footer_Admin from './components/Footer_Admin.vue';
 
 // DECLARACIÓN DE VARIABLES REACTIVAS (Simulación de BDD)
 // Uso de reactive() para un objeto de métricas (simulación de registro de BDD)

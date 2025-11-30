@@ -1,8 +1,6 @@
 <template>
     <div class="pag-ADMIN">
 <!-- meti -->
-
-    <!-- <menuPrincipal1 />-->
     <!-- a partir de aqui, vas a comenzar-->
      <!-- Contenedor del login -->
     <div class="contenedor-login">
@@ -43,7 +41,7 @@
 
     
     <!-- aqui se va a mostrar en la vista el footer entonces esta es la ultima parte del codigo-->
-    <Footer_Cliente />
+    <Footer_Admin />
     </div>
     
 
@@ -54,8 +52,7 @@
 <script>
 //ESTE SCRIPT TIENE COMO FIN definir y controlar la lógica central dE ESTA VISTA, EXPLICA QUE OTROS COMPONENTES ESTAN INCLUIDOS
 // 1. Los imports van primero
-import menuPrincipal1 from './components/menuPrincipal1.vue';
-import Footer_Cliente from './components/Footer_Cliente.vue';
+import Footer_Admin from './components/Footer_Admin.vue';
 
 export default {
     // 2. El nombre del componente
@@ -63,8 +60,7 @@ export default {
     
     // 3. Los componentes usados (menú)
     components: {
-        menuPrincipal1 ,
-        Footer_Cliente
+        Footer_Admin
     },
     
   

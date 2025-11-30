@@ -1,6 +1,6 @@
 <template>
     <div class="pag-ADMIN-clientes">
-        <menu_ADMIN />
+        <Sidebar_Admin />
 
         <main class="container-xl py-5 main-content-admin">
             <h1 class="text-center mb-5 titulo-admin">Gestión de Clientes</h1>
@@ -106,7 +106,7 @@
             </div>
         </main>
         
-        <Footer_Cliente />
+        <Footer_Admin />
 
     </div>
 </template>
@@ -119,8 +119,8 @@
 
 // IMPORTS
 import { reactive, ref } from 'vue';
-import menu_ADMIN from './components/menu_ADMIN.vue';
-import Footer_Cliente from './components/Footer_Cliente.vue';
+import Sidebar_Admin from './components/Sidebar_Admin.vue';
+import Footer_Admin from './components/Footer_Admin.vue';
 
 // DECLARACIÓN DE VARIABLES Y ARREGLOS (SIMULACIÓN DE BDD) //
 

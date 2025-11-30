@@ -24,24 +24,6 @@
         </div>
 
         <div class="footer-column">
-          <h4 class="column-title">Links Rápidos</h4>
-          <ul class="footer-links">
-            <li><a href="#">Empresa</a></li>
-            <li><a href="#">Servicios</a></li>
-            <li><a href="#">Contacto</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-column">
-          <h4 class="column-title">Búsqueda</h4>
-          <ul class="footer-links">
-            <li><a href="#">Destinos</a></li>
-            <li><a href="#">Boletos</a></li>
-            <li><a href="#">Paquetes</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-column">
           <h4 class="column-title">Soporte</h4>
           <ul class="footer-links">
             <li><a href="#">Términos</a></li>
@@ -60,7 +42,7 @@
 
 <script>
 export default {
-  name: 'FooterIni',
+  name: 'Footer_Admin',
   // Si deseas agregar lógica de Vue, iría aquí.
 };
 </script>
