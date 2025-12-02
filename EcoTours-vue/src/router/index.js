@@ -19,6 +19,10 @@ import E_Aerolinea from '../E_Aerolinea.vue';
 import hospedajePROV from '../hospedajePROV.vue';
 import alimentacionPROV from '../alimentacionPROV.vue';
 import paquetesTurisADMIN from '../paquetesTurisADMIN.vue';
+import tarifasHospedaje from '../tarifasHospedaje.vue';
+import tarifasADMIN from '../tarifasADMIN.vue';
+import tarifaPorDestino from '../tarifaPorDestino.vue';
+import tarifaRestaurante from '../tarifaRestaurante.vue';
 
 
 
@@ -89,36 +93,57 @@ const router = createRouter({
     },
     {
       path: '/aerolineasPROV',
-      name: '/aerolineasPROV',
+      name: 'aerolineasPROV',
       component: aerolineasPROV
     },
     {
       path: '/hospedajePROV',
-      name: '/hospedajePROV',
+      name: 'hospedajePROV',
       component: hospedajePROV
     }
     ,
     {
       path: '/alimentacionPROV',
-      name: '/alimentacionPROV',
+      name: 'alimentacionPROV',
       component: alimentacionPROV
     },
     {
       path: '/paquetesTurisADMIN',
-      name: '/paquetesTurisADMIN',
+      name: 'paquetesTurisADMIN',
       component: paquetesTurisADMIN
     },
     
     {
       path: '/C_Aerolinea',
-      name: '/C_Aerolinea',
+      name: 'C_Aerolinea',
       component: C_Aerolinea
     },
+  
     
     {
       path: '/E_Aerolinea',
-      name: '/E_Aerolinea',
+      name: 'E_Aerolinea',
       component: E_Aerolinea
+    },
+    {
+      path: '/tarifasHospedaje',
+      name: 'tarifasHospedaje',
+      component: tarifasHospedaje
+    },
+    {
+      path: '/tarifasADMIN',
+      name: 'tarifasADMIN',
+      component: tarifasADMIN
+    },
+    {
+      path: '/tarifaPorDestino',
+      name: 'tarifaPorDestino',
+      component: tarifaPorDestino
+    },
+    {
+      path: '/tarifaRestaurante',
+      name: 'tarifaRestaurante',
+      component: tarifaRestaurante
     },
   ]
 });

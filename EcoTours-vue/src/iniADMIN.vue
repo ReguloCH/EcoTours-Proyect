@@ -180,7 +180,12 @@ const pieChartStyle = computed(() => {
 </script>
 
 <style>
-
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+:root {
+    --primary-orange: #ff6600; 
+    --light-orange: #ffad66;   
+    --bg-admin: #f0f2f5;      
+}
 /* Contenedor de toda la vista con fondo de imagen */
 .pag-ADMINini {
     display: flex;
@@ -191,13 +196,6 @@ const pieChartStyle = computed(() => {
     color: #333; 
 }
 
-/*============ESTILOS ESPECÍFICOS PARA EL DASHBOARD DE ADMINISTRACIÓN (iniADMIN.vue)===========*/
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
-:root {
-    --primary-orange: #ff6600; 
-    --light-orange: #ffad66;   
-    --bg-admin: #f0f2f5;      
-}
 
 /* Contenedor principal del dashboard */
 .admin-dashboard-main {

@@ -26,7 +26,7 @@
             <ul class="dropdown-menu">
               <router-link to="/proveedoresADMIN" class="dropdown-item">Proveedores</router-link>
               <li><hr class="dropdown-divider"></li>
-              <router-link to="/proveedoresADMIN" class="dropdown-item">Tarifas de proveedores</router-link> 
+              <router-link to="/tarifasADMIN" class="dropdown-item">Tarifas de proveedores</router-link> 
             </ul>
           </li>
           <li class="nav-item dropdown">
