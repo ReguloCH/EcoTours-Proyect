@@ -55,64 +55,8 @@
                     </form>
                 </div>
             </div>
-
-
-
-
-            <div class="card shadow-lg tarjeta-transparente">
-                <div class="card-header bg-naranja-oscuro text-white">
-                    <h3 class="card-title mb-0">Clientes Registrados (Total: {{ listaClientes.length }})</h3>
-                </div>
-                <div class="card-body p-0">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-hover tabla-clientes">
-                            <thead class="bg-naranja-claro">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nombre Completo</th>
-                                    <th>Cédula</th>
-                                    <th>Correo</th>
-                                    <th>Teléfono</th>
-                                    <th>Dirección</th>
-                                    <th>Fecha Reg.</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-if="listaClientes.length === 0">
-                                    <td colspan="8" class="text-center text-muted">No hay clientes registrados aún.</td>
-                                </tr>
-                                <tr v-else v-for="(cliente, index) in listaClientes" :key="cliente.id">
-                                    <td>{{ cliente.id }}</td>
-                                    <td>{{ cliente.nombre }} {{ cliente.apellido }}</td>
-                                    <td>{{ cliente.cedula }}</td>
-                                    <td>{{ cliente.correo }}</td>
-                                    <td>{{ cliente.telefono }}</td>
-                                    <td>{{ cliente.direccion }}</td>
-                                    <td>{{ cliente.fechaRegistro }}</td>
-                                    <td>
-                                        <button @click="cargarParaEditar(cliente)" class="btn btn-sm btn-warning me-2" title="Editar">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </button>
-                                        <button @click="eliminarCliente(cliente.id)" class="btn btn-sm btn-danger" title="Eliminar">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </button>
-                                    </td>                                   
-                                </tr>
-                                    <tr>
-                                        <button class="btn btn-naranja-principal mt-2 w-80" title="" style="margin-left: 10px;" href="/C_Cliente">
-                                            <i class="bi bi-person-plus-fill me-2"></i><router-link to="/C_Cliente" class="dropdown-item">Crear cliente</router-link>
-                                        </button>
-                                    </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
         </main>
-        
-        <Footer_Admin />
-
+    <Footer_Admin />
     </div>
 </template>
 
@@ -124,12 +68,8 @@
 
 // IMPORTS
 import { reactive, ref } from 'vue';
-import axios from 'axios';
 import Sidebar_Admin from './components/Sidebar_Admin.vue';
 import Footer_Admin from './components/Footer_Admin.vue';
-
-axios.get('https:/localhost/clientes')
-    .then(response)
 
 // DECLARACIÓN DE VARIABLES Y ARREGLOS (SIMULACIÓN DE BDD) //
 

@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 09, 2025 at 03:01 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 03-12-2025 a las 20:13:47
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ecotours_bd`
+-- Base de datos: `ecotours_bd`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ciudad_base`
+-- Estructura de tabla para la tabla `ciudad_base`
 --
 
 CREATE TABLE `ciudad_base` (
@@ -33,7 +33,7 @@ CREATE TABLE `ciudad_base` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `ciudad_base`
+-- Volcado de datos para la tabla `ciudad_base`
 --
 
 INSERT INTO `ciudad_base` (`id_ciudad_base`, `nombre_ciudad_base`) VALUES
@@ -45,7 +45,7 @@ INSERT INTO `ciudad_base` (`id_ciudad_base`, `nombre_ciudad_base`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ciudad_hospedaje`
+-- Estructura de tabla para la tabla `ciudad_hospedaje`
 --
 
 CREATE TABLE `ciudad_hospedaje` (
@@ -54,7 +54,7 @@ CREATE TABLE `ciudad_hospedaje` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `ciudad_hospedaje`
+-- Volcado de datos para la tabla `ciudad_hospedaje`
 --
 
 INSERT INTO `ciudad_hospedaje` (`id_ciudad_hospedaje`, `ciudad_hospedaje`) VALUES
@@ -66,7 +66,7 @@ INSERT INTO `ciudad_hospedaje` (`id_ciudad_hospedaje`, `ciudad_hospedaje`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ciudad_restaurante`
+-- Estructura de tabla para la tabla `ciudad_restaurante`
 --
 
 CREATE TABLE `ciudad_restaurante` (
@@ -75,7 +75,7 @@ CREATE TABLE `ciudad_restaurante` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `ciudad_restaurante`
+-- Volcado de datos para la tabla `ciudad_restaurante`
 --
 
 INSERT INTO `ciudad_restaurante` (`id_ciudad_restaurante`, `ciudad_restaurante`) VALUES
@@ -87,7 +87,7 @@ INSERT INTO `ciudad_restaurante` (`id_ciudad_restaurante`, `ciudad_restaurante`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `destinos_manejados`
+-- Estructura de tabla para la tabla `destinos_manejados`
 --
 
 CREATE TABLE `destinos_manejados` (
@@ -96,7 +96,7 @@ CREATE TABLE `destinos_manejados` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `destinos_manejados`
+-- Volcado de datos para la tabla `destinos_manejados`
 --
 
 INSERT INTO `destinos_manejados` (`id_destino`, `nombre_destino`) VALUES
@@ -108,7 +108,7 @@ INSERT INTO `destinos_manejados` (`id_destino`, `nombre_destino`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `estado_proveedores`
+-- Estructura de tabla para la tabla `estado_proveedores`
 --
 
 CREATE TABLE `estado_proveedores` (
@@ -117,7 +117,7 @@ CREATE TABLE `estado_proveedores` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `estado_proveedores`
+-- Volcado de datos para la tabla `estado_proveedores`
 --
 
 INSERT INTO `estado_proveedores` (`id_estado_proveedor`, `estado_proveedor`) VALUES
@@ -127,7 +127,7 @@ INSERT INTO `estado_proveedores` (`id_estado_proveedor`, `estado_proveedor`) VAL
 -- --------------------------------------------------------
 
 --
--- Table structure for table `estado_transaccion`
+-- Estructura de tabla para la tabla `estado_transaccion`
 --
 
 CREATE TABLE `estado_transaccion` (
@@ -136,7 +136,7 @@ CREATE TABLE `estado_transaccion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `estado_transaccion`
+-- Volcado de datos para la tabla `estado_transaccion`
 --
 
 INSERT INTO `estado_transaccion` (`id_estado_transaccion`, `estado_transaccion`) VALUES
@@ -147,7 +147,7 @@ INSERT INTO `estado_transaccion` (`id_estado_transaccion`, `estado_transaccion`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `estado_transaccion_prov`
+-- Estructura de tabla para la tabla `estado_transaccion_prov`
 --
 
 CREATE TABLE `estado_transaccion_prov` (
@@ -156,7 +156,7 @@ CREATE TABLE `estado_transaccion_prov` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `estado_transaccion_prov`
+-- Volcado de datos para la tabla `estado_transaccion_prov`
 --
 
 INSERT INTO `estado_transaccion_prov` (`id_estado_transaccion_PROV`, `estado_transaccion_PROV`) VALUES
@@ -166,7 +166,7 @@ INSERT INTO `estado_transaccion_prov` (`id_estado_transaccion_PROV`, `estado_tra
 -- --------------------------------------------------------
 
 --
--- Table structure for table `factura_cliente`
+-- Estructura de tabla para la tabla `factura_cliente`
 --
 
 CREATE TABLE `factura_cliente` (
@@ -187,7 +187,7 @@ CREATE TABLE `factura_cliente` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `metodo_pago`
+-- Estructura de tabla para la tabla `metodo_pago`
 --
 
 CREATE TABLE `metodo_pago` (
@@ -196,7 +196,7 @@ CREATE TABLE `metodo_pago` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `metodo_pago`
+-- Volcado de datos para la tabla `metodo_pago`
 --
 
 INSERT INTO `metodo_pago` (`id_metodoP`, `tipo_metodo`) VALUES
@@ -207,7 +207,7 @@ INSERT INTO `metodo_pago` (`id_metodoP`, `tipo_metodo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `paquete_turistico`
+-- Estructura de tabla para la tabla `paquete_turistico`
 --
 
 CREATE TABLE `paquete_turistico` (
@@ -226,7 +226,7 @@ CREATE TABLE `paquete_turistico` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `proveedores_aerolineas`
+-- Estructura de tabla para la tabla `proveedores_aerolineas`
 --
 
 CREATE TABLE `proveedores_aerolineas` (
@@ -240,7 +240,7 @@ CREATE TABLE `proveedores_aerolineas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `proveedores_aerolineas`
+-- Volcado de datos para la tabla `proveedores_aerolineas`
 --
 
 INSERT INTO `proveedores_aerolineas` (`codigo_aerolinea`, `nombre_aerolinea`, `correo_aerolinea`, `telefono_aerolinea`, `id_estado_proveedor`, `fecha_registro_aerolinea`, `id_ciudad_base`) VALUES
@@ -250,7 +250,7 @@ INSERT INTO `proveedores_aerolineas` (`codigo_aerolinea`, `nombre_aerolinea`, `c
 -- --------------------------------------------------------
 
 --
--- Table structure for table `proveedores_hospedaje`
+-- Estructura de tabla para la tabla `proveedores_hospedaje`
 --
 
 CREATE TABLE `proveedores_hospedaje` (
@@ -264,7 +264,7 @@ CREATE TABLE `proveedores_hospedaje` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `proveedores_hospedaje`
+-- Volcado de datos para la tabla `proveedores_hospedaje`
 --
 
 INSERT INTO `proveedores_hospedaje` (`id_hospedaje`, `nombre_hospedaje`, `id_tipo_hospedaje`, `id_ciudad_hospedaje`, `direccion_hospedaje`, `id_estado_proveedor`, `fecha_registro_hospedaje`) VALUES
@@ -276,7 +276,7 @@ INSERT INTO `proveedores_hospedaje` (`id_hospedaje`, `nombre_hospedaje`, `id_tip
 -- --------------------------------------------------------
 
 --
--- Table structure for table `proveedores_restaurantes`
+-- Estructura de tabla para la tabla `proveedores_restaurantes`
 --
 
 CREATE TABLE `proveedores_restaurantes` (
@@ -293,18 +293,19 @@ CREATE TABLE `proveedores_restaurantes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `proveedores_restaurantes`
+-- Volcado de datos para la tabla `proveedores_restaurantes`
 --
 
 INSERT INTO `proveedores_restaurantes` (`id_restaurante`, `nombre_restaurante`, `horario_servicio`, `incluye_bebidas`, `id_ciudad_restaurante`, `direccion_restaurante`, `telefono_restaurante`, `correo_restaurante`, `id_estado_proveedor`, `fecha_registro_restaurante`) VALUES
 (1, 'Arepa Planet', '08:00 - 22:00', 1, 4, 'Parque Nacional Canaima, Laguna de Canaima, Canaima 8001, Bolivar', '04141234567', 'contacto@arepaplanet.com', 1, '2025-11-08'),
 (2, 'cacao', '10:00 - 20:00', 1, 2, 'Av. Porlamar, entre calles 1 y 2', '04141234567', 'contacto@cacao.com', 1, '2025-11-08'),
-(3, 'Lucas', NULL, NULL, 1, 'CC. Líder, 1er nivel ', NULL, 'contacto@lucas.com', 1, '2025-08-31');
+(3, 'Lucas', NULL, NULL, 1, 'CC. Líder, 1er nivel ', NULL, 'contacto@lucas.com', 1, '2025-08-31'),
+(5, 'Maranello Grill', '10:00 - 20:00', 1, 2, 'CC Sambil', '04141234567', 'contacto@maranellogrill.com', 1, '2025-11-09');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `registro_egresos`
+-- Estructura de tabla para la tabla `registro_egresos`
 --
 
 CREATE TABLE `registro_egresos` (
@@ -322,7 +323,7 @@ CREATE TABLE `registro_egresos` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tarifa_hospedaje`
+-- Estructura de tabla para la tabla `tarifa_hospedaje`
 --
 
 CREATE TABLE `tarifa_hospedaje` (
@@ -332,7 +333,7 @@ CREATE TABLE `tarifa_hospedaje` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tarifa_hospedaje`
+-- Volcado de datos para la tabla `tarifa_hospedaje`
 --
 
 INSERT INTO `tarifa_hospedaje` (`id_tarifa_hospedaje`, `id_hospedaje`, `precio_por_dia`) VALUES
@@ -342,7 +343,7 @@ INSERT INTO `tarifa_hospedaje` (`id_tarifa_hospedaje`, `id_hospedaje`, `precio_p
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tarifa_por_destino`
+-- Estructura de tabla para la tabla `tarifa_por_destino`
 --
 
 CREATE TABLE `tarifa_por_destino` (
@@ -353,7 +354,7 @@ CREATE TABLE `tarifa_por_destino` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tarifa_por_destino`
+-- Volcado de datos para la tabla `tarifa_por_destino`
 --
 
 INSERT INTO `tarifa_por_destino` (`id_tarifa_aerolinea`, `codigo_aerolinea`, `id_destino`, `precio_vuelos`) VALUES
@@ -363,7 +364,7 @@ INSERT INTO `tarifa_por_destino` (`id_tarifa_aerolinea`, `codigo_aerolinea`, `id
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tarifa_restaurante`
+-- Estructura de tabla para la tabla `tarifa_restaurante`
 --
 
 CREATE TABLE `tarifa_restaurante` (
@@ -373,7 +374,7 @@ CREATE TABLE `tarifa_restaurante` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tarifa_restaurante`
+-- Volcado de datos para la tabla `tarifa_restaurante`
 --
 
 INSERT INTO `tarifa_restaurante` (`id_tarifa_restaurante`, `id_restaurante`, `precio_por_dia`) VALUES
@@ -383,7 +384,7 @@ INSERT INTO `tarifa_restaurante` (`id_tarifa_restaurante`, `id_restaurante`, `pr
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tipo_hospedaje`
+-- Estructura de tabla para la tabla `tipo_hospedaje`
 --
 
 CREATE TABLE `tipo_hospedaje` (
@@ -392,7 +393,7 @@ CREATE TABLE `tipo_hospedaje` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tipo_hospedaje`
+-- Volcado de datos para la tabla `tipo_hospedaje`
 --
 
 INSERT INTO `tipo_hospedaje` (`id_tipo_hospedaje`, `tipo_hospedaje`) VALUES
@@ -404,7 +405,7 @@ INSERT INTO `tipo_hospedaje` (`id_tipo_hospedaje`, `tipo_hospedaje`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuario`
+-- Estructura de tabla para la tabla `usuario`
 --
 
 CREATE TABLE `usuario` (
@@ -413,65 +414,67 @@ CREATE TABLE `usuario` (
   `apellido_usuario` varchar(100) NOT NULL,
   `telefono_usuario` varchar(20) DEFAULT NULL,
   `correo_usuario` varchar(100) NOT NULL,
-  `contraseña_usuario` varchar(255) NOT NULL
+  `contraseña_usuario` varchar(255) NOT NULL,
+  `Admin` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `usuario`
+-- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`cedula_usuario`, `nombre_usuario`, `apellido_usuario`, `telefono_usuario`, `correo_usuario`, `contraseña_usuario`) VALUES
-(28281234, 'José Daniel', 'Colmenarez', '04245793109', 'dalto@gmail.com', '$2b$10$pEqxCgDkGLQNs1kk7OszZeFqtbqOqEY5rahsf5RUSligKcSCg1inK'),
-(31930239, 'Sarath', 'Mendoza', '04145589714', 'sarath@gmail.com', 'cama123$');
+INSERT INTO `usuario` (`cedula_usuario`, `nombre_usuario`, `apellido_usuario`, `telefono_usuario`, `correo_usuario`, `contraseña_usuario`, `Admin`) VALUES
+(28281234, 'José Daniel', 'Colmenarez', '04245793109', 'dalto@gmail.com', '$2b$10$pEqxCgDkGLQNs1kk7OszZeFqtbqOqEY5rahsf5RUSligKcSCg1inK', 0),
+(28585621, 'Jesus', 'Abreu', '04145385169', 'ja@gmail.com', '123456', 1),
+(31930239, 'Sarath', 'Mendoza', '04145589714', 'sarath@gmail.com', 'cama123$', 0);
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `ciudad_base`
+-- Indices de la tabla `ciudad_base`
 --
 ALTER TABLE `ciudad_base`
   ADD PRIMARY KEY (`id_ciudad_base`);
 
 --
--- Indexes for table `ciudad_hospedaje`
+-- Indices de la tabla `ciudad_hospedaje`
 --
 ALTER TABLE `ciudad_hospedaje`
   ADD PRIMARY KEY (`id_ciudad_hospedaje`);
 
 --
--- Indexes for table `ciudad_restaurante`
+-- Indices de la tabla `ciudad_restaurante`
 --
 ALTER TABLE `ciudad_restaurante`
   ADD PRIMARY KEY (`id_ciudad_restaurante`);
 
 --
--- Indexes for table `destinos_manejados`
+-- Indices de la tabla `destinos_manejados`
 --
 ALTER TABLE `destinos_manejados`
   ADD PRIMARY KEY (`id_destino`);
 
 --
--- Indexes for table `estado_proveedores`
+-- Indices de la tabla `estado_proveedores`
 --
 ALTER TABLE `estado_proveedores`
   ADD PRIMARY KEY (`id_estado_proveedor`);
 
 --
--- Indexes for table `estado_transaccion`
+-- Indices de la tabla `estado_transaccion`
 --
 ALTER TABLE `estado_transaccion`
   ADD PRIMARY KEY (`id_estado_transaccion`);
 
 --
--- Indexes for table `estado_transaccion_prov`
+-- Indices de la tabla `estado_transaccion_prov`
 --
 ALTER TABLE `estado_transaccion_prov`
   ADD PRIMARY KEY (`id_estado_transaccion_PROV`);
 
 --
--- Indexes for table `factura_cliente`
+-- Indices de la tabla `factura_cliente`
 --
 ALTER TABLE `factura_cliente`
   ADD PRIMARY KEY (`id_factura`),
@@ -481,13 +484,13 @@ ALTER TABLE `factura_cliente`
   ADD KEY `id_estado_transaccion` (`id_estado_transaccion`);
 
 --
--- Indexes for table `metodo_pago`
+-- Indices de la tabla `metodo_pago`
 --
 ALTER TABLE `metodo_pago`
   ADD PRIMARY KEY (`id_metodoP`);
 
 --
--- Indexes for table `paquete_turistico`
+-- Indices de la tabla `paquete_turistico`
 --
 ALTER TABLE `paquete_turistico`
   ADD PRIMARY KEY (`id_paquete`),
@@ -496,7 +499,7 @@ ALTER TABLE `paquete_turistico`
   ADD KEY `id_tarifa_restaurante` (`id_tarifa_restaurante`);
 
 --
--- Indexes for table `proveedores_aerolineas`
+-- Indices de la tabla `proveedores_aerolineas`
 --
 ALTER TABLE `proveedores_aerolineas`
   ADD PRIMARY KEY (`codigo_aerolinea`),
@@ -504,7 +507,7 @@ ALTER TABLE `proveedores_aerolineas`
   ADD KEY `id_ciudad_base` (`id_ciudad_base`);
 
 --
--- Indexes for table `proveedores_hospedaje`
+-- Indices de la tabla `proveedores_hospedaje`
 --
 ALTER TABLE `proveedores_hospedaje`
   ADD PRIMARY KEY (`id_hospedaje`),
@@ -513,7 +516,7 @@ ALTER TABLE `proveedores_hospedaje`
   ADD KEY `id_estado_proveedor` (`id_estado_proveedor`);
 
 --
--- Indexes for table `proveedores_restaurantes`
+-- Indices de la tabla `proveedores_restaurantes`
 --
 ALTER TABLE `proveedores_restaurantes`
   ADD PRIMARY KEY (`id_restaurante`),
@@ -521,7 +524,7 @@ ALTER TABLE `proveedores_restaurantes`
   ADD KEY `id_estado_proveedor` (`id_estado_proveedor`);
 
 --
--- Indexes for table `registro_egresos`
+-- Indices de la tabla `registro_egresos`
 --
 ALTER TABLE `registro_egresos`
   ADD PRIMARY KEY (`id_egreso`),
@@ -529,14 +532,14 @@ ALTER TABLE `registro_egresos`
   ADD KEY `id_estado_transaccion_PROV` (`id_estado_transaccion_PROV`);
 
 --
--- Indexes for table `tarifa_hospedaje`
+-- Indices de la tabla `tarifa_hospedaje`
 --
 ALTER TABLE `tarifa_hospedaje`
   ADD PRIMARY KEY (`id_tarifa_hospedaje`),
   ADD KEY `id_hospedaje` (`id_hospedaje`);
 
 --
--- Indexes for table `tarifa_por_destino`
+-- Indices de la tabla `tarifa_por_destino`
 --
 ALTER TABLE `tarifa_por_destino`
   ADD PRIMARY KEY (`id_tarifa_aerolinea`),
@@ -544,20 +547,20 @@ ALTER TABLE `tarifa_por_destino`
   ADD KEY `id_destino` (`id_destino`);
 
 --
--- Indexes for table `tarifa_restaurante`
+-- Indices de la tabla `tarifa_restaurante`
 --
 ALTER TABLE `tarifa_restaurante`
   ADD PRIMARY KEY (`id_tarifa_restaurante`),
   ADD KEY `id_restaurante` (`id_restaurante`);
 
 --
--- Indexes for table `tipo_hospedaje`
+-- Indices de la tabla `tipo_hospedaje`
 --
 ALTER TABLE `tipo_hospedaje`
   ADD PRIMARY KEY (`id_tipo_hospedaje`);
 
 --
--- Indexes for table `usuario`
+-- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`cedula_usuario`),
@@ -574,159 +577,166 @@ ALTER TABLE `usuario`
   ADD UNIQUE KEY `correo_usuario_11` (`correo_usuario`),
   ADD UNIQUE KEY `correo_usuario_12` (`correo_usuario`),
   ADD UNIQUE KEY `correo_usuario_13` (`correo_usuario`),
-  ADD UNIQUE KEY `correo_usuario_14` (`correo_usuario`);
+  ADD UNIQUE KEY `correo_usuario_14` (`correo_usuario`),
+  ADD UNIQUE KEY `correo_usuario_15` (`correo_usuario`),
+  ADD UNIQUE KEY `correo_usuario_16` (`correo_usuario`),
+  ADD UNIQUE KEY `correo_usuario_17` (`correo_usuario`),
+  ADD UNIQUE KEY `correo_usuario_18` (`correo_usuario`),
+  ADD UNIQUE KEY `correo_usuario_19` (`correo_usuario`),
+  ADD UNIQUE KEY `correo_usuario_20` (`correo_usuario`),
+  ADD UNIQUE KEY `correo_usuario_21` (`correo_usuario`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `ciudad_base`
+-- AUTO_INCREMENT de la tabla `ciudad_base`
 --
 ALTER TABLE `ciudad_base`
   MODIFY `id_ciudad_base` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `ciudad_hospedaje`
+-- AUTO_INCREMENT de la tabla `ciudad_hospedaje`
 --
 ALTER TABLE `ciudad_hospedaje`
   MODIFY `id_ciudad_hospedaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `ciudad_restaurante`
+-- AUTO_INCREMENT de la tabla `ciudad_restaurante`
 --
 ALTER TABLE `ciudad_restaurante`
   MODIFY `id_ciudad_restaurante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `destinos_manejados`
+-- AUTO_INCREMENT de la tabla `destinos_manejados`
 --
 ALTER TABLE `destinos_manejados`
   MODIFY `id_destino` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `estado_proveedores`
+-- AUTO_INCREMENT de la tabla `estado_proveedores`
 --
 ALTER TABLE `estado_proveedores`
   MODIFY `id_estado_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `estado_transaccion`
+-- AUTO_INCREMENT de la tabla `estado_transaccion`
 --
 ALTER TABLE `estado_transaccion`
   MODIFY `id_estado_transaccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `estado_transaccion_prov`
+-- AUTO_INCREMENT de la tabla `estado_transaccion_prov`
 --
 ALTER TABLE `estado_transaccion_prov`
   MODIFY `id_estado_transaccion_PROV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `factura_cliente`
+-- AUTO_INCREMENT de la tabla `factura_cliente`
 --
 ALTER TABLE `factura_cliente`
   MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `metodo_pago`
+-- AUTO_INCREMENT de la tabla `metodo_pago`
 --
 ALTER TABLE `metodo_pago`
   MODIFY `id_metodoP` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `paquete_turistico`
+-- AUTO_INCREMENT de la tabla `paquete_turistico`
 --
 ALTER TABLE `paquete_turistico`
   MODIFY `id_paquete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `proveedores_hospedaje`
+-- AUTO_INCREMENT de la tabla `proveedores_hospedaje`
 --
 ALTER TABLE `proveedores_hospedaje`
   MODIFY `id_hospedaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `proveedores_restaurantes`
+-- AUTO_INCREMENT de la tabla `proveedores_restaurantes`
 --
 ALTER TABLE `proveedores_restaurantes`
-  MODIFY `id_restaurante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_restaurante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `registro_egresos`
+-- AUTO_INCREMENT de la tabla `registro_egresos`
 --
 ALTER TABLE `registro_egresos`
   MODIFY `id_egreso` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tarifa_hospedaje`
+-- AUTO_INCREMENT de la tabla `tarifa_hospedaje`
 --
 ALTER TABLE `tarifa_hospedaje`
   MODIFY `id_tarifa_hospedaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `tarifa_por_destino`
+-- AUTO_INCREMENT de la tabla `tarifa_por_destino`
 --
 ALTER TABLE `tarifa_por_destino`
   MODIFY `id_tarifa_aerolinea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `tarifa_restaurante`
+-- AUTO_INCREMENT de la tabla `tarifa_restaurante`
 --
 ALTER TABLE `tarifa_restaurante`
   MODIFY `id_tarifa_restaurante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `tipo_hospedaje`
+-- AUTO_INCREMENT de la tabla `tipo_hospedaje`
 --
 ALTER TABLE `tipo_hospedaje`
   MODIFY `id_tipo_hospedaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `factura_cliente`
+-- Filtros para la tabla `factura_cliente`
 --
 ALTER TABLE `factura_cliente`
-  ADD CONSTRAINT `factura_cliente_ibfk_53` FOREIGN KEY (`cédula_usuario`) REFERENCES `usuario` (`cedula_usuario`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `factura_cliente_ibfk_54` FOREIGN KEY (`id_paquete`) REFERENCES `paquete_turistico` (`id_paquete`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `factura_cliente_ibfk_55` FOREIGN KEY (`id_metodoP`) REFERENCES `metodo_pago` (`id_metodoP`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `factura_cliente_ibfk_56` FOREIGN KEY (`id_estado_transaccion`) REFERENCES `estado_transaccion` (`id_estado_transaccion`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `factura_cliente_ibfk_81` FOREIGN KEY (`cédula_usuario`) REFERENCES `usuario` (`cedula_usuario`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `factura_cliente_ibfk_82` FOREIGN KEY (`id_paquete`) REFERENCES `paquete_turistico` (`id_paquete`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `factura_cliente_ibfk_83` FOREIGN KEY (`id_metodoP`) REFERENCES `metodo_pago` (`id_metodoP`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `factura_cliente_ibfk_84` FOREIGN KEY (`id_estado_transaccion`) REFERENCES `estado_transaccion` (`id_estado_transaccion`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
--- Constraints for table `paquete_turistico`
+-- Filtros para la tabla `paquete_turistico`
 --
 ALTER TABLE `paquete_turistico`
-  ADD CONSTRAINT `paquete_turistico_ibfk_40` FOREIGN KEY (`id_tarifa_aerolinea`) REFERENCES `tarifa_por_destino` (`id_tarifa_aerolinea`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `paquete_turistico_ibfk_41` FOREIGN KEY (`id_tarifa_hospedaje`) REFERENCES `tarifa_hospedaje` (`id_tarifa_hospedaje`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `paquete_turistico_ibfk_42` FOREIGN KEY (`id_tarifa_restaurante`) REFERENCES `tarifa_restaurante` (`id_tarifa_restaurante`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `paquete_turistico_ibfk_61` FOREIGN KEY (`id_tarifa_aerolinea`) REFERENCES `tarifa_por_destino` (`id_tarifa_aerolinea`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `paquete_turistico_ibfk_62` FOREIGN KEY (`id_tarifa_hospedaje`) REFERENCES `tarifa_hospedaje` (`id_tarifa_hospedaje`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `paquete_turistico_ibfk_63` FOREIGN KEY (`id_tarifa_restaurante`) REFERENCES `tarifa_restaurante` (`id_tarifa_restaurante`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Constraints for table `proveedores_aerolineas`
+-- Filtros para la tabla `proveedores_aerolineas`
 --
 ALTER TABLE `proveedores_aerolineas`
-  ADD CONSTRAINT `proveedores_aerolineas_ibfk_27` FOREIGN KEY (`id_estado_proveedor`) REFERENCES `estado_proveedores` (`id_estado_proveedor`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `proveedores_aerolineas_ibfk_28` FOREIGN KEY (`id_ciudad_base`) REFERENCES `ciudad_base` (`id_ciudad_base`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `proveedores_aerolineas_ibfk_41` FOREIGN KEY (`id_estado_proveedor`) REFERENCES `estado_proveedores` (`id_estado_proveedor`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `proveedores_aerolineas_ibfk_42` FOREIGN KEY (`id_ciudad_base`) REFERENCES `ciudad_base` (`id_ciudad_base`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Constraints for table `proveedores_hospedaje`
+-- Filtros para la tabla `proveedores_hospedaje`
 --
 ALTER TABLE `proveedores_hospedaje`
-  ADD CONSTRAINT `proveedores_hospedaje_ibfk_40` FOREIGN KEY (`id_tipo_hospedaje`) REFERENCES `tipo_hospedaje` (`id_tipo_hospedaje`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `proveedores_hospedaje_ibfk_41` FOREIGN KEY (`id_ciudad_hospedaje`) REFERENCES `ciudad_hospedaje` (`id_ciudad_hospedaje`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `proveedores_hospedaje_ibfk_42` FOREIGN KEY (`id_estado_proveedor`) REFERENCES `estado_proveedores` (`id_estado_proveedor`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `proveedores_hospedaje_ibfk_61` FOREIGN KEY (`id_tipo_hospedaje`) REFERENCES `tipo_hospedaje` (`id_tipo_hospedaje`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `proveedores_hospedaje_ibfk_62` FOREIGN KEY (`id_ciudad_hospedaje`) REFERENCES `ciudad_hospedaje` (`id_ciudad_hospedaje`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `proveedores_hospedaje_ibfk_63` FOREIGN KEY (`id_estado_proveedor`) REFERENCES `estado_proveedores` (`id_estado_proveedor`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
--- Constraints for table `proveedores_restaurantes`
+-- Filtros para la tabla `proveedores_restaurantes`
 --
 ALTER TABLE `proveedores_restaurantes`
-  ADD CONSTRAINT `proveedores_restaurantes_ibfk_27` FOREIGN KEY (`id_ciudad_restaurante`) REFERENCES `ciudad_restaurante` (`id_ciudad_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `proveedores_restaurantes_ibfk_28` FOREIGN KEY (`id_estado_proveedor`) REFERENCES `estado_proveedores` (`id_estado_proveedor`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `proveedores_restaurantes_ibfk_41` FOREIGN KEY (`id_ciudad_restaurante`) REFERENCES `ciudad_restaurante` (`id_ciudad_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `proveedores_restaurantes_ibfk_42` FOREIGN KEY (`id_estado_proveedor`) REFERENCES `estado_proveedores` (`id_estado_proveedor`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
--- Constraints for table `registro_egresos`
+-- Filtros para la tabla `registro_egresos`
 --
 ALTER TABLE `registro_egresos`
   ADD CONSTRAINT `registro_egresos_ibfk_10` FOREIGN KEY (`id_estado_transaccion_PROV`) REFERENCES `estado_transaccion_prov` (`id_estado_transaccion_PROV`) ON DELETE NO ACTION ON UPDATE CASCADE,
@@ -739,27 +749,34 @@ ALTER TABLE `registro_egresos`
   ADD CONSTRAINT `registro_egresos_ibfk_22` FOREIGN KEY (`id_estado_transaccion_PROV`) REFERENCES `estado_transaccion_prov` (`id_estado_transaccion_PROV`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `registro_egresos_ibfk_24` FOREIGN KEY (`id_estado_transaccion_PROV`) REFERENCES `estado_transaccion_prov` (`id_estado_transaccion_PROV`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `registro_egresos_ibfk_26` FOREIGN KEY (`id_estado_transaccion_PROV`) REFERENCES `estado_transaccion_prov` (`id_estado_transaccion_PROV`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `registro_egresos_ibfk_27` FOREIGN KEY (`id_factura`) REFERENCES `factura_cliente` (`id_factura`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `registro_egresos_ibfk_28` FOREIGN KEY (`id_estado_transaccion_PROV`) REFERENCES `estado_transaccion_prov` (`id_estado_transaccion_PROV`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `registro_egresos_ibfk_30` FOREIGN KEY (`id_estado_transaccion_PROV`) REFERENCES `estado_transaccion_prov` (`id_estado_transaccion_PROV`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `registro_egresos_ibfk_32` FOREIGN KEY (`id_estado_transaccion_PROV`) REFERENCES `estado_transaccion_prov` (`id_estado_transaccion_PROV`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `registro_egresos_ibfk_34` FOREIGN KEY (`id_estado_transaccion_PROV`) REFERENCES `estado_transaccion_prov` (`id_estado_transaccion_PROV`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `registro_egresos_ibfk_36` FOREIGN KEY (`id_estado_transaccion_PROV`) REFERENCES `estado_transaccion_prov` (`id_estado_transaccion_PROV`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `registro_egresos_ibfk_38` FOREIGN KEY (`id_estado_transaccion_PROV`) REFERENCES `estado_transaccion_prov` (`id_estado_transaccion_PROV`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `registro_egresos_ibfk_4` FOREIGN KEY (`id_estado_transaccion_PROV`) REFERENCES `estado_transaccion_prov` (`id_estado_transaccion_PROV`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `registro_egresos_ibfk_40` FOREIGN KEY (`id_estado_transaccion_PROV`) REFERENCES `estado_transaccion_prov` (`id_estado_transaccion_PROV`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `registro_egresos_ibfk_41` FOREIGN KEY (`id_factura`) REFERENCES `factura_cliente` (`id_factura`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `registro_egresos_ibfk_42` FOREIGN KEY (`id_estado_transaccion_PROV`) REFERENCES `estado_transaccion_prov` (`id_estado_transaccion_PROV`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `registro_egresos_ibfk_6` FOREIGN KEY (`id_estado_transaccion_PROV`) REFERENCES `estado_transaccion_prov` (`id_estado_transaccion_PROV`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `registro_egresos_ibfk_8` FOREIGN KEY (`id_estado_transaccion_PROV`) REFERENCES `estado_transaccion_prov` (`id_estado_transaccion_PROV`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
--- Constraints for table `tarifa_hospedaje`
+-- Filtros para la tabla `tarifa_hospedaje`
 --
 ALTER TABLE `tarifa_hospedaje`
   ADD CONSTRAINT `tarifa_hospedaje_ibfk_1` FOREIGN KEY (`id_hospedaje`) REFERENCES `proveedores_hospedaje` (`id_hospedaje`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
--- Constraints for table `tarifa_por_destino`
+-- Filtros para la tabla `tarifa_por_destino`
 --
 ALTER TABLE `tarifa_por_destino`
-  ADD CONSTRAINT `tarifa_por_destino_ibfk_27` FOREIGN KEY (`codigo_aerolinea`) REFERENCES `proveedores_aerolineas` (`codigo_aerolinea`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `tarifa_por_destino_ibfk_28` FOREIGN KEY (`id_destino`) REFERENCES `destinos_manejados` (`id_destino`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `tarifa_por_destino_ibfk_41` FOREIGN KEY (`codigo_aerolinea`) REFERENCES `proveedores_aerolineas` (`codigo_aerolinea`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `tarifa_por_destino_ibfk_42` FOREIGN KEY (`id_destino`) REFERENCES `destinos_manejados` (`id_destino`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
--- Constraints for table `tarifa_restaurante`
+-- Filtros para la tabla `tarifa_restaurante`
 --
 ALTER TABLE `tarifa_restaurante`
   ADD CONSTRAINT `tarifa_restaurante_ibfk_1` FOREIGN KEY (`id_restaurante`) REFERENCES `proveedores_restaurantes` (`id_restaurante`),
@@ -768,7 +785,14 @@ ALTER TABLE `tarifa_restaurante`
   ADD CONSTRAINT `tarifa_restaurante_ibfk_12` FOREIGN KEY (`id_restaurante`) REFERENCES `proveedores_restaurantes` (`id_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `tarifa_restaurante_ibfk_13` FOREIGN KEY (`id_restaurante`) REFERENCES `proveedores_restaurantes` (`id_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `tarifa_restaurante_ibfk_14` FOREIGN KEY (`id_restaurante`) REFERENCES `proveedores_restaurantes` (`id_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `tarifa_restaurante_ibfk_15` FOREIGN KEY (`id_restaurante`) REFERENCES `proveedores_restaurantes` (`id_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `tarifa_restaurante_ibfk_16` FOREIGN KEY (`id_restaurante`) REFERENCES `proveedores_restaurantes` (`id_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `tarifa_restaurante_ibfk_17` FOREIGN KEY (`id_restaurante`) REFERENCES `proveedores_restaurantes` (`id_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `tarifa_restaurante_ibfk_18` FOREIGN KEY (`id_restaurante`) REFERENCES `proveedores_restaurantes` (`id_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `tarifa_restaurante_ibfk_19` FOREIGN KEY (`id_restaurante`) REFERENCES `proveedores_restaurantes` (`id_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `tarifa_restaurante_ibfk_2` FOREIGN KEY (`id_restaurante`) REFERENCES `proveedores_restaurantes` (`id_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `tarifa_restaurante_ibfk_20` FOREIGN KEY (`id_restaurante`) REFERENCES `proveedores_restaurantes` (`id_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `tarifa_restaurante_ibfk_21` FOREIGN KEY (`id_restaurante`) REFERENCES `proveedores_restaurantes` (`id_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `tarifa_restaurante_ibfk_3` FOREIGN KEY (`id_restaurante`) REFERENCES `proveedores_restaurantes` (`id_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `tarifa_restaurante_ibfk_4` FOREIGN KEY (`id_restaurante`) REFERENCES `proveedores_restaurantes` (`id_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `tarifa_restaurante_ibfk_5` FOREIGN KEY (`id_restaurante`) REFERENCES `proveedores_restaurantes` (`id_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,

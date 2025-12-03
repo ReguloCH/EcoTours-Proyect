@@ -1,10 +1,7 @@
-const { Model, DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/db'); 
 
-class Usuario extends Model {}
-
-Usuario.init({
-
+const Usuario = sequelize.define('usuario', {
     cedula_usuario: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -37,15 +34,14 @@ Usuario.init({
         allowNull: false,
     },
 
+     Admin: {
+        type: DataTypes.BOOLEAN(), 
+        allowNull: true,
+    },
+
 }, {
-    sequelize,
-    modelName: 'Usuario',
     tableName: 'usuario', 
-    timestamps: false,    
+    timestamps: false, 
 });
 
 module.exports = Usuario;
-
-
-
-

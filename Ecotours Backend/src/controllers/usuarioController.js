@@ -11,7 +11,8 @@ exports.crearUsuario = async (req, res) => {
     apellido_usuario,
     telefono_usuario,
     correo_usuario,
-    contraseña_usuario
+    contraseña_usuario,
+    Admin
   } = req.body;
 
   if (!cedula_usuario || !nombre_usuario || !apellido_usuario || !telefono_usuario || !correo_usuario || !contraseña_usuario) {
@@ -44,7 +45,8 @@ exports.crearUsuario = async (req, res) => {
       apellido_usuario,
       telefono_usuario,
       correo_usuario,
-      contraseña_usuario: contraseñaEncriptada
+      contraseña_usuario: contraseñaEncriptada,
+      Admin
     });
     res.status(201).json(nuevoUsuario);
     
@@ -78,7 +80,8 @@ exports.actualizarUsuario = async (req, res) => {
     apellido_usuario,
     telefono_usuario,
     correo_usuario,
-    contraseña_usuario
+    contraseña_usuario,
+    Admin
   } = req.body;
 
   if (!nombre_usuario && !apellido_usuario && !telefono_usuario && !correo_usuario && !contraseña_usuario) {
@@ -109,6 +112,7 @@ exports.actualizarUsuario = async (req, res) => {
     if (apellido_usuario) usuario.apellido_usuario = apellido_usuario;
     if (telefono_usuario) usuario.telefono_usuario = telefono_usuario;
     if (correo_usuario) usuario.correo_usuario = correo_usuario;
+    if (Admin) usuario.Admin = Admin;
 
     await usuario.save();
 
