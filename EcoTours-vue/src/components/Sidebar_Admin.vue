@@ -17,7 +17,7 @@
             <router-link to="/iniADMIN" class="nav-link">Inicio</router-link>
           </li>
           <li class="nav-item">
-              <router-link to="/clientesADMIN" class="nav-link">Clientes</router-link>
+              <router-link to="/Clientes" class="nav-link">Clientes</router-link>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

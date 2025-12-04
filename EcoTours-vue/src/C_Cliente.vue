@@ -1,171 +1,72 @@
 <template>
     <div class="pag-ADMIN-clientes">
         <Sidebar_Admin />
-
         <main class="container-xl py-5 main-content-admin">
             <h1 class="text-center mb-5 titulo-admin">Gestión de Clientes</h1>
+                <div class="card shadow-lg mb-5 tarjeta-transparente">
+                    <div class="card-header bg-naranja-principal text-white">
+                        <h3 class="card-title mb-0">Registrar Nuevo Cliente</h3>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label for="cedula" class="form-label">Cédula</label>
+                                    <input type="text" class="form-control" id="cedula" required>
+                                </div>
+                                <div class="col-md-15">
+                                    <label for="nombre" class="form-label">Nombre y apellido</label>
+                                    <input type="text" class="form-control" id="nombre" required>
+                                </div>
 
-            <div class="card shadow-lg mb-5 tarjeta-transparente">
-                <div class="card-header bg-naranja-principal text-white">
-                    <h3 class="card-title mb-0">Registrar Nuevo Cliente</h3>
+                                <div class="col-md-15">
+                                    <label for="nombre" class="form-label">Dirección</label>
+                                    <input type="text" class="form-control" id="direccion" required>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label for="email" class="form-label">Correo Electrónico</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="telefono" class="form-label">Teléfono</label>
+                                    <input type="tel" class="form-control" id="telefono" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="usuario" class="form-label">Usuario</label>
+                                    <input type="text" class="form-control" id="usuario" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="contrasena" class="form-label">Contraseña</label>
+                                    <input type="password" class="form-control" id="contrasena" required>
+                                </div>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1">
+                                <label class="form-check-label" for="gridRadios1">Administrador</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1">
+                                <label class="form-check-label" for="gridRadios1">Usuario</label>
+                            </div>                   
+
+                            <button type="submit" class="btn btn-naranja-principal mt-4 w-100">
+                                <i class="bi bi-person-plus-fill me-2"></i>Agregar
+                            </button>
+                        </form>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <form @submit.prevent="agregarCliente">
-                        <div class="row g-3">
-                            <div class="col-md-4">
-                                <label for="nombre" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" v-model="clienteNuevo.nombre" required>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="apellido" class="form-label">Apellido</label>
-                                <input type="text" class="form-control" id="apellido" v-model="clienteNuevo.apellido" required>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="cedula" class="form-label">Cédula</label>
-                                <input type="text" class="form-control" id="cedula" v-model="clienteNuevo.cedula" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="email" class="form-label">Correo Electrónico</label>
-                                <input type="email" class="form-control" id="email" v-model="clienteNuevo.correo" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="telefono" class="form-label">Teléfono</label>
-                                <input type="tel" class="form-control" id="telefono" v-model="clienteNuevo.telefono" required>
-                            </div>
-                            <div class="col-12">
-                                <label for="direccion" class="form-label">Dirección</label>
-                                <input type="text" class="form-control" id="direccion" v-model="clienteNuevo.direccion" required>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="fechaRegistro" class="form-label">Fecha de Registro</label>
-                                <input type="date" class="form-control" id="fechaRegistro" v-model="clienteNuevo.fechaRegistro" required>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="usuario" class="form-label">Usuario</label>
-                                <input type="text" class="form-control" id="usuario" v-model="clienteNuevo.usuario" required>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="contrasena" class="form-label">Contraseña</label>
-                                <input type="password" class="form-control" id="contrasena" v-model="clienteNuevo.contrasena" required>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-naranja-principal mt-4 w-100">
-                            <i class="bi bi-person-plus-fill me-2"></i>Agregar
-                        </button>
-                    </form>
-                </div>
-            </div>
         </main>
-    <Footer_Admin />
+        <Footer_Admin />
     </div>
 </template>
 
-
-
-
 <script setup>
-// ESTE SCRIPT UTILIZA VUE 3 COMPOSITION API (<script setup>) PARA MEJOR ORGANIZACIÓN.
-
 // IMPORTS
 import { reactive, ref } from 'vue';
 import Sidebar_Admin from './components/Sidebar_Admin.vue';
 import Footer_Admin from './components/Footer_Admin.vue';
-
-// DECLARACIÓN DE VARIABLES Y ARREGLOS (SIMULACIÓN DE BDD) //
-
-// Arreglo principal que simula la Base de Datos de clientes
-const listaClientes = reactive([
-    {
-        id: 1, nombre: 'Ana', apellido: 'García', cedula: '12345678', correo: 'ana@mail.com', 
-        telefono: '555-1234', direccion: 'Av. Sol #10', fechaRegistro: '2024-01-10', 
-        usuario: 'anag', contrasena: '1234'
-    },
-    {
-        id: 2, nombre: 'Luis', apellido: 'Pérez', cedula: '87654321', correo: 'luis@mail.com', 
-        telefono: '555-5678', direccion: 'Calle Luna #5', fechaRegistro: '2024-03-20', 
-        usuario: 'luisp', contrasena: '5678'
-    },
-]);
-
-// Objeto reactivo para capturar los datos del formulario de registro/edición
-// Usamos 'ref' para el ID del cliente que estamos editando
-const siguienteId = ref(listaClientes.length + 1);
-const idClienteEditando = ref(null); // Guarda el ID del cliente que se está editando (null si es nuevo)
-// Objeto reactivo para el formulario (usado con v-model)
-const clienteNuevo = reactive(inicializarCliente());
-
-// Función de utilidad para limpiar el formulario y establecer valores por defecto
-function inicializarCliente() {
-    return {
-        id: 0,
-        nombre: '',
-        apellido: '',
-        cedula: '',
-        correo: '',
-        telefono: '',
-        direccion: '',
-        fechaRegistro: new Date().toISOString().substr(0, 10), // Fecha actual por defecto
-        usuario: '',
-        contrasena: ''
-    };
-}
-
-
-//  MÉTODOS (LÓGICA DE GESTIÓN)// 
-
-// Método para agregar o actualizar un cliente
-function agregarCliente() {
-    if (idClienteEditando.value) {
-        // Lógica de EDICIÓN
-        const index = listaClientes.findIndex(c => c.id === idClienteEditando.value);
-        if (index !== -1) {
-            // Reemplaza el objeto antiguo con los nuevos datos del formulario
-            Object.assign(listaClientes[index], clienteNuevo);
-            alert(`Cliente ${clienteNuevo.nombre} actualizado con éxito.`);
-        }
-    } else {
-        // Lógica de REGISTRO (Nuevo cliente)
-        const nuevo = { ...clienteNuevo }; // Copia los datos del formulario
-        nuevo.id = siguienteId.value; // Asigna el ID incremental
-        listaClientes.push(nuevo); // Agrega el nuevo objeto al arreglo (simulando INSERT)
-        siguienteId.value++; // Incrementa el ID para el próximo cliente
-        alert(`Cliente ${nuevo.nombre} registrado con éxito. ID: ${nuevo.id}`);
-    }
-    // Limpia el formulario y resetea el modo edición
-    limpiarFormulario();
-}
-
-// Carga los datos de un cliente seleccionado al formulario para edición
-function cargarParaEditar(cliente) {
-    // Establece el ID del cliente que se va a editar
-    idClienteEditando.value = cliente.id;
-    // aqui estamos asignando todos los valores del cliente al objeto clienteNuevo
-    Object.assign(clienteNuevo, cliente);
-}
-
-// Resetea el formulario y el estado de edición
-function limpiarFormulario() {
-    // Restablece el formulario a su estado inicial
-    Object.assign(clienteNuevo, inicializarCliente());
-    // Sale del modo edición
-    idClienteEditando.value = null;
-}
-
-// Método para eliminar un cliente por su ID
-function eliminarCliente(id) {
-    if (confirm('¿Está seguro de que desea eliminar este cliente?')) {
-        // Filtra la lista, manteniendo solo los clientes cuyo ID no coincida con el ID a eliminar
-        const index = listaClientes.findIndex(c => c.id === id);
-        if (index !== -1) {
-            listaClientes.splice(index, 1); // Simula que elimina al cliente
-            alert('Cliente eliminado.');
-        }
-    }
-}
 </script>
-
-
-
 
 <style scoped>
 

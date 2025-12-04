@@ -11,7 +11,7 @@ import paginaClientes from '../paginaClientes.vue';
 import paginaPago from '../paginaPago.vue';
 import adminLOGIN from '../adminLOGIN.vue';
 import iniADMIN from '../iniADMIN.vue';
-import clientesADMIN from '../clientesADMIN.vue';
+import Cliente from '../Cliente.vue';
 import proveedoresADMIN from '../proveedoresADMIN.vue';
 import aerolineasPROV from '../aerolineasPROV.vue';
 import C_Aerolinea from '../C_Aerolinea.vue';
@@ -83,9 +83,9 @@ const router = createRouter({
       component: iniADMIN
     },
      {
-      path: '/clientesADMIN',
-      name: 'clientesADMIN',
-      component: clientesADMIN
+      path: '/Clientes',
+      name: 'Clientes',
+      component: Cliente
     },
     {
       path: '/proveedoresADMIN',
