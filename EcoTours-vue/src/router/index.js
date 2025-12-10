@@ -7,7 +7,7 @@ import quienesSomos from '../quienesSomos.vue';
 import Contactanos from '../contactanos.vue';
 import Registrate from '../registrate.vue';
 import IniciarSesion from '../iniciarSesion.vue';
-import paginaClientes from '../paginaClientes.vue'; 
+import paginaClientes from '../paginaClientes.vue';
 import paginaPago from '../paginaPago.vue';
 import adminLOGIN from '../adminLOGIN.vue';
 import iniADMIN from '../iniADMIN.vue';
@@ -24,7 +24,7 @@ import tarifasHospedaje from '../tarifasHospedaje.vue';
 import tarifasADMIN from '../tarifasADMIN.vue';
 import tarifaPorDestino from '../tarifaPorDestino.vue';
 import tarifaRestaurante from '../tarifaRestaurante.vue';
-import movimientoscontables from '../movimientoscontables.vue'; 
+import movimientoscontables from '../movimientosContables.vue';
 import historialdecompras from '../historialdecompras.vue';
 
 
@@ -37,12 +37,12 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: Inicio 
+      component: Inicio
     },
     {
       path: '/PagPrincipal',
       name: 'PagPrincipal',
-      component: PagPrincipal1 
+      component: PagPrincipal1
     },
     {
       path: '/quienesSomos',
@@ -67,25 +67,25 @@ const router = createRouter({
     {
       path: '/pagina-clientes',
       name: 'pagina-clientes',
-      component: paginaClientes 
+      component: paginaClientes
     },
     {
       path: "/pago",
-  name: "paginaPago",
- component: () => import("../paginaPago.vue")
+      name: "paginaPago",
+      component: () => import("../paginaPago.vue")
 
     },
-     {
+    {
       path: '/adminLOGIN',
       name: 'adminLOGIN',
       component: adminLOGIN
     },
-     {
+    {
       path: '/iniADMIN',
       name: 'iniADMIN',
       component: iniADMIN
     },
-     {
+    {
       path: '/Clientes',
       name: 'Clientes',
       component: Cliente
@@ -116,13 +116,13 @@ const router = createRouter({
       name: 'paquetesTurisADMIN',
       component: paquetesTurisADMIN
     },
-    
+
     {
       path: '/C_Aerolinea',
       name: 'C_Aerolinea',
       component: C_Aerolinea
     },
-  
+
     {
       path: '/C_Cliente',
       name: 'C_Cliente',
@@ -154,7 +154,6 @@ const router = createRouter({
       name: 'tarifaRestaurante',
       component: tarifaRestaurante
     },
-
     {
       path: '/movimientoscontables',
       name: 'movimientoscontables',
@@ -165,7 +164,7 @@ const router = createRouter({
       path: '/historialdecompras',
       name: 'historialdecompras',
       component: historialdecompras
-    },
+    }
   ]
 });
 

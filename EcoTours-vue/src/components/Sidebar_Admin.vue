@@ -38,12 +38,13 @@
               <li><hr class="dropdown-divider"></li>
               <router-link to="/paquetesTurisADMIN" class="dropdown-item">Tarifas de paquetes turisticos</router-link> 
             </ul>
-            <li class="nav-item">
-              <router-link to="/historialdecompras" class="nav-link">Historial de Compras</router-link>
           </li>
+          <li class="nav-item">
+              <router-link to="/historialdecompras" class="nav-link">Historial de Compras</router-link>
           </li>
           <li class="nav-item">
               <router-link to="/movimientosContables" class="nav-link">Movimientos Contables</router-link>
+          </li>
           </li>
           <li class="nav-item">
             <router-link to="/adminLOGIN" class="nav-link">Salir</router-link>

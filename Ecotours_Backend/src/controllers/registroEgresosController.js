@@ -34,8 +34,25 @@ exports.create = async (req, res) => {
 
   try {
     const nuevo = await RegistroEgresos.create(req.body);
+
+    // 2️⃣ Registrar asiento contable automático (Salida de dinero)
+    const caja = await db.NombreCuenta.findOne({ where: { nombre: 'Caja General' } }); // O Bancos
+    const egresoTipo = await db.TipoMovimiento.findOne({ where: { tipo: 'Egreso' } });
+
+    if (caja && egresoTipo) {
+      await db.RegistroContable.create({
+        id_factura: null, // No asociado a factura de cliente, sino a egreso (falta foreign key en modelo? o usamos referencia en descripcion)
+        id_cuenta: caja.id_cuenta,
+        id_tipo_mov: egresoTipo.id_tipo_mov,
+        monto: nuevo.monto_A_pagar,
+        fecha_mov: nuevo.fecha_generacion,
+        descripcion: 'Egreso #' + nuevo.id_egreso + ': ' + nuevo.tipo_PROV
+      });
+    }
+
     res.status(201).json(nuevo);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Error al crear egreso', detalle: error.message });
   }
 };

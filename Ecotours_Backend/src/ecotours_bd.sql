@@ -3,9 +3,15 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
+<<<<<<< HEAD
 -- Tiempo de generación: 10-12-2025 a las 19:26:45
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
+=======
+-- Tiempo de generación: 03-12-2025 a las 20:13:47
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
+>>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -215,6 +221,7 @@ INSERT INTO `metodo_pago` (`id_metodoP`, `tipo_metodo`) VALUES
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Estructura de tabla para la tabla `nombre_cuenta`
 --
 
@@ -238,6 +245,8 @@ INSERT INTO `nombre_cuenta` (`id_cuenta`, `nombre`, `tipo`) VALUES
 -- --------------------------------------------------------
 
 --
+=======
+>>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
 -- Estructura de tabla para la tabla `paquete_turistico`
 --
 
@@ -338,13 +347,19 @@ CREATE TABLE `proveedores_restaurantes` (
 INSERT INTO `proveedores_restaurantes` (`id_restaurante`, `nombre_restaurante`, `horario_servicio`, `incluye_bebidas`, `id_ciudad_restaurante`, `direccion_restaurante`, `telefono_restaurante`, `correo_restaurante`, `id_estado_proveedor`, `fecha_registro_restaurante`) VALUES
 (1, 'Arepa Planet', '08:00 - 22:00', 1, 4, 'Parque Nacional Canaima, Laguna de Canaima, Canaima 8001, Bolivar', '04141234567', 'contacto@arepaplanet.com', 1, '2025-11-08'),
 (2, 'cacao', '10:00 - 20:00', 1, 2, 'Av. Porlamar, entre calles 1 y 2', '04141234567', 'contacto@cacao.com', 1, '2025-11-08'),
+<<<<<<< HEAD
 (3, 'cacao', '10:00 - 20:00', 1, 2, 'Av. Porlamar, entre calles 1 y 2', '04141234567', 'contacto@cacao.com', 1, '2025-11-08'),
 (4, 'cacao', '10:00 - 20:00', 1, 2, 'Av. Porlamar, entre calles 1 y 2', '04141234567', 'contacto@cacao.com', 1, '2025-11-08'),
 (5, 'cacao', '10:00 - 20:00', 1, 2, 'Av. Porlamar, entre calles 1 y 2', '04141234567', 'contacto@cacao.com', 1, '2025-11-08');
+=======
+(3, 'Lucas', NULL, NULL, 1, 'CC. Líder, 1er nivel ', NULL, 'contacto@lucas.com', 1, '2025-08-31'),
+(5, 'Maranello Grill', '10:00 - 20:00', 1, 2, 'CC Sambil', '04141234567', 'contacto@maranellogrill.com', 1, '2025-11-09');
+>>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
 
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Estructura de tabla para la tabla `registro_contable`
 --
 
@@ -361,6 +376,8 @@ CREATE TABLE `registro_contable` (
 -- --------------------------------------------------------
 
 --
+=======
+>>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
 -- Estructura de tabla para la tabla `registro_egresos`
 --
 
@@ -470,6 +487,7 @@ INSERT INTO `tipo_hospedaje` (`id_tipo_hospedaje`, `tipo_hospedaje`) VALUES
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Estructura de tabla para la tabla `tipo_movimiento`
 --
 
@@ -489,6 +507,8 @@ INSERT INTO `tipo_movimiento` (`id_tipo_mov`, `tipo`) VALUES
 -- --------------------------------------------------------
 
 --
+=======
+>>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
 -- Estructura de tabla para la tabla `usuario`
 --
 
@@ -498,18 +518,29 @@ CREATE TABLE `usuario` (
   `telefono_usuario` varchar(20) DEFAULT NULL,
   `correo_usuario` varchar(100) NOT NULL,
   `contraseña_usuario` varchar(255) NOT NULL,
+<<<<<<< HEAD
   `direccion_usuario` varchar(100) DEFAULT NULL,
   `user_usuario` varchar(50) NOT NULL,
   `admin_usuario` tinyint(1) DEFAULT NULL
+=======
+  `Admin` tinyint(1) DEFAULT NULL
+>>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
+<<<<<<< HEAD
 INSERT INTO `usuario` (`cedula_usuario`, `nombre_usuario`, `telefono_usuario`, `correo_usuario`, `contraseña_usuario`, `direccion_usuario`, `user_usuario`, `admin_usuario`) VALUES
 (28281234, 'José Daniel', '04245793109', 'dalto@gmail.com', '$2b$10$pEqxCgDkGLQNs1kk7OszZeFqtbqOqEY5rahsf5RUSligKcSCg1inK', NULL, '', NULL),
 (31930239, 'Sarath', '04145589714', 'sarath@gmail.com', 'cama123$', NULL, '', NULL);
+=======
+INSERT INTO `usuario` (`cedula_usuario`, `nombre_usuario`, `apellido_usuario`, `telefono_usuario`, `correo_usuario`, `contraseña_usuario`, `Admin`) VALUES
+(28281234, 'José Daniel', 'Colmenarez', '04245793109', 'dalto@gmail.com', '$2b$10$pEqxCgDkGLQNs1kk7OszZeFqtbqOqEY5rahsf5RUSligKcSCg1inK', 0),
+(28585621, 'Jesus', 'Abreu', '04145385169', 'ja@gmail.com', '123456', 1),
+(31930239, 'Sarath', 'Mendoza', '04145589714', 'sarath@gmail.com', 'cama123$', 0);
+>>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
 
 --
 -- Índices para tablas volcadas
@@ -574,12 +605,15 @@ ALTER TABLE `metodo_pago`
   ADD PRIMARY KEY (`id_metodoP`);
 
 --
+<<<<<<< HEAD
 -- Indices de la tabla `nombre_cuenta`
 --
 ALTER TABLE `nombre_cuenta`
   ADD PRIMARY KEY (`id_cuenta`);
 
 --
+=======
+>>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
 -- Indices de la tabla `paquete_turistico`
 --
 ALTER TABLE `paquete_turistico`
@@ -614,6 +648,7 @@ ALTER TABLE `proveedores_restaurantes`
   ADD KEY `id_estado_proveedor` (`id_estado_proveedor`);
 
 --
+<<<<<<< HEAD
 -- Indices de la tabla `registro_contable`
 --
 ALTER TABLE `registro_contable`
@@ -623,6 +658,8 @@ ALTER TABLE `registro_contable`
   ADD KEY `id_tipo_mov` (`id_tipo_mov`);
 
 --
+=======
+>>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
 -- Indices de la tabla `registro_egresos`
 --
 ALTER TABLE `registro_egresos`
@@ -659,12 +696,15 @@ ALTER TABLE `tipo_hospedaje`
   ADD PRIMARY KEY (`id_tipo_hospedaje`);
 
 --
+<<<<<<< HEAD
 -- Indices de la tabla `tipo_movimiento`
 --
 ALTER TABLE `tipo_movimiento`
   ADD PRIMARY KEY (`id_tipo_mov`);
 
 --
+=======
+>>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
@@ -689,6 +729,7 @@ ALTER TABLE `usuario`
   ADD UNIQUE KEY `correo_usuario_18` (`correo_usuario`),
   ADD UNIQUE KEY `correo_usuario_19` (`correo_usuario`),
   ADD UNIQUE KEY `correo_usuario_20` (`correo_usuario`),
+<<<<<<< HEAD
   ADD UNIQUE KEY `correo_usuario_21` (`correo_usuario`),
   ADD UNIQUE KEY `correo_usuario_22` (`correo_usuario`),
   ADD UNIQUE KEY `correo_usuario_23` (`correo_usuario`),
@@ -708,6 +749,9 @@ ALTER TABLE `usuario`
   ADD UNIQUE KEY `correo_usuario_37` (`correo_usuario`),
   ADD UNIQUE KEY `correo_usuario_38` (`correo_usuario`),
   ADD UNIQUE KEY `correo_usuario_39` (`correo_usuario`);
+=======
+  ADD UNIQUE KEY `correo_usuario_21` (`correo_usuario`);
+>>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -768,18 +812,25 @@ ALTER TABLE `metodo_pago`
   MODIFY `id_metodoP` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+<<<<<<< HEAD
 -- AUTO_INCREMENT de la tabla `nombre_cuenta`
+=======
+-- AUTO_INCREMENT de la tabla `paquete_turistico`
+>>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
 --
 ALTER TABLE `nombre_cuenta`
   MODIFY `id_cuenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+<<<<<<< HEAD
 -- AUTO_INCREMENT de la tabla `paquete_turistico`
 --
 ALTER TABLE `paquete_turistico`
   MODIFY `id_paquete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+=======
+>>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
 -- AUTO_INCREMENT de la tabla `proveedores_hospedaje`
 --
 ALTER TABLE `proveedores_hospedaje`
@@ -792,12 +843,15 @@ ALTER TABLE `proveedores_restaurantes`
   MODIFY `id_restaurante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+<<<<<<< HEAD
 -- AUTO_INCREMENT de la tabla `registro_contable`
 --
 ALTER TABLE `registro_contable`
   MODIFY `id_registro` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+=======
+>>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
 -- AUTO_INCREMENT de la tabla `registro_egresos`
 --
 ALTER TABLE `registro_egresos`
@@ -828,12 +882,15 @@ ALTER TABLE `tipo_hospedaje`
   MODIFY `id_tipo_hospedaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+<<<<<<< HEAD
 -- AUTO_INCREMENT de la tabla `tipo_movimiento`
 --
 ALTER TABLE `tipo_movimiento`
   MODIFY `id_tipo_mov` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+=======
+>>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
 -- Restricciones para tablas volcadas
 --
 
@@ -841,38 +898,63 @@ ALTER TABLE `tipo_movimiento`
 -- Filtros para la tabla `factura_cliente`
 --
 ALTER TABLE `factura_cliente`
+<<<<<<< HEAD
   ADD CONSTRAINT `factura_cliente_ibfk_41` FOREIGN KEY (`id_paquete`) REFERENCES `paquete_turistico` (`id_paquete`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `factura_cliente_ibfk_42` FOREIGN KEY (`id_metodoP`) REFERENCES `metodo_pago` (`id_metodoP`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `factura_cliente_ibfk_43` FOREIGN KEY (`id_estado_transaccion`) REFERENCES `estado_transaccion` (`id_estado_transaccion`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `factura_cliente_ibfk_44` FOREIGN KEY (`cedula_usuario`) REFERENCES `usuario` (`cedula_usuario`) ON DELETE NO ACTION ON UPDATE CASCADE;
+=======
+  ADD CONSTRAINT `factura_cliente_ibfk_81` FOREIGN KEY (`cédula_usuario`) REFERENCES `usuario` (`cedula_usuario`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `factura_cliente_ibfk_82` FOREIGN KEY (`id_paquete`) REFERENCES `paquete_turistico` (`id_paquete`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `factura_cliente_ibfk_83` FOREIGN KEY (`id_metodoP`) REFERENCES `metodo_pago` (`id_metodoP`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `factura_cliente_ibfk_84` FOREIGN KEY (`id_estado_transaccion`) REFERENCES `estado_transaccion` (`id_estado_transaccion`) ON DELETE NO ACTION ON UPDATE CASCADE;
+>>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
 
 --
 -- Filtros para la tabla `paquete_turistico`
 --
 ALTER TABLE `paquete_turistico`
+<<<<<<< HEAD
   ADD CONSTRAINT `paquete_turistico_ibfk_115` FOREIGN KEY (`id_tarifa_aerolinea`) REFERENCES `tarifa_por_destino` (`id_tarifa_aerolinea`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `paquete_turistico_ibfk_116` FOREIGN KEY (`id_tarifa_hospedaje`) REFERENCES `tarifa_hospedaje` (`id_tarifa_hospedaje`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `paquete_turistico_ibfk_117` FOREIGN KEY (`id_tarifa_restaurante`) REFERENCES `tarifa_restaurante` (`id_tarifa_restaurante`) ON DELETE SET NULL ON UPDATE CASCADE;
+=======
+  ADD CONSTRAINT `paquete_turistico_ibfk_61` FOREIGN KEY (`id_tarifa_aerolinea`) REFERENCES `tarifa_por_destino` (`id_tarifa_aerolinea`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `paquete_turistico_ibfk_62` FOREIGN KEY (`id_tarifa_hospedaje`) REFERENCES `tarifa_hospedaje` (`id_tarifa_hospedaje`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `paquete_turistico_ibfk_63` FOREIGN KEY (`id_tarifa_restaurante`) REFERENCES `tarifa_restaurante` (`id_tarifa_restaurante`) ON DELETE SET NULL ON UPDATE CASCADE;
+>>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
 
 --
 -- Filtros para la tabla `proveedores_aerolineas`
 --
 ALTER TABLE `proveedores_aerolineas`
+<<<<<<< HEAD
   ADD CONSTRAINT `proveedores_aerolineas_ibfk_77` FOREIGN KEY (`id_estado_proveedor`) REFERENCES `estado_proveedores` (`id_estado_proveedor`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `proveedores_aerolineas_ibfk_78` FOREIGN KEY (`id_ciudad_base`) REFERENCES `ciudad_base` (`id_ciudad_base`) ON DELETE SET NULL ON UPDATE CASCADE;
+=======
+  ADD CONSTRAINT `proveedores_aerolineas_ibfk_41` FOREIGN KEY (`id_estado_proveedor`) REFERENCES `estado_proveedores` (`id_estado_proveedor`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `proveedores_aerolineas_ibfk_42` FOREIGN KEY (`id_ciudad_base`) REFERENCES `ciudad_base` (`id_ciudad_base`) ON DELETE SET NULL ON UPDATE CASCADE;
+>>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
 
 --
 -- Filtros para la tabla `proveedores_hospedaje`
 --
 ALTER TABLE `proveedores_hospedaje`
+<<<<<<< HEAD
   ADD CONSTRAINT `proveedores_hospedaje_ibfk_115` FOREIGN KEY (`id_tipo_hospedaje`) REFERENCES `tipo_hospedaje` (`id_tipo_hospedaje`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `proveedores_hospedaje_ibfk_116` FOREIGN KEY (`id_ciudad_hospedaje`) REFERENCES `ciudad_hospedaje` (`id_ciudad_hospedaje`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `proveedores_hospedaje_ibfk_117` FOREIGN KEY (`id_estado_proveedor`) REFERENCES `estado_proveedores` (`id_estado_proveedor`) ON DELETE NO ACTION ON UPDATE CASCADE;
+=======
+  ADD CONSTRAINT `proveedores_hospedaje_ibfk_61` FOREIGN KEY (`id_tipo_hospedaje`) REFERENCES `tipo_hospedaje` (`id_tipo_hospedaje`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `proveedores_hospedaje_ibfk_62` FOREIGN KEY (`id_ciudad_hospedaje`) REFERENCES `ciudad_hospedaje` (`id_ciudad_hospedaje`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `proveedores_hospedaje_ibfk_63` FOREIGN KEY (`id_estado_proveedor`) REFERENCES `estado_proveedores` (`id_estado_proveedor`) ON DELETE NO ACTION ON UPDATE CASCADE;
+>>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
 
 --
 -- Filtros para la tabla `proveedores_restaurantes`
 --
 ALTER TABLE `proveedores_restaurantes`
+<<<<<<< HEAD
   ADD CONSTRAINT `proveedores_restaurantes_ibfk_77` FOREIGN KEY (`id_ciudad_restaurante`) REFERENCES `ciudad_restaurante` (`id_ciudad_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `proveedores_restaurantes_ibfk_78` FOREIGN KEY (`id_estado_proveedor`) REFERENCES `estado_proveedores` (`id_estado_proveedor`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
@@ -885,6 +967,12 @@ ALTER TABLE `registro_contable`
   ADD CONSTRAINT `registro_contable_ibfk_3` FOREIGN KEY (`id_tipo_mov`) REFERENCES `tipo_movimiento` (`id_tipo_mov`);
 
 --
+=======
+  ADD CONSTRAINT `proveedores_restaurantes_ibfk_41` FOREIGN KEY (`id_ciudad_restaurante`) REFERENCES `ciudad_restaurante` (`id_ciudad_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `proveedores_restaurantes_ibfk_42` FOREIGN KEY (`id_estado_proveedor`) REFERENCES `estado_proveedores` (`id_estado_proveedor`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+>>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
 -- Filtros para la tabla `registro_egresos`
 --
 ALTER TABLE `registro_egresos`
@@ -906,6 +994,7 @@ ALTER TABLE `registro_egresos`
   ADD CONSTRAINT `registro_egresos_ibfk_38` FOREIGN KEY (`id_estado_transaccion_PROV`) REFERENCES `estado_transaccion_prov` (`id_estado_transaccion_PROV`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `registro_egresos_ibfk_4` FOREIGN KEY (`id_estado_transaccion_PROV`) REFERENCES `estado_transaccion_prov` (`id_estado_transaccion_PROV`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `registro_egresos_ibfk_40` FOREIGN KEY (`id_estado_transaccion_PROV`) REFERENCES `estado_transaccion_prov` (`id_estado_transaccion_PROV`) ON DELETE NO ACTION ON UPDATE CASCADE,
+<<<<<<< HEAD
   ADD CONSTRAINT `registro_egresos_ibfk_42` FOREIGN KEY (`id_estado_transaccion_PROV`) REFERENCES `estado_transaccion_prov` (`id_estado_transaccion_PROV`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `registro_egresos_ibfk_44` FOREIGN KEY (`id_estado_transaccion_PROV`) REFERENCES `estado_transaccion_prov` (`id_estado_transaccion_PROV`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `registro_egresos_ibfk_46` FOREIGN KEY (`id_estado_transaccion_PROV`) REFERENCES `estado_transaccion_prov` (`id_estado_transaccion_PROV`) ON DELETE NO ACTION ON UPDATE CASCADE,
@@ -915,6 +1004,10 @@ ALTER TABLE `registro_egresos`
   ADD CONSTRAINT `registro_egresos_ibfk_54` FOREIGN KEY (`id_estado_transaccion_PROV`) REFERENCES `estado_transaccion_prov` (`id_estado_transaccion_PROV`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `registro_egresos_ibfk_56` FOREIGN KEY (`id_estado_transaccion_PROV`) REFERENCES `estado_transaccion_prov` (`id_estado_transaccion_PROV`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `registro_egresos_ibfk_58` FOREIGN KEY (`id_estado_transaccion_PROV`) REFERENCES `estado_transaccion_prov` (`id_estado_transaccion_PROV`) ON DELETE NO ACTION ON UPDATE CASCADE,
+=======
+  ADD CONSTRAINT `registro_egresos_ibfk_41` FOREIGN KEY (`id_factura`) REFERENCES `factura_cliente` (`id_factura`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `registro_egresos_ibfk_42` FOREIGN KEY (`id_estado_transaccion_PROV`) REFERENCES `estado_transaccion_prov` (`id_estado_transaccion_PROV`) ON DELETE NO ACTION ON UPDATE CASCADE,
+>>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
   ADD CONSTRAINT `registro_egresos_ibfk_6` FOREIGN KEY (`id_estado_transaccion_PROV`) REFERENCES `estado_transaccion_prov` (`id_estado_transaccion_PROV`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `registro_egresos_ibfk_60` FOREIGN KEY (`id_estado_transaccion_PROV`) REFERENCES `estado_transaccion_prov` (`id_estado_transaccion_PROV`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `registro_egresos_ibfk_61` FOREIGN KEY (`id_factura`) REFERENCES `factura_cliente` (`id_factura`) ON DELETE NO ACTION ON UPDATE CASCADE,
@@ -931,8 +1024,13 @@ ALTER TABLE `tarifa_hospedaje`
 -- Filtros para la tabla `tarifa_por_destino`
 --
 ALTER TABLE `tarifa_por_destino`
+<<<<<<< HEAD
   ADD CONSTRAINT `tarifa_por_destino_ibfk_77` FOREIGN KEY (`codigo_aerolinea`) REFERENCES `proveedores_aerolineas` (`codigo_aerolinea`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `tarifa_por_destino_ibfk_78` FOREIGN KEY (`id_destino`) REFERENCES `destinos_manejados` (`id_destino`) ON DELETE NO ACTION ON UPDATE CASCADE;
+=======
+  ADD CONSTRAINT `tarifa_por_destino_ibfk_41` FOREIGN KEY (`codigo_aerolinea`) REFERENCES `proveedores_aerolineas` (`codigo_aerolinea`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `tarifa_por_destino_ibfk_42` FOREIGN KEY (`id_destino`) REFERENCES `destinos_manejados` (`id_destino`) ON DELETE NO ACTION ON UPDATE CASCADE;
+>>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
 
 --
 -- Filtros para la tabla `tarifa_restaurante`
@@ -952,6 +1050,7 @@ ALTER TABLE `tarifa_restaurante`
   ADD CONSTRAINT `tarifa_restaurante_ibfk_2` FOREIGN KEY (`id_restaurante`) REFERENCES `proveedores_restaurantes` (`id_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `tarifa_restaurante_ibfk_20` FOREIGN KEY (`id_restaurante`) REFERENCES `proveedores_restaurantes` (`id_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `tarifa_restaurante_ibfk_21` FOREIGN KEY (`id_restaurante`) REFERENCES `proveedores_restaurantes` (`id_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
+<<<<<<< HEAD
   ADD CONSTRAINT `tarifa_restaurante_ibfk_22` FOREIGN KEY (`id_restaurante`) REFERENCES `proveedores_restaurantes` (`id_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `tarifa_restaurante_ibfk_23` FOREIGN KEY (`id_restaurante`) REFERENCES `proveedores_restaurantes` (`id_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `tarifa_restaurante_ibfk_24` FOREIGN KEY (`id_restaurante`) REFERENCES `proveedores_restaurantes` (`id_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
@@ -960,6 +1059,8 @@ ALTER TABLE `tarifa_restaurante`
   ADD CONSTRAINT `tarifa_restaurante_ibfk_27` FOREIGN KEY (`id_restaurante`) REFERENCES `proveedores_restaurantes` (`id_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `tarifa_restaurante_ibfk_28` FOREIGN KEY (`id_restaurante`) REFERENCES `proveedores_restaurantes` (`id_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `tarifa_restaurante_ibfk_29` FOREIGN KEY (`id_restaurante`) REFERENCES `proveedores_restaurantes` (`id_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
+=======
+>>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
   ADD CONSTRAINT `tarifa_restaurante_ibfk_3` FOREIGN KEY (`id_restaurante`) REFERENCES `proveedores_restaurantes` (`id_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `tarifa_restaurante_ibfk_30` FOREIGN KEY (`id_restaurante`) REFERENCES `proveedores_restaurantes` (`id_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `tarifa_restaurante_ibfk_31` FOREIGN KEY (`id_restaurante`) REFERENCES `proveedores_restaurantes` (`id_restaurante`) ON DELETE NO ACTION ON UPDATE CASCADE,

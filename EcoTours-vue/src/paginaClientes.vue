@@ -29,6 +29,71 @@
       </div>
     </section>
 
+
+    <!-- Sección de ofertas -->
+    <section class="ofertas mb-5">
+      <div class="container">
+        <div class="row mb-4 text-center">
+          <div class="col-12">
+            <h2>Mejores ofertas desde Venezuela</h2>
+          </div>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+          <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="card h-100 shadow-sm">
+              <img src="/img/losROQUES.jpg" alt="Destino 1" class="card-img-top" />
+              <div class="info p-3 text-center">
+                <h3>Caracas (CCS) a Los Roques</h3>
+                <p>oct 19, 2025 - oct 23, 2025</p>
+                <p class="precio">USD 500*</p>
+                <button class="btn-reservar" @click="PaginaPago">Reservar ahora</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-sm-6">
+           <div class="card h-100 shadow-sm">
+              <img src="/img/vuelo-Caracas-Santiagoch.webp" alt="Destino 2" class="card-img-top" />
+              <div class="info p-3 text-center">
+                <h3>Caracas (CCS) a Santiago de Chile (SCL)</h3>
+                <p>nov 13, 2025 - nov 21, 2025</p>
+                <p class="precio">USD 790*</p>
+                <button class="btn-reservar" @click="PaginaPago">Reservar ahora</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="card h-100 shadow-sm">
+              <img src="/img/vuelo-Caracas-Lima.jpg" alt="Destino 3" class="card-img-top" />
+              <div class="info p-3 text-center">
+                <h3>Caracas (CCS) a Lima (LIM)</h3>
+                <p>feb 01, 2026 - feb 17, 2026</p>
+                <p class="precio">USD 750*</p>
+                <button class="btn-reservar" @click="PaginaPago">Reservar ahora</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="card h-100 shadow-sm">
+              <img src="/img/vuelo-Caracas-Cdmx.jpg" alt="Destino 4" class="card-img-top" />
+              <div class="info p-3 text-center">
+                <h3>Caracas (CCS) a México - Ciudad (MEX)</h3>
+                <p>dic 15, 2025 - ene 05, 2026</p>
+                <p class="precio">USD 791*</p>
+                <button type="button" class="btn-reservar" @click="PaginaPago">
+  Reservar ahora
+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
     <Footer_Cliente />
   </div>
 </template>
@@ -36,6 +101,8 @@
 <script>
 import menuPrincipal1 from "./components/menuPrincipal1.vue";
 import Footer_Cliente from "./components/Footer_Cliente.vue";
+import PaginaPago from "./paginaPago.vue";
+
 
 export default {
   name: "paginaClientes",
@@ -93,6 +160,7 @@ export default {
   },
 
   methods: {
+
     irAPago(vuelo) {
       this.$router.push({
         name: "paginaPago",
@@ -106,7 +174,12 @@ export default {
           hotel: vuelo.hotel,
         },
       });
+
+    PaginaPago() {
+      this.$router.push({ name: 'pagina-pago' });
+
     },
   },
 };
+
 </script>

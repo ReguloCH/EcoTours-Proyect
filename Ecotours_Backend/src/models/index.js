@@ -1,5 +1,5 @@
 const { sequelize } = require('../config/db');
-const { DataTypes } = require('sequelize'); 
+const { DataTypes } = require('sequelize');
 // IMPORTACIÓN DE TODOS LOS 19 MODELOS
 // Claves Principales
 const Usuario = require('./usuario');
@@ -24,6 +24,12 @@ const EstadoTransaccion = require('./estadoTransaccion');
 const EstadoTransaccionProv = require('./estadoTransaccionProv');
 const MetodoPago = require('./metodoPago');
 const TipoHospedaje = require('./tipoHospedaje');
+
+// CONTABILIDAD
+const TipoMovimiento = require('./tipoMovimiento');
+const NombreCuenta = require('./nombreCuenta');
+const RegistroContable = require('./registroContable');
+
 // POR AQUI, TENEMOS DEFINICIÓN DE RELACIONES
 // RELACIONES DE TRANSACCIÓN: FACTURA_CLIENTE
 FacturaCliente.belongsTo(Usuario, { foreignKey: 'cedula_usuario' });
@@ -39,6 +45,12 @@ FacturaCliente.belongsTo(EstadoTransaccion, { foreignKey: 'id_estado_transaccion
 RegistroEgresos.belongsTo(FacturaCliente, { foreignKey: 'id_factura' });
 FacturaCliente.hasMany(RegistroEgresos, { foreignKey: 'id_factura' });
 RegistroEgresos.belongsTo(EstadoTransaccionProv, { foreignKey: 'id_estado_transaccion_PROV' });
+
+// RELACIONES DE CONTABILIDAD: REGISTRO_CONTABLE
+RegistroContable.belongsTo(FacturaCliente, { foreignKey: 'id_factura' });
+RegistroContable.belongsTo(NombreCuenta, { foreignKey: 'id_cuenta' });
+RegistroContable.belongsTo(TipoMovimiento, { foreignKey: 'id_tipo_mov' });
+
 // RELACIONES DE PROVEEDORES Y CATÁLOGOS
 // Los tres tipos de proveedores se asocian a EstadoProveedor y a sus respectivas ciudades/tipos.
 ProveedorAerolinea.belongsTo(EstadoProveedor, { foreignKey: 'id_estado_proveedor' });
@@ -89,5 +101,9 @@ db.EstadoTransaccion = EstadoTransaccion;
 db.EstadoTransaccionProv = EstadoTransaccionProv;
 db.MetodoPago = MetodoPago;
 db.TipoHospedaje = TipoHospedaje;
+
+db.TipoMovimiento = TipoMovimiento;
+db.NombreCuenta = NombreCuenta;
+db.RegistroContable = RegistroContable;
 
 module.exports = db;
