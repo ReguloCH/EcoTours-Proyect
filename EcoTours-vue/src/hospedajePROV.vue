@@ -14,67 +14,58 @@
                 </div>
                 <div class="card-body">
                     <form @submit.prevent="agregarOActualizarHospedaje">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label for="nombre_hospedaje" class="form-label">Nombre del Hospedaje</label>
-                                <input type="text" class="form-control" id="nombre_hospedaje" v-model="nuevoHospedaje.nombre_hospedaje" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="tipo" class="form-label">Tipo de Alojamiento</label>
-                                <select id="tipo" class="form-select" v-model="nuevoHospedaje.tipo" required>
-                                    <option value="" disabled>-- Seleccione Tipo --</option>
-                                    <option value="Hotel">Hotel</option>
-                                    <option value="Posada">Posada</option>
-                                </select>
-                            </div>
-                            
-                            <div class="col-md-6">
-                                <label for="estado" class="form-label">Estado / Ubicación</label>
-                                <select id="estado" class="form-select" v-model="nuevoHospedaje.estado" required>
-                                    <option value="" disabled>-- Seleccione Estado --</option>
-                                    <option v-for="estado in opcionesEstados" :key="estado" :value="estado">{{ estado }}</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="direccion" class="form-label">Dirección Específica</label>
-                                <input type="text" class="form-control" id="direccion" v-model="nuevoHospedaje.direccion" required>
-                            </div>
+    <div class="row g-3">
+        
+        <div class="col-md-6">
+            <label for="nombre_hospedaje" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre_hospedaje" v-model="nuevoHospedaje.nombre_hospedaje" required>
+        </div>
+        <div class="col-md-6">
+            <label for="tipo" class="form-label">Tipo de Hospedaje</label>
+            <select id="tipo" class="form-select" v-model="nuevoHospedaje.tipo" required>
+                <option value="" disabled>-- Seleccione Tipo --</option>
+                <option value="Hotel">Hotel</option>
+                <option value="Posada">Posada</option>
+            </select>
+        </div>
 
-                            <div class="col-md-6">
-                                <label for="telefono" class="form-label">Teléfono</label>
-                                <input type="tel" class="form-control" id="telefono" v-model="nuevoHospedaje.telefono" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="correo" class="form-label">Correo Electrónico</label>
-                                <input type="email" class="form-control" id="correo" v-model="nuevoHospedaje.correo" required>
-                            </div>
+        <h5 class="mt-4 mb-2 text-center">Ubicación</h5>
 
-                            <div class="col-md-6">
-                                <label for="contacto" class="form-label">Persona de Contacto / Representante</label>
-                                <input type="text" class="form-control" id="contacto" v-model="nuevoHospedaje.contacto" required>
-                            </div>
-                            <div class="col-md-3">
-                                <label for="estado_proveedor" class="form-label">Estado Proveedor</label>
-                                <select id="estado_proveedor" class="form-select" v-model="nuevoHospedaje.estado_proveedor" required>
-                                    <option value="Activo">Activo</option>
-                                    <option value="Inactivo">Inactivo</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3">
-                                <label for="fecha_registro" class="form-label">Fecha de Registro</label>
-                                <input type="date" class="form-control" id="fecha_registro" v-model="nuevoHospedaje.fecha_registro" readonly>
-                            </div>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-naranja-principal mt-4 w-100">
-                            <i :class="hospedajeEditandoId ? 'bi bi-save-fill' : 'bi bi-building-fill-add'" class="me-2"></i>
-                            {{ hospedajeEditandoId ? 'Guardar Cambios' : 'Registrar Hospedaje' }}
-                        </button>
-                        
-                        <button v-if="hospedajeEditandoId" @click="limpiarFormulario" type="button" class="btn btn-secondary-admin mt-2 w-100">
-                            Cancelar Edición
-                        </button>
-                    </form>
+        <div class="col-md-6">
+            <label for="ciudad" class="form-label">Ciudad</label>
+            <select id="ciudad" class="form-select" v-model="nuevoHospedaje.estado" required>
+                <option value="" disabled>-- Seleccione Ciudad --</option>
+                <option v-for="estado in opcionesEstados" :key="estado" :value="estado">{{ estado }}</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="direccion" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="direccion" v-model="nuevoHospedaje.direccion" required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="fecha_registro" class="form-label">Fecha Registro</label>
+            <input type="date" class="form-control" id="fecha_registro" v-model="nuevoHospedaje.fecha_registro" readonly>
+        </div>
+        <div class="col-md-6">
+            <label for="estado_proveedor" class="form-label">Estado Proveedor</label>
+            <select id="estado_proveedor" class="form-select" v-model="nuevoHospedaje.estado_proveedor" required>
+                <option value="Activo">Activo</option>
+                <option value="Inactivo">Inactivo</option>
+            </select>
+        </div>
+        
+    </div>
+    
+    <button type="submit" class="btn btn-naranja-principal mt-4 w-100">
+        <i :class="hospedajeEditandoId ? 'bi bi-save-fill' : 'bi bi-building-fill-add'" class="me-2"></i>
+        {{ hospedajeEditandoId ? 'Guardar Cambios' : 'Registrar Hospedaje' }}
+    </button>
+    
+    <button v-if="hospedajeEditandoId" @click="limpiarFormulario" type="button" class="btn btn-secondary-admin mt-2 w-100">
+        Cancelar Edición
+    </button>
+</form>
                 </div>
             </div>
 
@@ -91,8 +82,6 @@
                                     <th>Nombre</th>
                                     <th>Tipo</th>
                                     <th>Estado/Ubic.</th>
-                                    <th>Contacto</th>
-                                    <th>Teléfono</th>
                                     <th>Estatus</th>
                                     <th>Registro</th>
                                     <th>Acciones</th>
@@ -107,8 +96,6 @@
                                     <td>{{ hospedaje.nombre_hospedaje }}</td>
                                     <td>{{ hospedaje.tipo }}</td>
                                     <td>{{ hospedaje.estado }}</td>
-                                    <td>{{ hospedaje.contacto }}</td>
-                                    <td>{{ hospedaje.telefono }}</td>
                                     <td><span :class="{'badge bg-success': hospedaje.estado_proveedor === 'Activo', 'badge bg-danger': hospedaje.estado_proveedor === 'Inactivo'}">{{ hospedaje.estado_proveedor }}</span></td>
                                     <td>{{ hospedaje.fecha_registro }}</td>
                                     <td>
@@ -127,7 +114,7 @@
             </div>
         </main>
         
-        <FooterIni />
+        <Footer_Cliente />
     </div>
 </template>
 
@@ -135,24 +122,25 @@
 // USAMOS VUE 3 COMPOSITION API (<script setup>)
 import { reactive, ref } from 'vue';
 import menu_ADMIN from './components/menu_ADMIN.vue';
-import FooterIni from './components/footerIni.vue';
+import Footer_Cliente from './components/Footer_Cliente.vue';
 
 // Opciones y Simulación de BDD
 
-// Opciones de Estados/Ubicaciones 
+// Opciones de Ciudades/Ubicaciones (el nombre de la variable puede ser confuso, pero se mantiene para usarla en el template)
 const opcionesEstados = ['Mérida', 'Porlamar-Margarita', 'Ciudad Bolívar - Salto Ángel', 'La Gran Sabana', 'Amazonas', 'Colonia Tovar', 'Los Roques'];
 
-// Arreglo principal (simulación BDD)
+// Arreglo principal (simulación BDD) - AJUSTADO
 const listaHospedajes = reactive([
     {
         id: 1, 
         nombre_hospedaje: 'Hotel Montaña Azul', 
         tipo: 'Hotel', 
+        // El campo 'estado' ahora representa la Ciudad/Ubicación
         estado: 'Mérida', 
         direccion: 'Av. Principal, Sector La Teleferico', 
-        telefono: '+58 416-1234567', 
-        correo: 'reservas@montanaazul.com',
-        contacto: 'Sra. Carmen Díaz',
+        // ELIMINADO: telefono
+        // ELIMINADO: correo
+        // ELIMINADO: contacto
         estado_proveedor: 'Activo',
         fecha_registro: '2025-10-18'
     },
@@ -160,11 +148,11 @@ const listaHospedajes = reactive([
         id: 2, 
         nombre_hospedaje: 'Posada Sol y Arena', 
         tipo: 'Posada', 
-        estado: 'Archipiélago Los Roques', 
+        estado: 'Los Roques', // Corregido el ejemplo para usar una opción de opcionesEstados
         direccion: 'Calle El Morro, Pampatar', 
-        telefono: '+58 414-9876543', 
-        correo: 'posadasol@gmail.com',
-        contacto: 'Sr. Roberto Gómez',
+        // ELIMINADO: telefono
+        // ELIMINADO: correo
+        // ELIMINADO: contacto
         estado_proveedor: 'Activo',
         fecha_registro: '2025-09-01'
     },
@@ -177,17 +165,17 @@ const hospedajeEditandoId = ref(null);
 // Objeto reactivo para el formulario
 const nuevoHospedaje = reactive(inicializarHospedaje());
 
-// Función de utilidad para limpiar el formulario y establecer valores por defecto
+// Función de utilidad para limpiar el formulario y establecer valores por defecto - AJUSTADA
 function inicializarHospedaje() {
     return {
         id: 0,
         nombre_hospedaje: '',
         tipo: '',
-        estado: '',
+        estado: '', // Ahora representa la Ciudad
         direccion: '',
-        telefono: '',
-        correo: '',
-        contacto: '',
+        // ELIMINADO: telefono
+        // ELIMINADO: correo
+        // ELIMINADO: contacto
         estado_proveedor: 'Activo', // Estado por defecto
         fecha_registro: new Date().toISOString().substr(0, 10), // Fecha actual (YYYY-MM-DD)
     };

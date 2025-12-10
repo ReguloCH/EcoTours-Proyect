@@ -11,12 +11,21 @@ import paginaClientes from '../paginaClientes.vue';
 import paginaPago from '../paginaPago.vue';
 import adminLOGIN from '../adminLOGIN.vue';
 import iniADMIN from '../iniADMIN.vue';
-import clientesADMIN from '../clientesADMIN.vue';
+import Cliente from '../Cliente.vue';
 import proveedoresADMIN from '../proveedoresADMIN.vue';
 import aerolineasPROV from '../aerolineasPROV.vue';
+import C_Aerolinea from '../C_Aerolinea.vue';
+import C_Cliente from '../C_Cliente.vue';
+import E_Aerolinea from '../E_Aerolinea.vue';
 import hospedajePROV from '../hospedajePROV.vue';
 import alimentacionPROV from '../alimentacionPROV.vue';
 import paquetesTurisADMIN from '../paquetesTurisADMIN.vue';
+import tarifasHospedaje from '../tarifasHospedaje.vue';
+import tarifasADMIN from '../tarifasADMIN.vue';
+import tarifaPorDestino from '../tarifaPorDestino.vue';
+import tarifaRestaurante from '../tarifaRestaurante.vue';
+import movimientoscontables from '../movimientoscontables.vue'; 
+import historialdecompras from '../historialdecompras.vue';
 
 
 
@@ -77,9 +86,9 @@ const router = createRouter({
       component: iniADMIN
     },
      {
-      path: '/clientesADMIN',
-      name: 'clientesADMIN',
-      component: clientesADMIN
+      path: '/Clientes',
+      name: 'Clientes',
+      component: Cliente
     },
     {
       path: '/proveedoresADMIN',
@@ -88,28 +97,75 @@ const router = createRouter({
     },
     {
       path: '/aerolineasPROV',
-      name: '/aerolineasPROV',
+      name: 'aerolineasPROV',
       component: aerolineasPROV
     },
     {
       path: '/hospedajePROV',
-      name: '/hospedajePROV',
+      name: 'hospedajePROV',
       component: hospedajePROV
     }
     ,
     {
       path: '/alimentacionPROV',
-      name: '/alimentacionPROV',
+      name: 'alimentacionPROV',
       component: alimentacionPROV
     },
     {
       path: '/paquetesTurisADMIN',
-      name: '/paquetesTurisADMIN',
+      name: 'paquetesTurisADMIN',
       component: paquetesTurisADMIN
     },
+    
+    {
+      path: '/C_Aerolinea',
+      name: 'C_Aerolinea',
+      component: C_Aerolinea
+    },
+  
+    {
+      path: '/C_Cliente',
+      name: 'C_Cliente',
+      component: C_Cliente
+    },
 
-    
-    
+    {
+      path: '/E_Aerolinea',
+      name: 'E_Aerolinea',
+      component: E_Aerolinea
+    },
+    {
+      path: '/tarifasHospedaje',
+      name: 'tarifasHospedaje',
+      component: tarifasHospedaje
+    },
+    {
+      path: '/tarifasADMIN',
+      name: 'tarifasADMIN',
+      component: tarifasADMIN
+    },
+    {
+      path: '/tarifaPorDestino',
+      name: 'tarifaPorDestino',
+      component: tarifaPorDestino
+    },
+    {
+      path: '/tarifaRestaurante',
+      name: 'tarifaRestaurante',
+      component: tarifaRestaurante
+    },
+
+    {
+      path: '/movimientoscontables',
+      name: 'movimientoscontables',
+      component: movimientoscontables
+    },
+
+    {
+      path: '/historialdecompras',
+      name: 'historialdecompras',
+      component: historialdecompras
+    },
   ]
 });
 

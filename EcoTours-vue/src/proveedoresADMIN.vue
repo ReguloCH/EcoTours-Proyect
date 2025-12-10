@@ -1,6 +1,6 @@
 <template>
     <div class="pag-ADMIN-general">
-        <menu_ADMIN />
+        <Sidebar_Admin />
 
         <div class="header-proveedores d-flex align-items-center justify-content-center">
             <h1 class="header-titulo">Gestión de Proveedores</h1>
@@ -53,15 +53,15 @@
         </main>
         <!--COMPONENTE DEL FOOTER  -->
 
-        <FooterIni />
+        <Footer_Admin />
 
     </div>
 </template>
 
 <script>
 // IMPORTS
-import menu_ADMIN from './components/menu_ADMIN.vue';
-import FooterIni from './components/footerIni.vue';
+import Sidebar_Admin from './components/Sidebar_Admin.vue';
+import Footer_Admin from './components/Footer_Admin.vue';
 import aerolineasPROV from './aerolineasPROV.vue';
 import hospedajePROV from './hospedajePROV.vue';
 import alimentacionPROV from './alimentacionPROV.vue';
@@ -71,8 +71,8 @@ export default {
     name: 'proveedoresADMIN',
     //Los componentes usados, aqui observamos que hay mas de lo normal y es pq partiendo desde aqui, iremos a los proveedores de los paqutes 
     components: {
-        menu_ADMIN,
-        FooterIni,
+        Sidebar_Admin,
+        Footer_Admin,
         aerolineasPROV,
         hospedajePROV,
         alimentacionPROV

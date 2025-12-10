@@ -205,14 +205,14 @@
 </section>
 
 <!-- LLAMANDO AL OTRO COMPONENTE, EL FOOTERINI-->
-<FooterIni />
+<Footer_Cliente />
 </template>
 
 <script>
 //ESTE SCRIPT TIENE COMO FIN definir y controlar la lógica central dE ESTA VISTA, EXPLICA QUE OTROS COMPONENTES ESTAN INCLUIDOS, CONTIENE TAMBIEN LOGICA DEL CARRUSEL DE FOTOS
 // 1. Los imports van primero
 import menuPrincipal1 from './components/menuPrincipal1.vue';
-import FooterIni from './components/footerIni.vue';
+import Footer_Cliente from './components/Footer_Cliente.vue';
 
 export default {
     // 2. El nombre del componente
@@ -221,7 +221,7 @@ export default {
     // 3. Los componentes usados (menú)
     components: {
         menuPrincipal1 ,
-        FooterIni
+        Footer_Cliente
     },
     
     // 4. Los datos (la variable del carrusel)

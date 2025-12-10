@@ -8,6 +8,7 @@ import './paginaClientes.css'
 import './paginaPago.css'
 import App from './App.vue'
 import router from './router' 
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 const app = createApp(App)
 

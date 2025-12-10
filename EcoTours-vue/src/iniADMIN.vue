@@ -1,6 +1,6 @@
 <template>
     <div class="pag-ADMINini">
-        <menu_ADMIN />
+        <Sidebar_Admin />
         <main class="admin-dashboard-main container-xl py-5">
             <h1 class="dashboard-title text-center mb-5">
                 Bienvenido Administrador
@@ -119,15 +119,15 @@
             </div>
         </main>
         
-        <FooterIni />
+        <Footer_Admin />
     </div>
 </template>
 
 <script setup>
 //  IMPORTS
 import { ref, reactive, computed } from 'vue'; 
-import menu_ADMIN from './components/menu_ADMIN.vue';
-import FooterIni from './components/footerIni.vue';
+import Sidebar_Admin from './components/Sidebar_Admin.vue';
+import Footer_Admin from './components/Footer_Admin.vue';
 
 // DECLARACIÓN DE VARIABLES REACTIVAS (Simulación de BDD)
 // Uso de reactive() para un objeto de métricas (simulación de registro de BDD)
@@ -180,7 +180,12 @@ const pieChartStyle = computed(() => {
 </script>
 
 <style>
-
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+:root {
+    --primary-orange: #ff6600; 
+    --light-orange: #ffad66;   
+    --bg-admin: #f0f2f5;      
+}
 /* Contenedor de toda la vista con fondo de imagen */
 .pag-ADMINini {
     display: flex;
@@ -191,13 +196,6 @@ const pieChartStyle = computed(() => {
     color: #333; 
 }
 
-/*============ESTILOS ESPECÍFICOS PARA EL DASHBOARD DE ADMINISTRACIÓN (iniADMIN.vue)===========*/
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
-:root {
-    --primary-orange: #ff6600; 
-    --light-orange: #ffad66;   
-    --bg-admin: #f0f2f5;      
-}
 
 /* Contenedor principal del dashboard */
 .admin-dashboard-main {

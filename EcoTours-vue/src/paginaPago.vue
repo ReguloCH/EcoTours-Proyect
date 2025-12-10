@@ -72,18 +72,18 @@
       <button class="btn-enviar" @click="enviarFormulario">Confirmar Reserva</button>
     </section>
 
-    <FooterIni />
+    <Footer_Cliente />
   </div>
 </template>
 
 <script>
 import menuPrincipal1 from "./components/menuPrincipal1.vue";
-import FooterIni from "./components/footerIni.vue";
+import Footer_Cliente from "./components/Footer_Cliente.vue";
 
 export default {
   name: "paginaPago",
 
-  components: { menuPrincipal1, FooterIni },
+  components: { menuPrincipal1, Footer_Cliente },
 
   data() {
     return {
