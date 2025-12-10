@@ -2,11 +2,8 @@
     <div class="pag-ADMIN-clientes">
         <Sidebar_Admin />
         <main class="container-xl py-5 main-content-admin">
-            <h1 class="text-center mb-5 titulo-admin">Gestión de Clientes</h1>
+            <h1 class="text-center mb-5 titulo-admin">Nuevo cliente</h1>
                 <div class="card shadow-lg mb-5 tarjeta-transparente">
-                    <div class="card-header bg-naranja-principal text-white">
-                        <h3 class="card-title mb-0">Registrar Nuevo Cliente</h3>
-                    </div>
                     <div class="card-body">
                         <form>
                             <div class="row g-3">
@@ -14,6 +11,7 @@
                                     <label for="cedula" class="form-label">Cédula</label>
                                     <input type="text" class="form-control" id="cedula" required>
                                 </div>
+
                                 <div class="col-md-15">
                                     <label for="nombre" class="form-label">Nombre y apellido</label>
                                     <input type="text" class="form-control" id="nombre" required>
@@ -28,14 +26,17 @@
                                     <label for="email" class="form-label">Correo Electrónico</label>
                                     <input type="email" class="form-control" id="email" required>
                                 </div>
+
                                 <div class="col-md-2">
                                     <label for="telefono" class="form-label">Teléfono</label>
                                     <input type="tel" class="form-control" id="telefono" required>
                                 </div>
+
                                 <div class="col-md-3">
                                     <label for="usuario" class="form-label">Usuario</label>
                                     <input type="text" class="form-control" id="usuario" required>
                                 </div>
+
                                 <div class="col-md-4">
                                     <label for="contrasena" class="form-label">Contraseña</label>
                                     <input type="password" class="form-control" id="contrasena" required>
@@ -44,14 +45,9 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1">
                                 <label class="form-check-label" for="gridRadios1">Administrador</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1">
-                                <label class="form-check-label" for="gridRadios1">Usuario</label>
-                            </div>                   
-
+                            </div>                
                             <button type="submit" class="btn btn-naranja-principal mt-4 w-100">
-                                <i class="bi bi-person-plus-fill me-2"></i>Agregar
+                            <i class="bi bi-person-plus-fill me-2"></i>Agregar
                             </button>
                         </form>
                     </div>
