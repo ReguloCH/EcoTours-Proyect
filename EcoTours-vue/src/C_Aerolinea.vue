@@ -18,72 +18,59 @@
                     <!--COMIENZA EL FORMULARIO EN BOOTSTRAP, MEJOR ADMINISTRACION DEL ESPACIO, CON RESPONSIVIDAD  -->
 
                     <form @submit.prevent="agregarOActualizarAerolinea">
-                        <div class="row g-3">
-                            <div class="col-md-4">
-                                <label for="codigoAerolinea" class="form-label">Código Aerolínea</label>
-                                <input type="text" class="form-control" id="codigoAerolinea" v-model="nuevaAerolinea.codigoAerolinea" maxlength="8" required>
-                            </div>
-                            <div class="col-md-8">
-                                <label for="nombreAerolinea" class="form-label">Nombre Aerolínea</label>
-                                <input type="text" class="form-control" id="nombreAerolinea" v-model="nuevaAerolinea.nombreAerolinea" required>
-                            </div>
-                            
-                            <h5 class="mt-4 mb-2">Ciudad Base (Rutas de Salida)</h5>
-                            <div class="col-md-4" v-for="n in 3" :key="'base' + n">
-                                <label :for="'ciudadBase' + n" class="form-label sr-only">Ciudad Base {{ n }}</label>
-                                <select :id="'ciudadBase' + n" class="form-select" v-model="nuevaAerolinea.ciudadesBase[n-1]">
-                                    <option value="" disabled>-- Ciudad Base {{ n }} --</option>        
-                                    <!--RECIBE PARAMETROS DE UN ARREGLO PARA NO TENER QUE ESCRIBIR LA LISTA DE LAS CIUDADES VARIAS VECES  -->
-                                    <option v-for="ciudad in opcionesCiudades" :key="ciudad" :value="ciudad">{{ ciudad }}</option>
-                                </select>
-                            </div>
+    <div class="row g-3">
+        <div class="col-md-4">
+            <label for="codigoAerolinea" class="form-label">Código</label>
+            <input type="text" class="form-control" id="codigoAerolinea" v-model="nuevaAerolinea.codigoAerolinea" maxlength="8" required>
+        </div>
+        <div class="col-md-8">
+            <label for="nombreAerolinea" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombreAerolinea" v-model="nuevaAerolinea.nombreAerolinea" required>
+        </div>
 
-                            <h5 class="mt-4 mb-2">Rutas Turísticas Principales</h5>
-                            <div class="col-md-3" v-for="n in 4" :key="'ruta' + n">
-                                <label :for="'rutaPrincipal' + n" class="form-label sr-only">Ruta {{ n }}</label>
-                                <select :id="'rutaPrincipal' + n" class="form-select" v-model="nuevaAerolinea.rutasPrincipales[n-1]">
-                                 <!--IGUAL AQUI, CON PARAMETROS  -->
-                                    <option value="" disabled>-- Ruta {{ n }} --</option>
-                                    <option v-for="ruta in opcionesRutas" :key="ruta" :value="ruta">{{ ruta }}</option>
-                                </select>
-                            </div>
+        <h5 class="mt-4 mb-2 text-center">Contacto</h5>
+        
+        <div class="col-md-7">
+            <label for="correoElectronico" class="form-label">Correo</label>
+            <input type="email" class="form-control" id="correoElectronico" v-model="nuevaAerolinea.correoElectronico" required>
+        </div>
+        <div class="col-md-5">
+            <label for="telefonoContacto" class="form-label">Teléfono</label>
+            <input type="tel" class="form-control" id="telefonoContacto" v-model="nuevaAerolinea.telefonoContacto" required>
+        </div>
+        
+        <h5 class="mt-4 mb-2 text-center">Ciudad Base</h5>
 
-                            <div class="col-md-6">
-                                <label for="telefonoContacto" class="form-label">Teléfono de Contacto</label>
-                                <input type="tel" class="form-control" id="telefonoContacto" v-model="nuevaAerolinea.telefonoContacto" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="correoElectronico" class="form-label">Correo Electrónico</label>
-                                <input type="email" class="form-control" id="correoElectronico" v-model="nuevaAerolinea.correoElectronico" required>
-                            </div>
+        <div class="col-12 d-flex flex-wrap justify-content-between align-items-center mb-3">
+            <div class="form-check form-check-inline" v-for="ciudad in ['Barquisimeto', 'Maracaibo', 'Valencia', 'Caracas']" :key="ciudad">
+                <input class="form-check-input" type="radio" :id="'radioCiudad' + ciudad" 
+                       v-model="nuevaAerolinea.ciudadBaseUnica" :value="ciudad" required>
+                <label class="form-check-label" :for="'radioCiudad' + ciudad">{{ ciudad }}</label>
+            </div>
+        </div>
 
-                            <div class="col-md-6">
-                                <label for="representante" class="form-label">Representante / Persona de Contacto</label>
-                                <input type="text" class="form-control" id="representante" v-model="nuevaAerolinea.representanteContacto" required>
-                            </div>
-                            <div class="col-md-3">
-                                <label for="estado" class="form-label">Estado</label>
-                                <select id="estado" class="form-select" v-model="nuevaAerolinea.estado" required>
-                                    <option value="Activo">Activo</option>
-                                    <option value="Inactivo">Inactivo</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3">
-                                <label for="fechaRegistro" class="form-label">Fecha de Registro</label>
-                                <input type="date" class="form-control" id="fechaRegistro" v-model="nuevaAerolinea.fechaRegistro" readonly>
-                            </div>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-naranja-principal mt-4 w-100">
-                            <i :class="aerolineaEditandoId ? 'bi bi-save-fill' : 'bi bi-plus-circle-fill'" class="me-2"></i>
-                   <!--OTRO CONDICIONAL, PARA MOSTRAR EN EL BOTON O GUARDAR CAMBIOS (CUANDO SE ESTA EDITANDO) O PARAREGISTRAR AEROLINEA (CUANDO SE ESTA HACIENDO EL REGISTRO)  -->
-                            {{ aerolineaEditandoId ? 'Guardar Cambios' : 'Registrar Aerolínea' }}
-                        </button>
-                        
-                        <button v-if="aerolineaEditandoId" @click="limpiarFormulario" type="button" class="btn btn-secondary-admin mt-2 w-100">
-                            Cancelar Edición
-                        </button>
-                    </form>
+        <div class="col-md-6">
+            <label for="fechaRegistro" class="form-label">Fecha de Registro</label>
+            <input type="date" class="form-control" id="fechaRegistro" v-model="nuevaAerolinea.fechaRegistro" readonly>
+        </div>
+        <div class="col-md-6">
+            <label for="estado" class="form-label">Estado Proveedor:</label>
+            <select id="estado" class="form-select" v-model="nuevaAerolinea.estado" required>
+                <option value="Activo">Activo</option>
+                <option value="Inactivo">Inactivo</option>
+            </select>
+        </div>
+    </div>
+    
+    <button type="submit" class="btn btn-naranja-principal mt-4 w-100">
+        <i :class="aerolineaEditandoId ? 'bi bi-save-fill' : 'bi bi-plus-circle-fill'" class="me-2"></i>
+        {{ aerolineaEditandoId ? 'Guardar Cambios' : 'Registrar Aerolínea' }}
+    </button>
+    
+    <button v-if="aerolineaEditandoId" @click="limpiarFormulario" type="button" class="btn btn-secondary-admin mt-2 w-100">
+        Cancelar Edición
+    </button>
+</form>
                 </div>
             </div>  
         </main>
@@ -98,24 +85,23 @@ import Sidebar_Admin from './components/Sidebar_Admin.vue';
 import Footer_Admin from './components/Footer_Admin.vue';
 
 // ===============================================================
-// 1. Opciones y Simulación de BDD
+// 1. Opciones y Simulación de BDD (SIMPLIFICADA)
 // ===============================================================
 
-// Opciones fijas para los selects
-const opcionesCiudades = ['Caracas', 'Valencia', 'Barquisimeto', 'Maracaibo'];
-const opcionesRutas = ['Los Roques', 'Porlamar-Margarita', 'Ciudad Bolívar - Salto Ángel', 'La Gran Sabana', 'Amazonas', 'Mérida', 'Colonia Tovar'];
+// *** SE ELIMINA: const opcionesCiudades y const opcionesRutas ***
 
-// Arreglo principal (simulación BDD)
+// Arreglo principal (simulación BDD) - AJUSTADO
 const listaAerolineas = reactive([
     {
         id: 1, 
         codigoAerolinea: 'CONV001', 
         nombreAerolinea: 'CONVIASA', 
-        ciudadesBase: ['Caracas', 'Maracaibo', ''],
-        rutasPrincipales: ['Los Roques', 'Porlamar-Margarita', '', ''],
+        // CAMBIADO: ciudadesBase -> ciudadBaseUnica
+        ciudadBaseUnica: 'Caracas', 
+        // ELIMINADO: rutasPrincipales
         telefonoContacto: '0251 (848) 555-10', 
         correoElectronico: 'conviasasoport@airparadise.com',
-        representanteContacto: 'Juan Pérez',
+        // ELIMINADO: representanteContacto
         estado: 'Activo',
         fechaRegistro: '2025-10-15'
     },
@@ -134,12 +120,13 @@ function inicializarAerolinea() {
         id: 0,
         codigoAerolinea: '',
         nombreAerolinea: '',
-        // Arreglos para los 3 selects de ciudad base y 4 selects de rutas
-        ciudadesBase: ['', '', ''],
-        rutasPrincipales: ['', '', '', ''],
+        // NUEVO CAMPO:
+        ciudadBaseUnica: '', 
+        // ELIMINADO: ciudadesBase
+        // ELIMINADO: rutasPrincipales
         telefonoContacto: '',
         correoElectronico: '',
-        representanteContacto: '',
+        // ELIMINADO: representanteContacto
         estado: 'Activo', // Estado por defecto
         fechaRegistro: new Date().toISOString().substr(0, 10), // Fecha actual (YYYY-MM-DD)
     };

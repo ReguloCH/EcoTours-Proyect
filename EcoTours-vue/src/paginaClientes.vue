@@ -56,19 +56,19 @@
                 <h3>Caracas (CCS) a Los Roques</h3>
                 <p>oct 19, 2025 - oct 23, 2025</p>
                 <p class="precio">USD 500*</p>
-                <button class="btn-reservar" @click="irAPago">Reservar ahora</button>
+                <button class="btn-reservar" @click="PaginaPago">Reservar ahora</button>
               </div>
             </div>
           </div>
 
           <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="card h-100 shadow-sm">
+           <div class="card h-100 shadow-sm">
               <img src="/img/vuelo-Caracas-Santiagoch.webp" alt="Destino 2" class="card-img-top" />
               <div class="info p-3 text-center">
                 <h3>Caracas (CCS) a Santiago de Chile (SCL)</h3>
                 <p>nov 13, 2025 - nov 21, 2025</p>
                 <p class="precio">USD 790*</p>
-                <button class="btn-reservar" @click="irAPago">Reservar ahora</button>
+                <button class="btn-reservar" @click="PaginaPago">Reservar ahora</button>
               </div>
             </div>
           </div>
@@ -80,7 +80,7 @@
                 <h3>Caracas (CCS) a Lima (LIM)</h3>
                 <p>feb 01, 2026 - feb 17, 2026</p>
                 <p class="precio">USD 750*</p>
-                <button class="btn-reservar" @click="irAPago">Reservar ahora</button>
+                <button class="btn-reservar" @click="PaginaPago">Reservar ahora</button>
               </div>
             </div>
           </div>
@@ -92,7 +92,7 @@
                 <h3>Caracas (CCS) a México - Ciudad (MEX)</h3>
                 <p>dic 15, 2025 - ene 05, 2026</p>
                 <p class="precio">USD 791*</p>
-                <button type="button" class="btn-reservar" @click="irAPago">
+                <button type="button" class="btn-reservar" @click="PaginaPago">
   Reservar ahora
 </button>
               </div>
@@ -109,6 +109,7 @@
 <script>
 import menuPrincipal1 from "./components/menuPrincipal1.vue";
 import Footer_Cliente from "./components/Footer_Cliente.vue";
+import PaginaPago from "./paginaPago.vue";
 
 export default {
   name: "paginaClientes",
@@ -117,8 +118,8 @@ export default {
     Footer_Cliente,
   },
   methods: {
-    irAPago() {
-      this.$router.push("/paginaPago");
+    PaginaPago() {
+      this.$router.push({ name: 'pagina-pago' });
     },
   },
 };

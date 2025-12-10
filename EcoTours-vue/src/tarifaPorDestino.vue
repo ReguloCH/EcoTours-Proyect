@@ -16,77 +16,41 @@
                 </div>
                 <div class="card-body">
                     <form @submit.prevent="agregarOActualizarTarifa">
-                        <div class="row g-3">
-                            <input type="hidden" v-model="nuevaTarifa.id_aerolinea">
-
+                        <div class="row g-3 align-items-end">
+                            
                             <div class="col-md-4">
-                                <label for="origen_iata" class="form-label">Origen (Código IATA)</label>
-                                <input type="text" class="form-control" id="origen_iata" v-model="nuevaTarifa.origen_iata" placeholder="Ej: CCS" maxlength="5" required>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="destino_iata" class="form-label">Destino (Código IATA)</label>
-                                <input type="text" class="form-control" id="destino_iata" v-model="nuevaTarifa.destino_iata" placeholder="Ej: MIA" maxlength="5" required>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="tipo_viaje" class="form-label">Tipo de Viaje</label>
-                                <select id="tipo_viaje" class="form-select" v-model="nuevaTarifa.tipo_viaje" required>
-                                    <option value="Ida y Vuelta">Ida y Vuelta</option>
-                                    <option value="Solo Ida">Solo Ida</option>
-                                    <option value="Multidestino">Multidestino</option>
+                                <label for="id_aerolinea_select" class="form-label">Código de Aerolínea</label>
+                                <select id="id_aerolinea_select" class="form-select" v-model.number="nuevaTarifa.id_aerolinea" required>
+                                    <option value="" disabled>-- Seleccione Código --</option>
+                                    <option v-for="aerolinea in listaAerolineas" :key="aerolinea.id" :value="aerolinea.id">{{ aerolinea.codigo }}</option>
                                 </select>
                             </div>
 
                             <div class="col-md-4">
-                                <label for="clase_vuelo" class="form-label">Clase de Vuelo</label>
-                                <select id="clase_vuelo" class="form-select" v-model="nuevaTarifa.clase_vuelo" required>
-                                    <option value="Económica">Económica</option>
-                                    <option value="Business">Business</option>
-                                    <option value="Primera">Primera</option>
+                                <label for="destino_iata" class="form-label">Destino</label>
+                                <select id="destino_iata" class="form-select" v-model="nuevaTarifa.destino_iata" required>
+                                    <option value="" disabled>-- Seleccione Destino --</option>
+                                    <option v-for="destino in destinosDisponibles" :key="destino" :value="destino">{{ destino }}</option>
                                 </select>
                             </div>
-                            <div class="col-md-4">
-                                <label for="fecha_inicio_vigencia" class="form-label">Fecha Inicio Vigencia</label>
-                                <input type="date" class="form-control" id="fecha_inicio_vigencia" v-model="nuevaTarifa.fecha_inicio_vigencia" required>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="fecha_fin_vigencia" class="form-label">Fecha Fin Vigencia</label>
-                                <input type="date" class="form-control" id="fecha_fin_vigencia" v-model="nuevaTarifa.fecha_fin_vigencia" required>
-                            </div>
-
-                            <div class="col-md-3">
-                                <label for="tarifa_base_neta" class="form-label">Tarifa Base Neta</label>
+                            
+                            <div class="col-md-2">
+                                <label for="tarifa_base_neta" class="form-label">Precio (I/V)</label>
                                 <input type="number" step="0.01" class="form-control" id="tarifa_base_neta" v-model.number="nuevaTarifa.tarifa_base_neta" required>
                             </div>
-                            <div class="col-md-3">
-                                <label for="impuestos_y_tasas" class="form-label">Impuestos/Tasas (TUA)</label>
-                                <input type="number" step="0.01" class="form-control" id="impuestos_y_tasas" v-model.number="nuevaTarifa.impuestos_y_tasas" required>
-                            </div>
+                            
                             <div class="col-md-2">
-                                <label for="moneda" class="form-label">Moneda</label>
-                                <select id="moneda" class="form-select" v-model="nuevaTarifa.moneda" required>
-                                    <option value="USD">USD</option>
-                                    <option value="VES">VES</option>
-                                </select>
+                                 <button type="submit" class="btn btn-naranja-principal w-100">
+                                    <i class="bi bi-plus-circle me-1"></i> Registrar
+                                </button>
                             </div>
-                            <div class="col-md-2">
-                                <label for="comision_agencia_porcentaje" class="form-label">Comisión (%)</label>
-                                <input type="number" step="0.01" class="form-control" id="comision_agencia_porcentaje" v-model.number="nuevaTarifa.comision_agencia_porcentaje">
-                            </div>
-                            <div class="col-md-2">
-                                <label class="form-label">Tarifa Venta</label>
-                                <p class="form-control-plaintext **fw-bold**">{{ calcularTarifaVenta() }}</p>
-                            </div>
+                            
                         </div>
-                        
-                        <button type="submit" class="btn btn-naranja-principal mt-4 w-100">
-                            <i :class="tarifaEditandoId ? 'bi bi-save-fill' : 'bi bi-airplane-fill'" class="me-2"></i>
-                            {{ tarifaEditandoId ? 'Guardar Cambios de Tarifa' : 'Registrar Tarifa Aérea' }}
-                        </button>
-                        
-                        <button v-if="tarifaEditandoId" @click="limpiarFormulario" type="button" class="btn btn-secondary-admin mt-2 w-100">
-                            Cancelar Edición
-                        </button>
                     </form>
+                    
+                    <button v-if="tarifaEditandoId" @click="limpiarFormulario" type="button" class="btn btn-secondary-admin mt-2 w-100">
+                        Cancelar Edición
+                    </button>
                 </div>
             </div>
 
@@ -99,27 +63,21 @@
                         <table class="table table-striped table-hover tabla-datos">
                             <thead class="bg-naranja-claro">
                                 <tr>
-                                    <th>Ruta</th>
-                                    <th>Clase</th>
-                                    <th>Vigencia</th>
-                                    <th>Base Neta</th>
-                                    <th>Tasas</th>
-                                    <th>Comisión (%)</th>
-                                    <th>**Tarifa Venta**</th>
+                                    <th>Aerolínea</th>
+                                    <th>Destino</th>
+                                    <th>Tipo</th>
+                                    <th>**Precio (I/V)**</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-if="listaTarifas.length === 0">
-                                    <td colspan="8" class="text-center text-muted">No hay tarifas registradas para esta aerolínea.</td>
+                                    <td colspan="5" class="text-center text-muted">No hay tarifas registradas.</td>
                                 </tr>
                                 <tr v-else v-for="tarifa in listaTarifas" :key="tarifa.id_tarifa_aerea">
-                                    <td>{{ tarifa.origen_iata }} a {{ tarifa.destino_iata }} ({{ tarifa.tipo_viaje }})</td>
-                                    <td>{{ tarifa.clase_vuelo }}</td>
-                                    <td>{{ tarifa.fecha_inicio_vigencia }} a {{ tarifa.fecha_fin_vigencia }}</td>
-                                    <td>{{ tarifa.moneda }} {{ tarifa.tarifa_base_neta }}</td>
-                                    <td>{{ tarifa.moneda }} {{ tarifa.impuestos_y_tasas }}</td>
-                                    <td>{{ tarifa.comision_agencia_porcentaje || 0 }}%</td>
+                                    <td>{{ obtenerCodigoAerolinea(tarifa.id_aerolinea) }}</td> 
+                                    <td>{{ tarifa.destino_iata }}</td>
+                                    <td>Ida y Vuelta</td> 
                                     <td>**{{ calcularTarifaVenta(tarifa) }}**</td>
                                     <td>
                                         <button @click="cargarParaEditar(tarifa)" class="btn btn-sm btn-warning me-2" title="Editar">
@@ -149,67 +107,79 @@ import Footer_Cliente from './components/Footer_Cliente.vue';
 import axios from 'axios'; 
 
 const route = useRoute();
-// Debe coincidir con el nombre del parámetro en tu router (ej: /tarifas/aerolineas/:id)
 const idAerolinea = ref(route.params.id); 
+
+// Lista de Destinos Disponibles 
+const destinosDisponibles = [
+    'MIA - Miami', 'PTY - Ciudad de Panamá', 'MAD - Madrid', 'BOG - Bogotá', 'SDQ - Santo Domingo', 'GYE - Guayaquil'
+];
+
+// Lista de Aerolíneas Simulada (Necesaria para el Select)
+const listaAerolineas = [
+    { id: 101, codigo: 'AVA', nombre: 'Avianca' },
+    { id: 102, codigo: 'AA', nombre: 'American Airlines' },
+    { id: 103, codigo: 'LA', nombre: 'Latam' },
+    { id: 104, codigo: 'CO', nombre: 'Conviasa' },
+];
 
 const nombreProveedor = ref('');
 const listaTarifas = reactive([]);
 const tarifaEditandoId = ref(null); 
-const API_URL = '/api/tarifas-aerolineas'; // Endpoint principal
-const API_PROV = '/api/aerolineas'; // Endpoint de proveedor
+const API_URL = '/api/tarifas-aerolineas';
+const API_PROV = '/api/aerolineas';
 
 const nuevaTarifa = reactive(inicializarTarifa());
 
+// FUNCIÓN INICIALIZAR TARIFA (SIMPLIFICADA)
 function inicializarTarifa() {
     return {
         id_tarifa_aerea: 0,
-        id_aerolinea: parseInt(idAerolinea.value), 
-        origen_iata: '',
+        // Usamos el ID de la URL o el primer ID de la lista por defecto
+        id_aerolinea: idAerolinea.value ? parseInt(idAerolinea.value) : listaAerolineas[0]?.id || 0, 
+        origen_iata: 'CCS', 
         destino_iata: '',
-        clase_vuelo: 'Económica',
-        tipo_viaje: 'Ida y Vuelta',
+        clase_vuelo: 'Económica', 
+        tipo_viaje: 'Ida y Vuelta', 
         fecha_inicio_vigencia: new Date().toISOString().substr(0, 10),
-        fecha_fin_vigencia: '',
+        fecha_fin_vigencia: '2099-12-31', 
         tarifa_base_neta: 0.00,
-        impuestos_y_tasas: 0.00,
+        impuestos_y_tasas: 0.00, 
         moneda: 'USD',
-        comision_agencia_porcentaje: 10.00, 
+        comision_agencia_porcentaje: 0.00, 
     };
 }
 
-// Cálculo de Tarifa de Venta Aérea
+// CÁLCULO DE TARIFA VENTA (SIMPLIFICADO: es solo la tarifa base)
 function calcularTarifaVenta(tarifa = nuevaTarifa) {
-    let tarifa_base = parseFloat(tarifa.tarifa_base_neta || 0);
-    let impuestos_tasas = parseFloat(tarifa.impuestos_y_tasas || 0);
-    let comision_perc = parseFloat(tarifa.comision_agencia_porcentaje || 0);
-    
-    if (tarifa_base <= 0) return `${tarifa.moneda} 0.00`;
-    
-    // 1. Costo Neto Total: Base + Impuestos/Tasas (asumiendo que las tasas ya son un valor fijo)
-    let costo_neto = tarifa_base + impuestos_tasas;
+    return `${tarifa.moneda || 'USD'} ${parseFloat(tarifa.tarifa_base_neta || 0).toFixed(2)}`;
+}
 
-    // 2. Tarifa Total (Aplicando comisión sobre el precio de VENTA)
-    // Formula: Venta = Costo Neto / (1 - %Comision)
-    let tarifa_total = costo_neto / (1 - (comision_perc / 100));
-
-    return `${tarifa.moneda} ${tarifa_total.toFixed(2)}`;
+// Función para buscar el código de la aerolínea por su ID (PARA EL LISTADO)
+function obtenerCodigoAerolinea(id) {
+    const aerolinea = listaAerolineas.find(a => a.id === id);
+    return aerolinea ? aerolinea.codigo : 'N/A';
 }
 
 
 onMounted(() => {
+    // Si la vista se carga por ID, cargamos los datos del proveedor y las tarifas
     if (idAerolinea.value) {
         cargarDatosProveedor(idAerolinea.value);
         cargarListaTarifas(idAerolinea.value);
     }
+    // Si la aerolínea no está seleccionada, forzamos la inicialización con el primer elemento de la lista
+    if (!nuevaTarifa.id_aerolinea && listaAerolineas.length > 0) {
+        nuevaTarifa.id_aerolinea = listaAerolineas[0].id;
+    }
 });
 
-// --- Lógica de CRUD ---
+// --- Lógica de CRUD (Se mantiene) ---
 
 async function cargarDatosProveedor(id) {
     try {
         const response = await axios.get(`${API_PROV}/${id}`); 
-        // Asumiendo que el campo se llama 'nombre_aerolinea' en el backend
-        nombreProveedor.value = response.data.nombre_aerolinea || response.data.nombre_hospedaje; 
+        // Mostrar el nombre de la aerolínea seleccionada o cargada por URL
+        nombreProveedor.value = response.data.nombre_aerolinea || 'Aerolínea (Sin Nombre)'; 
     } catch (error) {
         console.error('Error al cargar proveedor:', error);
         nombreProveedor.value = 'ERROR: Aerolínea No Encontrada';
@@ -218,7 +188,8 @@ async function cargarDatosProveedor(id) {
 
 async function cargarListaTarifas(id) {
     try {
-        // La ruta es: /api/tarifas-aerolineas/:idAerolinea
+        // En una aplicación real, aquí podrías querer cargar todas las tarifas
+        // y filtrarlas si no quieres depender del ID de la URL
         const response = await axios.get(`${API_URL}/${id}`); 
         listaTarifas.splice(0, listaTarifas.length, ...response.data); 
     } catch (error) {
@@ -230,18 +201,21 @@ async function cargarListaTarifas(id) {
 async function agregarOActualizarTarifa() {
     const dataToSend = { ...nuevaTarifa };
 
+    if (!dataToSend.id_aerolinea) {
+        alert('Por favor, selecciona un Código de Aerolínea.');
+        return;
+    }
+
     try {
         if (tarifaEditandoId.value) {
-            // EDICIÓN (PUT) - /api/tarifas-aerolineas/:idTarifa
             await axios.put(`${API_URL}/${tarifaEditandoId.value}`, dataToSend);
             alert('Tarifa aérea actualizada con éxito.');
         } else {
-            // REGISTRO (POST) - /api/tarifas-aerolineas
             await axios.post(API_URL, dataToSend);
             alert('Tarifa aérea registrada con éxito.');
         }
         
-        cargarListaTarifas(idAerolinea.value); 
+        cargarListaTarifas(dataToSend.id_aerolinea); 
         limpiarFormulario(); 
     } catch (error) {
         console.error('Error en la operación de tarifa:', error.response?.data || error.message);
@@ -262,10 +236,9 @@ function limpiarFormulario() {
 async function eliminarTarifa(id) {
     if (confirm('¿Está seguro de que desea eliminar esta tarifa aérea?')) {
         try {
-            // DELETE - /api/tarifas-aerolineas/:idTarifa
             await axios.delete(`${API_URL}/${id}`);
             alert('Tarifa eliminada.');
-            cargarListaTarifas(idAerolinea.value);
+            cargarListaTarifas(nuevaTarifa.id_aerolinea);
             if (tarifaEditandoId.value === id) {
                 limpiarFormulario();
             }
@@ -278,7 +251,7 @@ async function eliminarTarifa(id) {
 </script>
 
 <style scoped>
-/* Reutilizando tus estilos de administración */
+/* ESTILOS (Sin cambios) */
 .pag-ADMIN-tarifas {
     display: flex;
     flex-direction: column;

@@ -3,11 +3,8 @@
         <menu_ADMIN />
 
         <main class="container-xl py-5 main-content-admin">
-            <h1 class="text-center mb-5 titulo-admin">Gestión de Menú y Tarifas</h1>
-            <h2 class="text-center mb-4 sub-titulo-secundario">
-                Tarifas para: {{ nombreProveedor || 'Cargando Restaurante...' }}
-            </h2>
-
+            <h1 class="text-center mb-5 titulo-admin">Tarifas por Restaurante</h1>
+            
             <div v-if="message" :class="['alert mb-5', messageType === 'success' ? 'alert-success' : 'alert-danger']" role="alert">
                 {{ message }}
             </div>
@@ -15,98 +12,43 @@
             <div class="card shadow-lg mb-5 tarjeta-transparente">
                 <div class="card-header bg-naranja-principal text-white"> 
                     <h3 class="card-title mb-0">
-                        {{ isEditing ? 'Editar Tarifa' : 'Registrar Nuevo Producto' }}
+                        {{ isEditing ? 'Editar Tarifa Diaria' : 'Registrar Nueva Tarifa Diaria' }}
                     </h3>
                 </div>
                 <div class="card-body">
                     <form @submit.prevent="handleSubmit">
-                        <div class="row g-3">
-                            <input type="hidden" v-model="form.restaurante_id">
-
-                            <div class="col-md-4">
-                                <label for="tipo" class="form-label">Tipo de Producto</label>
-                                <select id="tipo" class="form-select" v-model="form.tipo" required>
-                                    <option value="" disabled>-- Seleccione un tipo --</option>
-                                    <option value="Plato Principal">Plato Principal</option>
-                                    <option value="Entrada">Entrada</option>
-                                    <option value="Bebida">Bebida</option>
-                                    <option value="Postre">Postre</option>
+                        <div class="row g-3"> 
+                            
+                            <div class="col-md-6 col-lg-4">
+                                <label for="restaurante_id" class="form-label">Restaurante</label>
+                                <select id="restaurante_id" class="form-select" v-model="form.restaurante_id" required>
+                                    <option value="" disabled>-- Seleccione un Restaurante --</option>
+                                    <option v-for="restaurante in listaRestaurantes" :key="restaurante.id" :value="restaurante.id">
+                                        {{ restaurante.nombre_restaurante }}
+                                    </option>
                                 </select>
                             </div>
 
-                            <div class="col-md-5">
-                                <label for="nombre" class="form-label">Nombre del Producto</label>
-                                <input type="text" class="form-control" id="nombre" v-model="form.nombre" required placeholder="Ej: Pasta Carbonara">
+                            <div class="col-md-6 col-lg-8">
+                                <label for="direccion" class="form-label">Dirección</label>
+                                <input type="text" class="form-control" id="direccion" v-model="form.direccion" required placeholder="Ingrese la dirección del restaurante">
                             </div>
 
-                            <div class="col-md-3">
-                                <label for="precio" class="form-label">Precio Neto (USD)</label>
-                                <input type="number" step="0.01" class="form-control" id="precio" v-model.number="form.precio" required min="0.01" placeholder="Ej: 15.50">
+                            <div class="col-12 col-lg-6"> 
+                                <label for="precio_dia" class="form-label">Precio por Día</label>
+                                <input type="number" step="0.01" class="form-control" id="precio_dia" v-model.number="form.precio_dia" required min="0.01" placeholder="Ej: 50.00">
                             </div>
-
                         </div>
 
-                        <div class="mt-4">
-                            <button type="submit" class="btn btn-naranja-principal w-100 mb-2">
-                                <i :class="isEditing ? 'bi bi-save-fill' : 'bi bi-plus-circle-fill'" class="me-2"></i>
-                                {{ isEditing ? 'Guardar Cambios del Producto' : 'Registrar Producto al Menú' }}
-                            </button>
-
-                            <button v-if="isEditing" @click="resetForm" type="button" class="btn btn-secondary-admin w-100">
-                                Cancelar Edición
-                            </button>
+                        <div class="mt-4 row g-3">
+                            <div class="col-12"> 
+                                <button type="submit" class="btn btn-naranja-principal w-100">
+                                    <i :class="isEditing ? 'bi bi-save-fill' : 'bi bi-plus-circle-fill'" class="me-2"></i>
+                                    {{ isEditing ? 'Guardar Cambios' : 'Registrar' }}
+                                </button>
+                            </div>
                         </div>
                     </form>
-                </div>
-            </div>
-
-            <div class="card shadow-lg tarjeta-transparente">
-                <div class="card-header bg-naranja-oscuro text-white"> 
-                    <h3 class="card-title mb-0">Listado de Productos del Menú ({{ tarifas.length }})</h3>
-                </div>
-                <div class="card-body p-0">
-                    
-                    <div v-if="loading" class="text-center py-5 text-muted">
-                        Cargando tarifas...
-                    </div>
-                    
-                    <div v-else-if="error" class="text-center py-5 text-danger">
-                        <p class="font-weight-bold">⚠️ Error al cargar las tarifas: {{ error }}</p>
-                    </div>
-
-                    <div v-else-if="tarifas.length === 0" class="text-center py-5 text-muted">
-                        No hay productos registrados para este restaurante.
-                    </div>
-
-                    <div v-else class="table-responsive">
-                        <table class="table table-striped table-hover tabla-datos">
-                            <thead class="bg-naranja-claro">
-                                <tr>
-                                    <th class="text-center">ID</th>
-                                    <th>Tipo</th>
-                                    <th>Producto</th>
-                                    <th class="text-end">Precio (USD)</th>
-                                    <th class="text-center">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="tarifa in tarifas" :key="tarifa.id">
-                                    <td class="text-center">{{ tarifa.id }}</td>
-                                    <td>{{ tarifa.tipo }}</td>
-                                    <td>{{ tarifa.nombre }}</td>
-                                    <td class="text-end fw-bold">${{ tarifa.precio.toFixed(2) }}</td>
-                                    <td class="text-center">
-                                        <button @click="startEdit(tarifa)" class="btn btn-sm btn-warning me-2" title="Editar">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </button>
-                                        <button @click="deleteTarifa(tarifa.id)" class="btn btn-sm btn-danger" title="Eliminar">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
             </div>
         </main>
@@ -116,80 +58,76 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue';
-import { useRoute } from 'vue-router';
+import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import menu_ADMIN from './components/menu_ADMIN.vue'; 
 import Footer_Cliente from './components/Footer_Cliente.vue';
 
-// --- Lógica de la API y Estados ---
-const route = useRoute();
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
 
-const proveedorId = computed(() => route.params.id);
-const nombreProveedor = ref('');
-
-const tarifas = ref([]);
-const loading = ref(true);
-const error = ref(null);
+const listaRestaurantes = ref([]);
 const message = ref('');
 const messageType = ref('success');
-const isEditing = ref(false);
-const currentTarifaId = ref(null);
+const isEditing = ref(false); 
 
 const form = ref({
-    tipo: '',
-    nombre: '',
-    precio: 0,
-    restaurante_id: proveedorId.value
+    restaurante_id: '',
+    direccion: '',
+    precio_dia: 0,
 });
 
-// Función para obtener el nombre del restaurante
-const fetchNombreProveedor = async () => {
+// Función para obtener la lista de restaurantes para el select
+const fetchRestaurantes = async () => {
     try {
-        const response = await axios.get(`${API_URL}/restaurantes/${proveedorId.value}`); 
-        nombreProveedor.value = response.data.nombre_restaurante || `Restaurante ID: ${proveedorId.value}`;
+        const response = await axios.get(`${API_URL}/restaurantes`); 
+        listaRestaurantes.value = response.data;
     } catch (e) {
-        console.error("Error al obtener nombre de proveedor:", e);
-        nombreProveedor.value = 'ERROR: No Encontrado';
+        console.error("Error al obtener la lista de restaurantes:", e);
+        showMessage('Error al cargar la lista de restaurantes.', 'error');
     }
 };
 
-// 1. Obtener todas las tarifas del restaurante
-const fetchTarifas = async () => {
-    loading.value = true;
-    error.value = null;
+// Función para cargar la tarifa existente (si la hay) para el restaurante seleccionado
+const fetchTarifaExistente = async (restauranteId) => {
     try {
-        const response = await axios.get(`${API_URL}/tarifasRestaurante/${proveedorId.value}`);
-        tarifas.value = response.data;
+        const response = await axios.get(`${API_URL}/tarifasDiarias/${restauranteId}`);
+        const tarifa = response.data; 
+        if (tarifa) {
+            Object.assign(form.value, {
+                direccion: tarifa.direccion,
+                precio_dia: parseFloat(tarifa.precio_dia),
+            });
+            isEditing.value = true;
+        } else {
+            resetForm();
+        }
     } catch (e) {
-        console.error("Error al obtener las tarifas del restaurante:", e);
-        error.value = 'Error al cargar las tarifas del restaurante.';
-    } finally {
-        loading.value = false;
+        resetForm();
     }
 };
 
-// 2. Enviar (Crear o Editar) Tarifa
+// Enviar (Crear o Editar) Tarifa
 const handleSubmit = async () => {
-    form.value.restaurante_id = proveedorId.value;
     
-    if (form.value.precio <= 0) {
-        showMessage('El precio debe ser un valor positivo.', 'error');
+    if (form.value.precio_dia <= 0) {
+        showMessage('El Precio por Día debe ser un valor positivo.', 'error');
         return;
     }
 
     try {
+        const dataToSend = {
+            restaurante_id: form.value.restaurante_id,
+            direccion: form.value.direccion,
+            precio_dia: form.value.precio_dia,
+        };
+
         if (isEditing.value) {
-            await axios.put(`${API_URL}/tarifasRestaurante/${currentTarifaId.value}`, form.value);
-            showMessage('Tarifa actualizada exitosamente.', 'success');
+            await axios.put(`${API_URL}/tarifasDiarias/${form.value.restaurante_id}`, dataToSend);
+            showMessage('Tarifa por Restaurante actualizada exitosamente.', 'success');
         } else {
-            await axios.post(`${API_URL}/tarifasRestaurante`, form.value);
-            showMessage('Tarifa creada exitosamente.', 'success');
+            await axios.post(`${API_URL}/tarifasDiarias`, dataToSend);
+            showMessage('Tarifa por Restaurante registrada exitosamente.', 'success');
         }
-        
-        await fetchTarifas();
-        resetForm();
         
     } catch (e) {
         console.error("Error al enviar la tarifa:", e);
@@ -197,48 +135,12 @@ const handleSubmit = async () => {
     }
 };
 
-// 3. Iniciar Edición
-const startEdit = (tarifa) => {
-    isEditing.value = true;
-    currentTarifaId.value = tarifa.id;
-    Object.assign(form.value, {
-        tipo: tarifa.tipo,
-        nombre: tarifa.nombre,
-        precio: parseFloat(tarifa.precio), 
-        restaurante_id: tarifa.restaurante_id
-    });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
-// 4. Eliminar Tarifa
-const deleteTarifa = async (id) => {
-    if (!confirm('¿Está seguro de que desea eliminar este producto del menú?')) {
-        return;
-    }
-    
-    try {
-        await axios.delete(`${API_URL}/tarifasRestaurante/${id}`);
-        showMessage('Producto eliminado exitosamente.', 'success');
-        await fetchTarifas();
-        if (currentTarifaId.value === id) {
-            resetForm();
-        }
-    } catch (e) {
-        console.error("Error al eliminar la tarifa:", e);
-        showMessage(`Error al eliminar la tarifa: ${e.response?.data?.message || e.message}`, 'error');
-    }
-};
 
 // 5. Resetear el formulario y estado de edición
 const resetForm = () => {
     isEditing.value = false;
-    currentTarifaId.value = null;
-    form.value = {
-        tipo: '',
-        nombre: '',
-        precio: 0,
-        restaurante_id: proveedorId.value
-    };
+    form.value.direccion = '';
+    form.value.precio_dia = 0;
 };
 
 // 6. Mostrar mensaje temporal 
@@ -252,19 +154,12 @@ const showMessage = (msg, type) => {
 
 // --- Ciclo de Vida ---
 onMounted(() => {
-    if (proveedorId.value) {
-        fetchNombreProveedor();
-        fetchTarifas();
-    } else {
-        error.value = "ID del restaurante no proporcionado en la URL.";
-        loading.value = false;
-    }
+    fetchRestaurantes();
 });
 </script>
 
 <style scoped>
-
-
+/* Las clases de estilo se mantienen igual */
 .pag-ADMIN-tarifas {
     display: flex;
     flex-direction: column;
@@ -307,9 +202,9 @@ onMounted(() => {
     transition: background-color 0.3s, transform 0.2s;
 }
 .btn-naranja-principal:hover {
-     background-color: #e65c00;
-     border-color: #e65c00;
-     color: white;
+    background-color: #e65c00;
+    border-color: #e65c00;
+    color: white;
 }
 .btn-secondary-admin {
     background-color: #6c757d;
