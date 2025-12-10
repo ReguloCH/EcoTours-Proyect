@@ -5,46 +5,47 @@
             <h1 class="text-center mb-5 titulo-admin">Nuevo cliente</h1>
                 <div class="card shadow-lg mb-5 tarjeta-transparente">
                     <div class="card-body">
-                        <form>
+                        <form @submit.prevent="addItem">
                             <div class="row g-3">
                                 <div class="col-md-4">
-                                    <label for="cedula" class="form-label">Cédula</label>
-                                    <input type="text" class="form-control" id="cedula" required>
+                                    <label for="cedula_usuario" class="form-label">Cédula</label>
+                                    <input v-model="newItem.cedula_usuario" type="text" class="form-control" id="cedula_usuario" required>
                                 </div>
 
                                 <div class="col-md-15">
-                                    <label for="nombre" class="form-label">Nombre y apellido</label>
-                                    <input type="text" class="form-control" id="nombre" required>
+                                    <label for="nombre_usuario" class="form-label">Nombre y apellido</label>
+                                    <input v-model="newItem.nombre_usuario" type="text" class="form-control" id="nombre_usuario" required>
                                 </div>
 
                                 <div class="col-md-15">
-                                    <label for="nombre" class="form-label">Dirección</label>
-                                    <input type="text" class="form-control" id="direccion" required>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <label for="email" class="form-label">Correo Electrónico</label>
-                                    <input type="email" class="form-control" id="email" required>
+                                    <label for="direccion_usuario" class="form-label">Dirección</label>
+                                    <input v-model="newItem.direccion_usuario" type="text" class="form-control" id="direccion_usuario" required>
                                 </div>
 
                                 <div class="col-md-2">
-                                    <label for="telefono" class="form-label">Teléfono</label>
-                                    <input type="tel" class="form-control" id="telefono" required>
+                                    <label for="telefono_usuario" class="form-label">Teléfono</label>
+                                    <input v-model="newItem.telefono_usuario" type="tel" class="form-control" id="telefono_usuario" required>
                                 </div>
 
                                 <div class="col-md-3">
-                                    <label for="usuario" class="form-label">Usuario</label>
-                                    <input type="text" class="form-control" id="usuario" required>
+                                    <label for="correo_usuario" class="form-label">Correo Electrónico</label>
+                                    <input v-model="newItem.correo_usuario" type="email" class="form-control" id="correo_usuario" required>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label for="user_usuario" class="form-label">Usuario</label>
+                                    <input v-model="newItem.user_usuario" type="text" class="form-control" id="user_usuario" required>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label for="contrasena" class="form-label">Contraseña</label>
-                                    <input type="password" class="form-control" id="contrasena" required>
+                                    <label for="contrasena_usuario" class="form-label">Contraseña</label>
+                                    <input v-model="newItem.contrasena_usuario" type="password" class="form-control" id="contrasena_usuario" required>
                                 </div>
                             </div>
+                            <br>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1">
-                                <label class="form-check-label" for="gridRadios1">Administrador</label>
+                                <input v-model="newItem.admin_usuario" class="form-check-input" type="checkbox" id="admin_usuario">
+                                <label class="form-check-label" for="admin_usuario">Administrador</label>
                             </div>                
                             <button type="submit" class="btn btn-naranja-principal mt-4 w-100">
                             <i class="bi bi-person-plus-fill me-2"></i>Agregar
@@ -52,20 +53,50 @@
                         </form>
                     </div>
                 </div>
-        </main>
+            </main>
         <Footer_Admin />
     </div>
 </template>
 
 <script setup>
 // IMPORTS
-import { reactive, ref } from 'vue';
+import { ref, reactive } from 'vue';
 import Sidebar_Admin from './components/Sidebar_Admin.vue';
 import Footer_Admin from './components/Footer_Admin.vue';
+
+const items = ref([]);
+
+const newItem = reactive({
+    cedula_usuario: '',
+    nombre_usuario: '',
+    direccion_usuario: '',
+    telefono_usuario: '',
+    correo_usuario: '',
+    user_usuario: '',
+    contrasena_usuario: '',
+    admin_usuario: false
+});
+
+function resetForm() {
+    newItem.cedula_usuario = '';
+    newItem.nombre_usuario = '';
+    newItem.direccion_usuario = '';
+    newItem.telefono_usuario = '';
+    newItem.correo_usuario = '';
+    newItem.user_usuario = '';
+    newItem.contrasena_usuario = '';
+    newItem.admin_usuario = false;
+}
+
+function addItem() {
+    // Agrega copia al arreglo
+    items.value.push({ ...newItem });
+    console.log('Cliente agregado:', items.value[items.value.length - 1]);
+    resetForm();
+}
 </script>
 
 <style scoped>
-
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
 
 /* ESTILOS ESPECÍFICOS PARA LA VISTA DE ADMINISTRACIÓN DE CLIENTES */
