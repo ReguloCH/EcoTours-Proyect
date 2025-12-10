@@ -9,7 +9,7 @@
                             <div class="row g-3">
                                 <div class="col-md-4">
                                     <label for="cedula_usuario" class="form-label">Cédula</label>
-                                    <input v-model="newItem.cedula_usuario" type="text" class="form-control" id="cedula_usuario" required>
+                                    <input v-model.number="newItem.cedula_usuario" type="number" class="form-control" id="cedula_usuario" required>
                                 </div>
 
                                 <div class="col-md-15">
@@ -60,14 +60,17 @@
 
 <script setup>
 // IMPORTS
+import axios from 'axios';
 import { ref, reactive } from 'vue';
 import Sidebar_Admin from './components/Sidebar_Admin.vue';
 import Footer_Admin from './components/Footer_Admin.vue';
 
+axios.defaults.baseURL = 'http://localhost:3000'; // mover baseURL aquí
+
 const items = ref([]);
 
 const newItem = reactive({
-    cedula_usuario: '',
+    cedula_usuario: null,
     nombre_usuario: '',
     direccion_usuario: '',
     telefono_usuario: '',
@@ -78,7 +81,7 @@ const newItem = reactive({
 });
 
 function resetForm() {
-    newItem.cedula_usuario = '';
+    newItem.cedula_usuario = null;
     newItem.nombre_usuario = '';
     newItem.direccion_usuario = '';
     newItem.telefono_usuario = '';
@@ -88,10 +91,34 @@ function resetForm() {
     newItem.admin_usuario = false;
 }
 
-function addItem() {
-    // Agrega copia al arreglo
-    items.value.push({ ...newItem });
-    console.log('Cliente agregado:', items.value[items.value.length - 1]);
+async function addItem() {
+    // construir payload con tipos y claves exactas (nota la ñ en contraseña)
+    const payload = {
+        nombre_usuario: String(newItem.nombre_usuario).trim(),
+        cedula_usuario: parseInt(newItem.cedula_usuario, 10) || 0,
+        direccion_usuario: newItem.direccion_usuario || '',
+        telefono_usuario: newItem.telefono_usuario || '',
+        correo_usuario: newItem.correo_usuario || '',
+        user_usuario: newItem.user_usuario || '',
+        admin_usuario: Boolean(newItem.admin_usuario)
+    };
+    // clave con ñ
+    payload['contraseña_usuario'] = newItem.contrasena_usuario || '';
+
+    // guardar local (opcional)
+    items.value.push({ ...payload });
+
+    try {
+        const res = await axios.post('/api/usuarios', payload);
+        console.log('Success:', res.data);
+    } catch (error) {
+        // mostrar info útil de error 400
+        if (error.response) {
+            console.error('Error status:', error.response.status, 'data:', error.response.data);
+        } else {
+            console.error('Error:', error.message);
+        }
+    }
     resetForm();
 }
 </script>
@@ -166,20 +193,5 @@ function addItem() {
     font-weight: 700;
 }
 
-.form-label {
-    font-weight: 600;
-}
 
-/* 5. Estilos de la Tabla */
-.tabla-clientes {
-    background-color: transparent; 
-}
-
-.tabla-clientes tbody tr:nth-child(odd) {
-    background-color: rgba(255, 102, 0, 0.05); 
-}
-
-.tabla-clientes th, .tabla-clientes td {
-    vertical-align: middle;
-}
 </style>
