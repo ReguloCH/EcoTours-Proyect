@@ -1,27 +1,3 @@
-<script setup>
-import { ref, onMounted } from 'vue'
-import axios from 'axios'
-import Footer_Admin from './components/Footer_Admin.vue';
-import Sidebar_Admin from './components/Sidebar_Admin.vue';
-
-const usuarios = ref([])
-
-const axiosInstance = axios.create({
-    baseURL: "http://localhost:3000/api",
-}); 
-
-async function initApp() {
-    try {
-        const res = await axiosInstance.get("/usuarios");
-        usuarios.value = res.data;
-    } catch (error) {
-        console.error("Error cargando usuarios:", error);
-    }
-};
-
-onMounted(initApp);
-</script>
-
 <template>
     <div class="pag-ADMIN-clientes">
         <Sidebar_Admin />
@@ -59,7 +35,8 @@ onMounted(initApp);
                                         <button class="btn btn-sm btn-warning me-2" title="Editar">
                                             <i class="bi bi-pencil-square"></i>
                                         </button>
-                                        <button class="btn btn-sm btn-danger" title="Eliminar">
+                                        <button class="btn btn-sm btn-danger" title="Eliminar"
+                                                @click="deleteCliente(usuario.cedula_usuario)">
                                             <i class="bi bi-trash-fill"></i>
                                         </button>
                                     </td>                                   
@@ -73,9 +50,52 @@ onMounted(initApp);
                 </div>
             </div>
         </main>
-        <Footer_Admin />
+        <Footer_Admin/>
     </div>
 </template>
+
+<script setup>
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
+import Footer_Admin from './components/Footer_Admin.vue';
+import Sidebar_Admin from './components/Sidebar_Admin.vue';
+
+const usuarios = ref([])
+
+const axiosInstance = axios.create({
+    baseURL: "http://localhost:3000/api",
+}); 
+
+async function initApp() {
+    try {
+        const res = await axiosInstance.get("/usuarios");
+        usuarios.value = res.data;
+    } catch (error) {
+        console.error("Error cargando usuarios:", error);
+    }
+};
+
+onMounted(initApp);
+
+// Función para eliminar cliente por cédula
+async function deleteCliente(cedula) {
+    if (!cedula) return;
+    if (!confirm(`Eliminar cliente con cédula ${cedula}?`)) return;
+
+    try {
+        const res = await axiosInstance.delete(`/usuarios/${cedula}`);
+        // actualizar lista local
+        usuarios.value = usuarios.value.filter(u => u.cedula_usuario !== cedula);
+        console.log('Cliente eliminado:', res.data);
+    } catch (error) {
+        if (error.response) {
+            console.error('Error status:', error.response.status, 'data:', error.response.data);
+        } else {
+            console.error('Error:', error.message);
+        }
+    }
+}
+</script>
 
 <style scoped>
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
