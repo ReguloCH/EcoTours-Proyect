@@ -1,9 +1,6 @@
 <template>
     <div class="pag-ADMIN-paquetes">
-<<<<<<< HEAD
-=======
         <!-- NOTA: Se asume que los componentes Sidebar_Admin y Footer_Admin existen -->
->>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
         <Sidebar_Admin />
 
         <main class="container-xl py-5 main-content-admin">
@@ -253,22 +250,13 @@
                 </div>
             </div>
         </main>
-<<<<<<< HEAD
-        
-=======
-
->>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
         <Footer_Admin />
     </div>
 </template>
 
 <script setup>
-<<<<<<< HEAD
-import { reactive, ref } from 'vue';
-=======
 import { reactive, ref, computed, watch } from 'vue';
 // Importamos los componentes de la interfaz de administración (simulación)
->>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
 import Sidebar_Admin from './components/Sidebar_Admin.vue';
 import Footer_Admin from './components/Footer_Admin.vue';
 

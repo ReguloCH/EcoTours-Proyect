@@ -1,28 +1,4 @@
 <template>
-<<<<<<< HEAD
-  <div class="pagina-viajes">
-    <menuPrincipal1 />
-
-    <section class="formulario-pago">
-
-      <h2>Registro de Pago</h2>
-
-      <!-- DATOS PERSONALES -->
-      <div class="form-section">
-        <h3>Datos Personales</h3>
-
-        <label>Cédula:</label>
-        <input v-model="form.cedula" type="text" placeholder="Ej: V-12345678" />
-
-        <label>Nombre:</label>
-        <input v-model="form.nombre" type="text" placeholder="Nombre" />
-
-        <label>Apellido:</label>
-        <input v-model="form.apellido" type="text" placeholder="Apellido" />
-
-        <label>Dirección:</label>
-        <input v-model="form.direccion" type="text" placeholder="Dirección completa" />
-=======
   <div class="pagina-pago d-flex flex-column min-vh-100">
     <menuPrincipal1 />
 
@@ -179,62 +155,10 @@
             </form>
           </div>
         </div>
->>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
       </div>
 
-<<<<<<< HEAD
-      <!-- DATOS DEL PAQUETE -->
-      <div class="form-section">
-        <h3>Datos del Paquete</h3>
-
-        <label>Origen:</label>
-        <input type="text" v-model="form.origen" readonly />
-
-        <label>Destino:</label>
-        <input type="text" v-model="form.destino" readonly />
-
-        <label>Aerolínea:</label>
-        <input type="text" v-model="form.aerolinea" readonly />
-
-        <label>Hotel:</label>
-        <input type="text" v-model="form.hotel" readonly />
-
-        <label>Fecha inicio:</label>
-        <input type="text" v-model="form.fechaInicio" readonly />
-
-        <label>Fecha fin:</label>
-        <input type="text" v-model="form.fechaFin" readonly />
-      </div>
-
-      <!-- DATOS DEL PAGO -->
-      <div class="form-section">
-        <h3>Datos del Pago</h3>
-
-        <label>Precio del paquete:</label>
-        <input type="text" :value="'USD ' + form.precio" readonly />
-
-        <label>Cantidad de personas:</label>
-        <input v-model.number="form.personas" type="number" min="1" />
-
-        <label>Total a pagar:</label>
-        <input type="text" :value="'USD ' + totalPagar" readonly />
-
-        <label>Método de pago:</label>
-        <select v-model="form.metodoPago">
-          <option disabled value="">Seleccione un método</option>
-          <option>Transferencia Bancaria</option>
-          <option>Pago Móvil</option>
-          <option>Tarjeta de Crédito</option>
-          <option>PayPal</option>
-        </select>
-      </div>
-
-      <button class="btn-enviar" @click="enviarFormulario">Confirmar Reserva</button>
-    </section>
-
-=======
->>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
     <Footer_Cliente />
+  </div>
   </div>
 </template>
 
@@ -244,30 +168,10 @@ import Footer_Cliente from "./components/Footer_Cliente.vue";
 
 export default {
   name: "paginaPago",
-<<<<<<< HEAD
-
-=======
->>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
   components: { menuPrincipal1, Footer_Cliente },
 
   data() {
     return {
-<<<<<<< HEAD
-      form: {
-        cedula: "",
-        nombre: "",
-        apellido: "",
-        direccion: "",
-        origen: "",
-        destino: "",
-        aerolinea: "",
-        hotel: "",
-        fechaInicio: "",
-        fechaFin: "",
-        precio: 0,
-        personas: 1,
-        metodoPago: "",
-=======
       pago: {
         nombre: "", 
         tarjeta: "",
@@ -320,7 +224,6 @@ export default {
         personas: 1, 
         metodoPago: "", 
         referenciaPago: '', 
->>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
       },
     };
   },
@@ -333,13 +236,9 @@ export default {
 
   computed: {
     totalPagar() {
-<<<<<<< HEAD
-      return this.form.precio * this.form.personas;
-=======
       const precioUnitario = this.vueloSeleccionado?.precio || 539; 
       const personas = this.form.personas || 1;
       return (precioUnitario * personas).toFixed(2); 
->>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
     },
   },
 
@@ -356,12 +255,6 @@ export default {
   },
 
   methods: {
-<<<<<<< HEAD
-    enviarFormulario() {
-      alert(`✅ Reserva confirmada para ${this.form.nombre}.
-Destino: ${this.form.destino}
-Total: USD ${this.totalPagar}`);
-=======
     todayDate() {
         const now = new Date();
         const year = now.getFullYear();
@@ -406,7 +299,6 @@ Total: USD ${this.totalPagar}`);
     
     cancelarPago() {
       this.$router.push('/pagina-clientes'); 
->>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
     },
   },
 };

@@ -45,7 +45,6 @@
           <li class="nav-item">
               <router-link to="/movimientosContables" class="nav-link">Movimientos Contables</router-link>
           </li>
-          </li>
           <li class="nav-item">
             <router-link to="/adminLOGIN" class="nav-link">Salir</router-link>
           </li>

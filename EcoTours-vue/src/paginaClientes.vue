@@ -103,7 +103,6 @@ import menuPrincipal1 from "./components/menuPrincipal1.vue";
 import Footer_Cliente from "./components/Footer_Cliente.vue";
 import PaginaPago from "./paginaPago.vue";
 
-
 export default {
   name: "paginaClientes",
 
@@ -174,12 +173,6 @@ export default {
           hotel: vuelo.hotel,
         },
       });
-
-    PaginaPago() {
-      this.$router.push({ name: 'pagina-pago' });
-
-    },
   },
-};
-
+}}
 </script>
