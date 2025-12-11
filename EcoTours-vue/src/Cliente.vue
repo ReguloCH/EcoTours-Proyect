@@ -1,30 +1,3 @@
-<<<<<<< HEAD
-<script setup>
-import { ref, onMounted } from 'vue'
-import axios from 'axios'
-import Footer_Admin from './components/Footer_Admin.vue';
-import Sidebar_Admin from './components/Sidebar_Admin.vue';
-
-const usuarios = ref([])
-
-const axiosInstance = axios.create({
-    baseURL: "http://localhost:3000/api",
-}); 
-
-async function initApp() {
-    try {
-        const res = await axiosInstance.get("/usuarios");
-        usuarios.value = res.data;
-    } catch (error) {
-        console.error("Error cargando usuarios:", error);
-    }
-};
-
-onMounted(initApp);
-</script>
-
-=======
->>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
 <template>
     <div class="pag-ADMIN-clientes">
         <Sidebar_Admin />
@@ -59,15 +32,11 @@ onMounted(initApp);
                                     <td>{{ usuario.user_usuario }}</td>
                                     <td>{{ usuario.admin_usuario ? 'Sí' : 'No' }}</td>
                                     <td>
-                                        <button class="btn btn-sm btn-warning me-2" title="Editar">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </button>
-<<<<<<< HEAD
-                                        <button class="btn btn-sm btn-danger" title="Eliminar">
-=======
+                                                <button class="btn btn-sm btn-warning me-2" title="Editar" @click="editCliente(usuario.cedula_usuario)">
+                                                    <i class="bi bi-pencil-square"></i>
+                                                </button>
                                         <button class="btn btn-sm btn-danger" title="Eliminar"
                                                 @click="deleteCliente(usuario.cedula_usuario)">
->>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
                                             <i class="bi bi-trash-fill"></i>
                                         </button>
                                     </td>                                   
@@ -81,23 +50,19 @@ onMounted(initApp);
                 </div>
             </div>
         </main>
-<<<<<<< HEAD
-        <Footer_Admin />
-    </div>
-</template>
-
-=======
         <Footer_Admin/>
     </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import axios from 'axios'
 import Footer_Admin from './components/Footer_Admin.vue';
 import Sidebar_Admin from './components/Sidebar_Admin.vue';
 
 const usuarios = ref([])
+const router = useRouter()
 
 const axiosInstance = axios.create({
     baseURL: "http://localhost:3000/api",
@@ -105,7 +70,7 @@ const axiosInstance = axios.create({
 
 async function initApp() {
     try {
-        const res = await axiosInstance.get("/usuarios");
+        const res = await axiosInstance.get("/usuario");
         usuarios.value = res.data;
     } catch (error) {
         console.error("Error cargando usuarios:", error);
@@ -113,6 +78,12 @@ async function initApp() {
 };
 
 onMounted(initApp);
+
+// Navegar a la página de edición pasando la cédula en query
+function editCliente(cedula) {
+    if (!cedula) return;
+    router.push({ path: '/E_Cliente', query: { cedula } });
+}
 
 // Función para eliminar cliente por cédula
 async function deleteCliente(cedula) {
@@ -134,7 +105,6 @@ async function deleteCliente(cedula) {
 }
 </script>
 
->>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
 <style scoped>
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
 /* ESTILOS ESPECÍFICOS PARA LA VISTA DE ADMINISTRACIÓN DE CLIENTES */
