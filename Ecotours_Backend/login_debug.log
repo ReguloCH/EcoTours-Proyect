@@ -51,3 +51,9 @@
 2025-12-11T05:33:22.401Z [LOGIN] contraseña almacenada (prefijo): $2b$10$hq4
 2025-12-11T05:33:22.403Z [LOGIN] contraseña parece ser bcrypt hash
 2025-12-11T05:33:22.492Z [LOGIN] resultado compararContraseñas: true
+2025-12-11T06:04:05.932Z [LOGIN] identifier: abreu
+2025-12-11T06:04:05.977Z [LOGIN] usuario encontrado?: true
+2025-12-11T06:04:05.982Z [LOGIN] contraseña almacenada (prefijo): $2b$10$FFY
+2025-12-11T06:04:05.987Z [LOGIN] contraseña parece ser bcrypt hash
+2025-12-11T06:04:06.059Z [LOGIN] resultado compararContraseñas: true
+2025-12-11T06:29:58.793Z Modelo Usuario: usuario

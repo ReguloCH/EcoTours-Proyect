@@ -84,7 +84,7 @@
             <div class="row g-4 mt-5">
                 <div class="col-lg-6">
                     <div class="dashboard-chart-card shadow-sm h-100 p-4">
-                        <h4 class="chart-title mb-4">Registro de Clientes por Mes</h4>
+                        <h4 class="chart-title mb-4">Ventas de paquetes turisticos por mes</h4>
                         <div class="chart-placeholder bar-chart">
                             <div class="bar-item" 
                                 v-for="(data, index) in monthlyRegistration"
@@ -125,14 +125,15 @@
 
 <script setup>
 //  IMPORTS
-import { ref, reactive, computed } from 'vue'; 
+import { ref, reactive, computed, onMounted } from 'vue'; 
+import axios from 'axios';
 import Sidebar_Admin from './components/Sidebar_Admin.vue';
 import Footer_Admin from './components/Footer_Admin.vue';
 
 // DECLARACIÓN DE VARIABLES REACTIVAS (Simulación de BDD)
 // Uso de reactive() para un objeto de métricas (simulación de registro de BDD)
 const metrics = reactive({
-    totalClients: 1250,
+    totalClients: 0,
     activePackages: 45,
     pendingBookings: 15,
     confirmedBookings: 280,
@@ -176,6 +177,31 @@ const pieChartStyle = computed(() => {
         var(--primary-orange) 0% ${confirmedPercent}%,
         var(--light-orange) ${confirmedPercent}% 100%
     );`;
+});
+
+// Cargar cantidad real de clientes y paquetes desde la API
+onMounted(async () => {
+    const axiosInstance = axios.create({ baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000/api' });
+
+    // Obtener clientes
+    try {
+        const res = await axiosInstance.get('/usuario');
+        if (Array.isArray(res.data)) {
+            metrics.totalClients = res.data.length;
+        }
+    } catch (err) {
+        console.error('Error al obtener usuarios:', err);
+    }
+
+    // Obtener paquetes turísticos y actualizar la métrica de paquetes activos
+    try {
+        const paquetesRes = await axiosInstance.get('/paquete-turistico');
+        if (Array.isArray(paquetesRes.data)) {
+            metrics.activePackages = paquetesRes.data.length;
+        }
+    } catch (err) {
+        console.error('Error al obtener paquetes turísticos:', err);
+    }
 });
 </script>
 
