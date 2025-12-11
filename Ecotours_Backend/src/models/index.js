@@ -47,9 +47,11 @@ FacturaCliente.hasMany(RegistroEgresos, { foreignKey: 'id_factura' });
 RegistroEgresos.belongsTo(EstadoTransaccionProv, { foreignKey: 'id_estado_transaccion_PROV' });
 
 // RELACIONES DE CONTABILIDAD: REGISTRO_CONTABLE
-RegistroContable.belongsTo(FacturaCliente, { foreignKey: 'id_factura' });
-RegistroContable.belongsTo(NombreCuenta, { foreignKey: 'id_cuenta' });
-RegistroContable.belongsTo(TipoMovimiento, { foreignKey: 'id_tipo_mov' });
+RegistroContable.belongsTo(FacturaCliente, { foreignKey: 'id_factura', constraints: false });
+FacturaCliente.hasMany(RegistroContable, { foreignKey: 'id_factura', constraints: false });
+
+RegistroContable.belongsTo(NombreCuenta, { foreignKey: 'id_cuenta', as: 'NombreCuenta' });
+RegistroContable.belongsTo(TipoMovimiento, { foreignKey: 'id_tipo_mov', as: 'TipoMovimiento' });
 
 // RELACIONES DE PROVEEDORES Y CATÁLOGOS
 // Los tres tipos de proveedores se asocian a EstadoProveedor y a sus respectivas ciudades/tipos.

@@ -155,14 +155,14 @@ const router = createRouter({
       component: tarifaRestaurante
     },
     {
-      path: '/movimientoscontables',
-      name: 'movimientoscontables',
+      path: '/movimientos-contables',
+      name: 'movimientos-contables',
       component: movimientoscontables
     },
 
     {
-      path: '/historialdecompras',
-      name: 'historialdecompras',
+      path: '/historial-compras',
+      name: 'historial-compras',
       component: historialdecompras
     }
   ]

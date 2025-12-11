@@ -1,40 +1,13 @@
-<<<<<<< HEAD
-<script setup>
-import { ref, onMounted } from 'vue'
-import axios from 'axios'
-import Footer_Admin from './components/Footer_Admin.vue';
-import Sidebar_Admin from './components/Sidebar_Admin.vue';
-
-const usuarios = ref([])
-
-const axiosInstance = axios.create({
-    baseURL: "http://localhost:3000/api",
-}); 
-
-async function initApp() {
-    try {
-        const res = await axiosInstance.get("/usuarios");
-        usuarios.value = res.data;
-    } catch (error) {
-        console.error("Error cargando usuarios:", error);
-    }
-};
-
-onMounted(initApp);
-</script>
-
-=======
->>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
 <template>
     <div class="pag-ADMIN-clientes">
         <Sidebar_Admin />
         <main class="container-xl py-5 main-content-admin">
-            <h1 class="text-center mb-5 titulo-admin">Clientes</h1>
+            <h1 class="text-center mb-5 titulo-admin">Gestión de Clientes</h1>
             <div class="card shadow-lg tarjeta-transparente">
                 <div class="card-header bg-naranja-oscuro text-white">
                     <h3 class="card-title mb-0">Clientes Registrados</h3>
                 </div>
-                <div class="card-body p-0">
+                <div class="card-body p-3">
                     <div class="table-responsive">
                         <table class="table table-striped table-hover tabla-clientes">
                             <thead class="bg-naranja-claro">
@@ -45,98 +18,104 @@ onMounted(initApp);
                                     <th>Correo</th>
                                     <th>Teléfono</th>
                                     <th>Usuario</th>
-                                    <th>Administrador</th>
-                                    <th>Acciones</th>
+                                    <th>Rol</th>
+                                    <th class="text-center">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="usuario in usuarios" :key="usuario.id_usuario || usuario.cedula_usuario">
+                                <tr v-if="usuarios.length === 0">
+                                    <td colspan="8" class="text-center text-muted">No hay clientes registrados.</td>
+                                </tr>
+                                <tr v-else v-for="usuario in usuarios" :key="usuario.cedula_usuario">
                                     <td>{{ usuario.cedula_usuario }}</td>
                                     <td>{{ usuario.nombre_usuario }}</td>
                                     <td>{{ usuario.direccion_usuario }}</td>
                                     <td>{{ usuario.correo_usuario }}</td>
                                     <td>{{ usuario.telefono_usuario }}</td>
                                     <td>{{ usuario.user_usuario }}</td>
-                                    <td>{{ usuario.admin_usuario ? 'Sí' : 'No' }}</td>
                                     <td>
-                                        <button class="btn btn-sm btn-warning me-2" title="Editar">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </button>
-<<<<<<< HEAD
-                                        <button class="btn btn-sm btn-danger" title="Eliminar">
-=======
-                                        <button class="btn btn-sm btn-danger" title="Eliminar"
-                                                @click="deleteCliente(usuario.cedula_usuario)">
->>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
-                                            <i class="bi bi-trash-fill"></i>
-                                        </button>
+                                        <span :class="['badge', usuario.admin_usuario ? 'bg-danger' : 'bg-primary']">
+                                            {{ usuario.admin_usuario ? 'Admin' : 'Usuario' }}
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <!-- Botones de Acción -->
+                                        <div class="btn-group" role="group">
+                                            <!-- Editar (Por implementar funcionalidad real) -->
+                                            <button class="btn btn-sm btn-outline-warning" title="Editar">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </button>
+                                            
+                                            <!-- Eliminar -->
+                                            <button class="btn btn-sm btn-outline-danger" title="Eliminar"
+                                                    @click="deleteCliente(usuario.cedula_usuario)">
+                                                <i class="bi bi-trash-fill"></i>
+                                            </button>
+                                        </div>
                                     </td>                                   
                                 </tr>
                             </tbody>
-                            <button class="btn btn-naranja-principal mt-2 w-80" title="" style="margin-left: 10px;" href="/C_Cliente">
-                                <i class="bi bi-person-plus-fill me-2"></i><router-link to="/C_Cliente" class="dropdown-item">Crear cliente</router-link>
-                            </button>
                         </table>
                     </div>
                 </div>
+                <div class="card-footer bg-white border-0">
+                    <router-link to="/C_Cliente" class="btn btn-naranja-principal w-100">
+                        <i class="bi bi-person-plus-fill me-2"></i>Registrar Nuevo Cliente
+                    </router-link>
+                </div>
             </div>
         </main>
-<<<<<<< HEAD
         <Footer_Admin />
     </div>
 </template>
 
-=======
-        <Footer_Admin/>
-    </div>
-</template>
-
 <script setup>
-import { ref, onMounted } from 'vue'
-import axios from 'axios'
-import Footer_Admin from './components/Footer_Admin.vue';
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
 import Sidebar_Admin from './components/Sidebar_Admin.vue';
+import Footer_Admin from './components/Footer_Admin.vue';
 
-const usuarios = ref([])
+const usuarios = ref([]);
 
-const axiosInstance = axios.create({
-    baseURL: "http://localhost:3000/api",
-}); 
+// Configuración axios local si no es global
+axios.defaults.baseURL = 'http://localhost:3000';
 
-async function initApp() {
+// Cargar usuarios al montar
+onMounted(async () => {
+    await cargarUsuarios();
+});
+
+async function cargarUsuarios() {
     try {
-        const res = await axiosInstance.get("/usuarios");
+        const res = await axios.get('/api/usuario');
         usuarios.value = res.data;
     } catch (error) {
         console.error("Error cargando usuarios:", error);
     }
-};
-
-onMounted(initApp);
+}
 
 // Función para eliminar cliente por cédula
 async function deleteCliente(cedula) {
     if (!cedula) return;
-    if (!confirm(`Eliminar cliente con cédula ${cedula}?`)) return;
+    
+    // Nota: window.confirm es bloqueante, idealmente usar modal custom
+    if (!confirm(`¿Estás seguro de que deseas eliminar al usuario con Cédula ${cedula}?`)) return;
 
     try {
-        const res = await axiosInstance.delete(`/usuarios/${cedula}`);
-        // actualizar lista local
+        await axios.delete(`/api/usuario/${cedula}`);
+        // Actualizar lista local eliminando el item
         usuarios.value = usuarios.value.filter(u => u.cedula_usuario !== cedula);
-        console.log('Cliente eliminado:', res.data);
+        alert('Usuario eliminado correctamente.');
     } catch (error) {
-        if (error.response) {
-            console.error('Error status:', error.response.status, 'data:', error.response.data);
-        } else {
-            console.error('Error:', error.message);
-        }
+        console.error('Error al eliminar:', error);
+        alert('Error al eliminar el usuario.');
     }
 }
 </script>
 
->>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
 <style scoped>
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
 /* ESTILOS ESPECÍFICOS PARA LA VISTA DE ADMINISTRACIÓN DE CLIENTES */
 
 :root {
@@ -161,7 +140,7 @@ async function deleteCliente(cedula) {
 
 /* Estilos para la Transparencia (Tarjetas) */
 .tarjeta-transparente {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.95);
     border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: 12px;
 }
@@ -186,7 +165,8 @@ async function deleteCliente(cedula) {
 .btn-naranja-principal {
     background-color: var(--naranja-principal);
     border-color: var(--naranja-principal);
-    color: rgb(235, 124, 34);
+    color: white;
+    font-weight: 600;
     transition: background-color 0.3s, transform 0.2s;
 }
 
@@ -197,27 +177,24 @@ async function deleteCliente(cedula) {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); 
 }
 
-/* 4. Estilos de Formulario y Título */
+/* Título */
 .titulo-admin {
-    color: #fff; 
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    color: var(--naranja-oscuro); 
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     font-weight: 700;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 8px;
+    display: inline-block;
 }
 
-.form-label {
-    font-weight: 600;
-}
-
-/* 5. Estilos de la Tabla */
-.tabla-clientes {
-    background-color: transparent; 
-}
-
-.tabla-clientes tbody tr:nth-child(odd) {
-    background-color: rgba(255, 102, 0, 0.05); 
-}
-
+/* Tabla */
 .tabla-clientes th, .tabla-clientes td {
     vertical-align: middle;
+}
+.tabla-clientes thead th {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
 }
 </style>

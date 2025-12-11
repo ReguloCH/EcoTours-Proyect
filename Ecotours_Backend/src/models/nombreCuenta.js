@@ -8,6 +8,10 @@ const NombreCuenta = sequelize.define('NombreCuenta', {
         autoIncrement: true,
         allowNull: false
     },
+    codigo: {
+        type: DataTypes.STRING(20),
+        allowNull: true
+    },
     nombre: {
         type: DataTypes.STRING(50),
         allowNull: false

@@ -1,9 +1,8 @@
 <template>
     <div class="pag-ADMIN-paquetes">
-<<<<<<< HEAD
-=======
+
         <!-- NOTA: Se asume que los componentes Sidebar_Admin y Footer_Admin existen -->
->>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
+
         <Sidebar_Admin />
 
         <main class="container-xl py-5 main-content-admin">
@@ -66,8 +65,10 @@
                                 <label for="tarifaAerea" class="form-label text-naranja">1. Tarifa de Boleto Aéreo</label>
                                 <select id="tarifaAerea" class="form-select" v-model="nuevoPaquete.idTarifaAerea" required>
                                     <option value="" disabled>-- Seleccione Boleto Aéreo --</option>
-                                    <option v-for="t in listaBoletosAereos" :key="t.id" :value="t.id">
-                                        {{ t.proveedor }} ({{ t.origen }} -> {{ t.destinoVuelo }}) - Base: ${{ t.costoBaseUSD }}
+                                    <option v-for="t in listaBoletosAereos" :key="t.id_tarifa_aerolinea" :value="t.id_tarifa_aerolinea">
+                                        {{ t.ProveedorAerolinea ? t.ProveedorAerolinea.nombre_aerolinea : 'Aerolínea' }} 
+                                        ({{ t.DestinoManejado ? t.DestinoManejado.ciudad_origen + ' -> ' + t.DestinoManejado.ciudad_destino : 'Vuelo' }}) 
+                                        - Base: ${{ t.precio_vuelos }}
                                     </option>
                                 </select>
                             </div>
@@ -77,8 +78,10 @@
                                 <label for="tarifaHospedaje" class="form-label text-naranja">2. Tarifa de Hospedaje</label>
                                 <select id="tarifaHospedaje" class="form-select" v-model="nuevoPaquete.idTarifaHospedaje" required>
                                     <option value="" disabled>-- Seleccione Oferta de Hospedaje --</option>
-                                    <option v-for="t in listaOfertasHospedaje" :key="t.id" :value="t.id">
-                                        {{ t.proveedor }} ({{ t.tipoHabitacion }}) - Base: ${{ t.costoBaseUSD }}
+                                    <option v-for="t in listaOfertasHospedaje" :key="t.id_tarifa_hospedaje" :value="t.id_tarifa_hospedaje">
+                                        {{ t.ProveedorHospedaje ? t.ProveedorHospedaje.nombre_hospedaje : 'Hotel' }} 
+                                        ({{ t.TipoHospedaje ? t.TipoHospedaje.nombre_tipo : 'Habitacion' }}) 
+                                        - Base: ${{ t.precio_x_noche }}
                                     </option>
                                 </select>
                             </div>
@@ -91,16 +94,29 @@
                                         v-model="nuevoPaquete.idTarifaRestaurante"
                                         required>
                                     <option value="" disabled>-- Seleccione Plan de Comidas --</option>
-                                    <option v-for="t in listaPlanesAlimentacion" :key="t.id" :value="t.id">
-                                        {{ t.proveedor }} ({{ t.nombrePlan }}) - Base: ${{ t.costoBaseUSD }}
+                                    <option v-for="t in listaPlanesAlimentacion" :key="t.id_tarifa_restaurante" :value="t.id_tarifa_restaurante">
+                                        {{ t.ProveedorRestaurante ? t.ProveedorRestaurante.nombre_restaurante : 'Restaurante' }} 
+                                        ({{ t.nombre_platillo }}) - Base: ${{ t.costo_unitario }}
                                     </option>
                                 </select>
                             </div>
 
-                            <!-- URL de Imagen (Para Card del Cliente) -->
+                            <!-- URL de Imagen (Selección) -->
                             <div class="col-md-12">
-                                <label for="imagenURL" class="form-label">URL de Imagen (Para Card del Cliente)</label>
-                                <input type="url" class="form-control" id="imagenURL" v-model="nuevoPaquete.imagenURL" placeholder="Ej: /img/losroques-paquete.jpg" required>
+                                <label for="imagenURL" class="form-label">Seleccionar Imagen del Paquete</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light"><i class="bi bi-image"></i></span>
+                                    <select id="imagenURL" class="form-select" v-model="nuevoPaquete.imagenURL" required>
+                                        <option value="" disabled>-- Seleccione una Imagen --</option>
+                                        <option v-for="img in listaImagenes" :key="img" :value="'/img/' + img">
+                                            {{ img }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <!-- Previsualización pequeña -->
+                                <div v-if="nuevoPaquete.imagenURL" class="mt-2">
+                                    <img :src="nuevoPaquete.imagenURL" alt="Vista previa" style="height: 100px; border-radius: 8px; border: 2px solid #ddd;">
+                                </div>
                             </div>
                         </div>
 
@@ -175,7 +191,7 @@
                                     <th rowspan="2" class="align-middle">ID</th>
                                     <th rowspan="2" class="align-middle">Destino</th>
                                     <th rowspan="2" class="align-middle">Duración</th>
-                                    <th rowspan="2" class="align-middle">Personas</th> <!-- Nuevo campo en tabla -->
+                                    <th rowspan="2" class="align-middle">Personas</th>
                                     <th colspan="3" class="text-center">Detalle de Proveedores</th>
                                     <th colspan="4" class="text-center">Desglose Financiero (Unitario/Total USD)</th>
                                     <th rowspan="2" class="align-middle">Acciones</th>
@@ -183,7 +199,7 @@
                                 <tr>
                                     <th>Aéreo</th>
                                     <th>Hospedaje</th>
-                                    <th>Restaurante</th> <!-- Cambiado de 'Comidas' -->
+                                    <th>Restaurante</th>
                                     <th>Costo Base (Unitario)</th>
                                     <th>IVA (16%) Unitario</th>
                                     <th>Ganancia (40%) Unitario</th>
@@ -200,21 +216,20 @@
                                     <td>{{ paquete.id }}</td>
                                     <td>{{ paquete.destino }}</td>
                                     <td>{{ paquete.duracion }}</td>
-                                    <td class="fw-bold">{{ paquete.cantidadPersonas }}</td> <!-- Nuevo campo -->
+                                    <td class="fw-bold">{{ paquete.cantidadPersonas }}</td>
 
                                     <!-- Detalle de Proveedores -->
                                     <td>{{ getTarifaNombre(paquete.idTarifaAerea, 'aereo') }}</td>
                                     <td>{{ getTarifaNombre(paquete.idTarifaHospedaje, 'hospedaje') }}</td>
                                     <td>
-                                        <!-- Plan de Restaurante (ahora siempre debe existir) -->
                                         {{ getTarifaNombre(paquete.idTarifaRestaurante, 'alimentacion') }}
                                     </td>
 
                                     <!-- Desglose Financiero (Unitario y Total) -->
-                                    <td>${{ paquete.costoBaseUnitario.toFixed(2) }}</td>
-                                    <td class="text-primary">${{ paquete.montoIVAUnitario.toFixed(2) }}</td>
-                                    <td class="text-success">${{ paquete.montoGananciaUnitario.toFixed(2) }}</td>
-                                    <td class="fw-bold text-warning">${{ paquete.precioFinalVenta.toFixed(2) }}</td>
+                                    <td>${{ (paquete.costoBaseUnitario || 0).toFixed(2) }}</td>
+                                    <td class="text-primary">${{ (paquete.montoIVAUnitario || 0).toFixed(2) }}</td>
+                                    <td class="text-success">${{ (paquete.montoGananciaUnitario || 0).toFixed(2) }}</td>
+                                    <td class="fw-bold text-warning">${{ (paquete.precioFinalVenta || 0).toFixed(2) }}</td>
 
                                     <!-- Botones de Acción (Editar y Eliminar) -->
                                     <td>
@@ -222,7 +237,6 @@
                                             <button @click="iniciarEdicion(paquete)" class="btn btn-sm btn-outline-info me-1" title="Editar Paquete">
                                                 <i class="bi bi-pencil-square"></i>
                                             </button>
-                                            <!-- Usamos un modal o componente de confirmación en lugar de window.confirm() -->
                                             <button @click="confirmarEliminar(paquete.id, paquete.destino)" class="btn btn-sm btn-outline-danger" title="Eliminar Paquete">
                                                 <i class="bi bi-trash-fill"></i>
                                             </button>
@@ -253,317 +267,303 @@
                 </div>
             </div>
         </main>
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
+
+
+
         <Footer_Admin />
     </div>
 </template>
 
 <script setup>
-<<<<<<< HEAD
-import { reactive, ref } from 'vue';
-=======
-import { reactive, ref, computed, watch } from 'vue';
-// Importamos los componentes de la interfaz de administración (simulación)
->>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
+import { reactive, ref, computed, watch, onMounted } from 'vue';
+import axios from 'axios';
 import Sidebar_Admin from './components/Sidebar_Admin.vue';
 import Footer_Admin from './components/Footer_Admin.vue';
 
 // --- CONSTANTES DE CÁLCULO ---
-const IVA = 0.16; // 16% de Impuesto al Valor Agregado
-const PORCENTAJE_GANANCIA = 0.40; // 40% de Ganancia
+const IVA = 0.16;
+const PORCENTAJE_GANANCIA = 0.40;
 
-// --- ESTADO Y SIMULACIÓN DE DATOS ---
+// Lista de imágenes disponibles en /public/img
+const listaImagenes = [
+    "paquete1.jpg", "paquete2.jpg", "paquete3.jpg", "paquete4.jpg", "paquete5.jpg", 
+    "paquete6.jpg", "paquete7.jpg", "paquete8.jpg", "paquete9.jpg", "paqueteTURISTICO.jpg",
+    "losROQUES.jpg", "maracaibo.jpg", "valencia.jpg", "caracas.webp", "playa-en-margarita.webp",
+    "oferta1.jpg", "oferta2.jpg", "oferta3.jpg", "oferta4.jpg", "oferta5.jpg", "oferta6.jpg"
+];
 
-// Refs para manejo de mensajes y filtro
+// --- ESTADO ---
 const message = ref(null);
 const messageType = ref('success');
 const filtroDestino = ref('');
 const paqueteEditando = ref(null);
 
-// Refs para el modal de eliminación (Reemplazo de window.confirm)
+// Modal de eliminación
 const paqueteAEliminar = ref(null);
 const paqueteAEliminarNombre = ref('');
 
-// SIMULACIÓN DE DATOS DE TARIFAS (Se reemplazará con datos del backend)
-const listaBoletosAereos = reactive([
-    { id: 10, proveedor: 'CONVIASA', origen: 'CCS', destinoVuelo: 'LRM', costoBaseUSD: 250 },
-    { id: 11, proveedor: 'Turismo Albatros', origen: 'CCS', destinoVuelo: 'CMM', costoBaseUSD: 350 },
-    { id: 12, proveedor: 'Laser Airlines', origen: 'CCS', destinoVuelo: 'MAR', costoBaseUSD: 180 },
-]);
+// Listas de datos reales (desde Backend)
+const listaBoletosAereos = ref([]);
+const listaOfertasHospedaje = ref([]);
+const listaPlanesAlimentacion = ref([]);
+const listaPaquetes = ref([]);
 
-const listaOfertasHospedaje = reactive([
-    { id: 20, proveedor: 'Posada Sol y Arena', tipoHabitacion: 'Doble Estándar', costoBaseUSD: 150, noches: 2 },
-    { id: 21, proveedor: 'Hotel Playa Grande', tipoHabitacion: 'Suite Ejecutiva', costoBaseUSD: 280, noches: 3 },
-    { id: 22, proveedor: 'Campamento Canaima', tipoHabitacion: 'Churuata Compartida', costoBaseUSD: 100, noches: 3 },
-]);
+// Objeto para consolidar todas las tarifas para búsqueda rápida en la tabla
+const todasLasTarifas = computed(() => {
+    // Mapeamos para unificar estructura si es necesario
+    const aereos = listaBoletosAereos.value.map(t => ({
+        id: t.id_tarifa_aerolinea, // ID de la tabla tarifa_por_destino
+        proveedor: t.ProveedorAerolinea ? t.ProveedorAerolinea.nombre_aerolinea : 'Aerolínea',
+        detalle: t.DestinoManejado ? `${t.DestinoManejado.ciudad_origen} -> ${t.DestinoManejado.ciudad_destino}` : 'Vuelo',
+        costoBaseUSD: parseFloat(t.precio_vuelos || 0),
+        tipo: 'aereo'
+    }));
+    
+    const hospedajes = listaOfertasHospedaje.value.map(t => ({
+        id: t.id_tarifa_hospedaje,
+        proveedor: t.ProveedorHospedaje ? t.ProveedorHospedaje.nombre_hospedaje : 'Hotel',
+        detalle: t.TipoHospedaje ? t.TipoHospedaje.nombre_tipo : 'Hospedaje', // O descripción
+        costoBaseUSD: parseFloat(t.precio_por_dia || 0), // CORREGIDO: Usar precio_por_dia
+        tipo: 'hospedaje'
+    }));
 
-const listaPlanesAlimentacion = reactive([
-    { id: 30, proveedor: 'Sabores del Mar', nombrePlan: 'Pensión Completa (3D)', costoBaseUSD: 90 },
-    { id: 31, proveedor: 'El Grill Venezolano', nombrePlan: 'Cena Gourmet (1N)', costoBaseUSD: 45 },
-    { id: 32, proveedor: 'Desayunos Express', nombrePlan: 'Solo Desayuno (2D)', costoBaseUSD: 30 },
-]);
+    const restaurantes = listaPlanesAlimentacion.value.map(t => ({
+        id: t.id_tarifa_restaurante,
+        proveedor: t.ProveedorRestaurante ? t.ProveedorRestaurante.nombre_restaurante : 'Restaurante',
+        detalle: t.nombre_platillo || 'Comida', // Ojo: nombre_platillo no existe en modelo? Revisar.
+        // Si modelo restaurante no tiene detalle de comida, usar nombre genérico
+        costoBaseUSD: parseFloat(t.precio_por_dia || 0), // CORREGIDO: Usar precio_por_dia (era costo_unitario)
+        tipo: 'alimentacion'
+    }));
 
-// Objeto para consolidar todas las tarifas para búsqueda rápida
-const todasLasTarifas = computed(() => [
-    ...listaBoletosAereos.map(t => ({ ...t, tipo: 'aereo' })),
-    ...listaOfertasHospedaje.map(t => ({ ...t, tipo: 'hospedaje' })),
-    ...listaPlanesAlimentacion.map(t => ({ ...t, tipo: 'alimentacion' })),
-]);
+    return [...aereos, ...hospedajes, ...restaurantes];
+});
 
-// Arreglo principal (simulación BDD de Paquetes con la nueva estructura)
-const listaPaquetes = reactive([
-    {
-        id: 101,
-        destino: 'Los Roques', // Destino de la lista
-        duracion: '3 días / 2 noches',
-        descripcion: 'Paquete playero con pasaje aéreo y hospedaje en posada, incluye pensión completa.', // Nuevo
-        cantidadPersonas: 2, // Nuevo
-        idTarifaAerea: 10, // CONVIASA (Base: 250)
-        idTarifaHospedaje: 20, // Posada Sol y Arena (Base: 150)
-        idTarifaRestaurante: 30, // Pensión Completa (Base: 90) - Obligatorio
-        imagenURL: '/img/roques-1.jpg',
-        // Costos Calculados (Unitario: 490)
-        costoBaseUnitario: 490,
-        montoIVAUnitario: 78.4,
-        montoGananciaUnitario: 196,
-        precioFinalVenta: 1528.8, // (490 + 78.4 + 196) * 2 = 1528.8
-    },
-    {
-        id: 102,
-        destino: 'El Salto Ángel',
-        duracion: '4 días / 3 noches',
-        descripcion: 'Expedición de aventura incluyendo vuelo, campamento y plan de comidas básico.',
-        cantidadPersonas: 1,
-        idTarifaAerea: 11, // Turismo Albatros (Base: 350)
-        idTarifaHospedaje: 22, // Campamento Canaima (Base: 100)
-        idTarifaRestaurante: 31, // Cena Gourmet (Base: 45) - Obligatorio
-        imagenURL: '/img/canaima-2.jpg',
-        // Costos Calculados (Unitario: 495)
-        costoBaseUnitario: 495, // 350 + 100 + 45
-        montoIVAUnitario: 79.2,
-        montoGananciaUnitario: 198,
-        precioFinalVenta: 772.2, // (495 + 79.2 + 198) * 1 = 772.2
-    }
-]);
-
-// Contador e ID del nuevo paquete (para simulación de IDs)
-const siguienteId = ref(103);
-
-// Función para resetear el objeto del formulario a su estado inicial
+// Función para inicializar el formulario
 function inicializarPaquete() {
     return {
         id: 0,
-        destino: 'Los Roques', // Default selection
+        destino: '', 
         duracion: '',
-        descripcion: '', // Nuevo campo
-        cantidadPersonas: 1, // Nuevo campo
+        descripcion: '',
+        cantidadPersonas: 1,
         idTarifaAerea: '',
         idTarifaHospedaje: '',
-        idTarifaRestaurante: '', // Ahora siempre obligatorio
+        idTarifaRestaurante: '',
         imagenURL: '',
-        // Cálculos Unitarios (Por Persona)
         costoBaseUnitario: 0,
         montoIVAUnitario: 0,
         montoGananciaUnitario: 0,
-        // Cálculo Total
         precioFinalVenta: 0,
     };
 }
 
-// Objeto reactivo para el formulario
 const nuevoPaquete = reactive(inicializarPaquete());
 
-// --- LÓGICA DE CÁLCULO DE PRECIOS (Computadas) ---
+// --- CARGA DE DATOS (ON MOUNTED) ---
+onMounted(async () => {
+    await cargarDatos();
+});
 
-// Función helper para encontrar una tarifa
-function findTarifa(id, lista) {
-    return lista.find(t => t.id === id);
+async function cargarDatos() {
+    try {
+        // Cargar Tarifas y Paquetes en paralelo
+        const [resAereos, resHospedajes, resRestaurantes, resPaquetes] = await Promise.all([
+            axios.get('http://localhost:3000/api/tarifa-por-destino'),
+            axios.get('http://localhost:3000/api/tarifa-hospedaje'),
+            axios.get('http://localhost:3000/api/tarifa-restaurante'),
+            axios.get('http://localhost:3000/api/paquete-turistico')
+        ]);
+
+        listaBoletosAereos.value = resAereos.data;
+        listaOfertasHospedaje.value = resHospedajes.data;
+        listaPlanesAlimentacion.value = resRestaurantes.data;
+        
+        // Mapear los paquetes recibidos para que coincidan con la estructura interna del frontend
+        // El backend devuelve snake_case (destino_paquete, id_tarifa_aerolinea, etc.)
+        listaPaquetes.value = resPaquetes.data.map(p => ({
+            id: p.id_paquete,
+            destino: p.destino_paquete,
+            duracion: p.duracion_paquete,
+            descripcion: p.descripcion_paquete,
+            cantidadPersonas: p.cantidad_personas,
+            idTarifaAerea: p.id_tarifa_aerolinea,
+            idTarifaHospedaje: p.id_tarifa_hospedaje,
+            idTarifaRestaurante: p.id_tarifa_restaurante,
+            // imagenURL: p.imagen_url, // Si agregas este campo al backend
+            costoBaseUnitario: parseFloat(p.subtotal), // Asumimos subtotal unitario
+            // Recalculamos o usamos lo del backend
+            precioFinalVenta: parseFloat(p.total_con_iva), 
+            // Campos calculados visuales (opcional recalcular)
+            montoIVAUnitario: parseFloat(p.subtotal) * IVA,
+            montoGananciaUnitario: parseFloat(p.subtotal) * PORCENTAJE_GANANCIA
+        }));
+
+    } catch (error) {
+        console.error('Error cargando datos:', error);
+        mostrarMensaje('Error al conectar con el servidor.', 'danger');
+    }
 }
 
-const tarifaAereaSeleccionada = computed(() =>
-    findTarifa(nuevoPaquete.idTarifaAerea, listaBoletosAereos)
-);
+// --- LÓGICA DE CÁLCULO ---
 
-const tarifaHospedajeSeleccionada = computed(() =>
-    findTarifa(nuevoPaquete.idTarifaHospedaje, listaOfertasHospedaje)
-);
+function findTarifa(id, lista, idField, costoField) {
+    if(!id) return null;
+    return lista.find(t => t[idField] === id);
+}
 
-const tarifaRestauranteSeleccionada = computed(() =>
-    // Ya no hay chequeo condicional, el restaurante es obligatorio
-    findTarifa(nuevoPaquete.idTarifaRestaurante, listaPlanesAlimentacion)
-);
+// Computadas para obtener el objeto tarifa seleccionado real
+// Nota: Usamos los IDs correctos de la BD (id_tarifa_aerolinea, etc)
+const tarifaAereaObj = computed(() => findTarifa(nuevoPaquete.idTarifaAerea, listaBoletosAereos.value, 'id_tarifa_aerolinea'));
+const tarifaHospedajeObj = computed(() => findTarifa(nuevoPaquete.idTarifaHospedaje, listaOfertasHospedaje.value, 'id_tarifa_hospedaje'));
+const tarifaRestauranteObj = computed(() => findTarifa(nuevoPaquete.idTarifaRestaurante, listaPlanesAlimentacion.value, 'id_tarifa_restaurante'));
 
-// 1. Costo Base Unitario (Suma de las tarifas seleccionadas - POR PERSONA)
+// 1. Costo Base Unitario
 const costoBaseUnitario = computed(() => {
     let base = 0;
-    if (tarifaAereaSeleccionada.value) {
-        base += tarifaAereaSeleccionada.value.costoBaseUSD;
-    }
-    if (tarifaHospedajeSeleccionada.value) {
-        base += tarifaHospedajeSeleccionada.value.costoBaseUSD;
-    }
-    if (tarifaRestauranteSeleccionada.value) {
-        base += tarifaRestauranteSeleccionada.value.costoBaseUSD;
-    }
+    if (tarifaAereaObj.value) base += parseFloat(tarifaAereaObj.value.precio_vuelos || 0);
+    if (tarifaHospedajeObj.value) base += parseFloat(tarifaHospedajeObj.value.precio_por_dia || 0); // CORREGIDO
+    if (tarifaRestauranteObj.value) base += parseFloat(tarifaRestauranteObj.value.precio_por_dia || 0); // CORREGIDO
     return base;
 });
 
-// 2. Monto IVA Unitario (Costo Base Unitario * IVA)
 const montoIVAUnitario = computed(() => costoBaseUnitario.value * IVA);
-
-// 3. Monto Ganancia Unitario (Costo Base Unitario * 40%)
 const montoGananciaUnitario = computed(() => costoBaseUnitario.value * PORCENTAJE_GANANCIA);
 
-// 4. Precio Final de Venta (TOTAL: (Unitario + Unitario IVA + Unitario Ganancia) * Cantidad de Personas)
-const precioFinalVenta = computed(() =>
+// Precio Final Total
+const precioFinalVenta = computed(() => 
     (costoBaseUnitario.value + montoIVAUnitario.value + montoGananciaUnitario.value) * (nuevoPaquete.cantidadPersonas || 1)
 );
 
-// Sincronizar los campos calculados con el objeto reactivo *siempre que cambien las tarifas o la cantidad de personas*
+// Watcher para actualizar el formulario visual
 watch([precioFinalVenta, () => nuevoPaquete.cantidadPersonas], () => {
-    // Los campos unitarios se guardan para fines informativos en la tabla/BDD
     nuevoPaquete.costoBaseUnitario = costoBaseUnitario.value;
     nuevoPaquete.montoIVAUnitario = montoIVAUnitario.value;
     nuevoPaquete.montoGananciaUnitario = montoGananciaUnitario.value;
-    // El precio final es el total
     nuevoPaquete.precioFinalVenta = precioFinalVenta.value;
-}, { immediate: true });
-
-
-// --- FUNCIONES DE FILTRO Y BÚSQUEDA ---
-
-const paquetesFiltrados = computed(() => {
-    if (!filtroDestino.value) {
-        return listaPaquetes;
-    }
-    const filtro = filtroDestino.value.toLowerCase().trim();
-    return listaPaquetes.filter(paquete =>
-        paquete.destino.toLowerCase().includes(filtro)
-    );
 });
 
-/**
- * Función para obtener el nombre corto de la tarifa para la tabla.
- */
+// --- FILTRO ---
+const paquetesFiltrados = computed(() => {
+    if (!filtroDestino.value) return listaPaquetes.value;
+    const filtro = filtroDestino.value.toLowerCase().trim();
+    return listaPaquetes.value.filter(p => p.destino.toLowerCase().includes(filtro));
+});
+
 function getTarifaNombre(id, tipo) {
-    if (!id) return 'N/A';
-    const tarifa = todasLasTarifas.value.find(t => t.id === id && t.tipo === tipo);
-
-    if (!tarifa) return `ID ${id} no encontrado`;
-
-    switch (tipo) {
-        case 'aereo':
-            return `${tarifa.proveedor} (${tarifa.destinoVuelo})`;
-        case 'hospedaje':
-            return `${tarifa.proveedor} (${tarifa.tipoHabitacion})`;
-        case 'alimentacion':
-            return `${tarifa.proveedor} (${tarifa.nombrePlan})`;
-        default:
-            return 'N/A';
-    }
+    const t = todasLasTarifas.value.find(item => item.id === id && item.tipo === tipo);
+    return t ? `${t.proveedor} (${t.detalle})` : 'N/A';
 }
 
-// --- LÓGICA DE CRUD ---
+// --- CRUD ---
 
-// Método para agregar un paquete nuevo (Simulación de POST)
-function agregarPaquete() {
-    // 1. Validación de obligatoriedad del restaurante
+async function agregarPaquete() {
     if (!nuevoPaquete.idTarifaRestaurante) {
-        mostrarMensaje('Debe seleccionar un Plan de Restaurante (es obligatorio en todos los paquetes).', 'danger');
+        mostrarMensaje('Debe seleccionar restaurante.', 'danger');
         return;
     }
 
-    // 2. Crear objeto final con IDs y Cálculos
-    const nuevo = { ...nuevoPaquete };
-    nuevo.id = siguienteId.value;
+    try {
+        // Payload snake_case para backend
+        const payload = {
+            destino_paquete: nuevoPaquete.destino,
+            duracion_paquete: nuevoPaquete.duracion,
+            cantidad_personas: nuevoPaquete.cantidadPersonas,
+            descripcion_paquete: nuevoPaquete.descripcion,
+            id_tarifa_aerolinea: nuevoPaquete.idTarifaAerea,
+            id_tarifa_hospedaje: nuevoPaquete.idTarifaHospedaje,
+            id_tarifa_restaurante: nuevoPaquete.idTarifaRestaurante,
+            subtotal: nuevoPaquete.costoBaseUnitario, // Guardamos unitario o total segun lógica de negocio. Backend espera 'subtotal'. Ajustar.
+            total_con_iva: nuevoPaquete.precioFinalVenta // Este es el total global
+            // imagen_url ... si existe
+        };
 
-    // SIMULACIÓN: Aquí iría el fetch/axios.post(URL, nuevo)
-    listaPaquetes.push(nuevo);
-    siguienteId.value++;
-
-    mostrarMensaje(`Paquete "${nuevo.destino}" registrado con éxito.`, 'success');
-    limpiarFormulario();
+        await axios.post('http://localhost:3000/api/paquete-turistico', payload);
+        
+        mostrarMensaje('Paquete creado exitosamente.', 'success');
+        limpiarFormulario();
+        await cargarDatos(); // Recargar lista
+    } catch (error) {
+        console.error(error);
+        mostrarMensaje('Error al crear paquete: ' + (error.response?.data?.error || error.message), 'danger');
+    }
 }
 
-// Inicia el modo de edición
 function iniciarEdicion(paquete) {
-    // Asignamos el paquete (incluyendo sus cálculos y tarifas IDs) al formulario
-    Object.assign(nuevoPaquete, { ...paquete });
+    // Mapeo inverso para llenar el form
+    Object.assign(nuevoPaquete, {
+        id: paquete.id,
+        destino: paquete.destino,
+        duracion: paquete.duracion,
+        descripcion: paquete.descripcion,
+        cantidadPersonas: paquete.cantidadPersonas,
+        idTarifaAerea: paquete.idTarifaAerea,
+        idTarifaHospedaje: paquete.idTarifaHospedaje,
+        idTarifaRestaurante: paquete.idTarifaRestaurante,
+        imagenURL: '' // paquete.imagenURL
+    });
     paqueteEditando.value = paquete.id;
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Guarda los cambios del paquete (Simulación de PUT)
-function guardarEdicion() {
-    // 1. Validación de obligatoriedad del restaurante
-    if (!nuevoPaquete.idTarifaRestaurante) {
-        mostrarMensaje('Debe seleccionar un Plan de Restaurante (es obligatorio en todos los paquetes).', 'danger');
-        return;
-    }
+async function guardarEdicion() {
+    try {
+        const payload = {
+            destino_paquete: nuevoPaquete.destino,
+            duracion_paquete: nuevoPaquete.duracion,
+            cantidad_personas: nuevoPaquete.cantidadPersonas,
+            descripcion_paquete: nuevoPaquete.descripcion,
+            id_tarifa_aerolinea: nuevoPaquete.idTarifaAerea,
+            id_tarifa_hospedaje: nuevoPaquete.idTarifaHospedaje,
+            id_tarifa_restaurante: nuevoPaquete.idTarifaRestaurante,
+            subtotal: nuevoPaquete.costoBaseUnitario,
+            total_con_iva: nuevoPaquete.precioFinalVenta
+        };
 
-    // 2. Busca el índice y actualiza
-    const index = listaPaquetes.findIndex(p => p.id === paqueteEditando.value);
-
-    if (index !== -1) {
-        // SIMULACIÓN: Aquí iría el fetch/axios.put(URL/id, nuevoPaquete)
-        // nuevoPaquete ya tiene los cálculos actualizados gracias al watcher
-        listaPaquetes[index] = { ...nuevoPaquete };
-
-        mostrarMensaje(`Paquete "${nuevoPaquete.destino}" actualizado con éxito.`, 'success');
-
-        // 3. Salir del modo edición
+        await axios.put(`http://localhost:3000/api/paquete-turistico/${paqueteEditando.value}`, payload);
+        
+        mostrarMensaje('Paquete actualizado.', 'success');
         cancelarEdicion();
+        await cargarDatos();
+    } catch (error) {
+        console.error(error);
+        mostrarMensaje('Error al actualizar: ' + (error.response?.data?.error || error.message), 'danger');
     }
 }
 
-// Cancela la edición y limpia el formulario
 function cancelarEdicion() {
     paqueteEditando.value = null;
     limpiarFormulario();
 }
 
-// Confirma la eliminación (usando el modal custom)
 function confirmarEliminar(id, nombre) {
     paqueteAEliminar.value = id;
     paqueteAEliminarNombre.value = nombre;
 }
 
-// Ejecuta la eliminación (Simulación de DELETE)
-function ejecutarEliminacion() {
-    const id = paqueteAEliminar.value;
-    const index = listaPaquetes.findIndex(p => p.id === id);
-
-    if (index !== -1) {
-        const nombrePaquete = listaPaquetes[index].destino;
-        // SIMULACIÓN: Aquí iría el fetch/axios.delete(URL/id)
-        listaPaquetes.splice(index, 1);
-        mostrarMensaje(`Paquete "${nombrePaquete}" eliminado con éxito.`, 'danger');
+async function ejecutarEliminacion() {
+    if (!paqueteAEliminar.value) return;
+    try {
+        await axios.delete(`http://localhost:3000/api/paquete-turistico/${paqueteAEliminar.value}`);
+        mostrarMensaje('Paquete eliminado.', 'warning');
+        paqueteAEliminar.value = null;
+        await cargarDatos();
+    } catch (error) {
+        console.error(error);
+        mostrarMensaje('Error al eliminar.', 'danger');
     }
-
-    paqueteAEliminar.value = null; // Cierra el modal
 }
 
-
-/**
- * Muestra una notificación temporal.
- */
 function mostrarMensaje(msg, type) {
     message.value = msg;
     messageType.value = type;
-    setTimeout(() => {
-        message.value = null;
-    }, 4000);
+    setTimeout(() => message.value = null, 4000);
 }
 
-// Resetea el formulario
 function limpiarFormulario() {
     Object.assign(nuevoPaquete, inicializarPaquete());
 }
-
 </script>
 
 <style scoped>

@@ -16,14 +16,14 @@ const initData = async () => {
         const countCuentas = await NombreCuenta.count();
         if (countCuentas === 0) {
             await NombreCuenta.bulkCreate([
-                { nombre: 'Caja General', tipo: 'Activo' },
-                { nombre: 'Bancos', tipo: 'Activo' },
-                { nombre: 'Cuentas por Cobrar', tipo: 'Activo' },
-                { nombre: 'Proveedores', tipo: 'Pasivo' },
-                { nombre: 'Cuentas por Pagar', tipo: 'Pasivo' },
-                { nombre: 'Ventas de Paquetes', tipo: 'Ingreso' },
-                { nombre: 'Gastos de Viaje', tipo: 'Gasto' },
-                { nombre: 'Gastos Administrativos', tipo: 'Gasto' }
+                { nombre: 'Caja General', tipo: 'Activo', codigo: '1000' },
+                { nombre: 'Bancos', tipo: 'Activo', codigo: '1100' },
+                { nombre: 'Cuentas por Cobrar', tipo: 'Activo', codigo: '1200' },
+                { nombre: 'Proveedores', tipo: 'Pasivo', codigo: '2000' },
+                { nombre: 'Cuentas por Pagar', tipo: 'Pasivo', codigo: '2100' },
+                { nombre: 'Ventas de Paquetes', tipo: 'Ingreso', codigo: '4000' },
+                { nombre: 'Gastos de Viaje', tipo: 'Gasto', codigo: '5000' },
+                { nombre: 'Gastos Administrativos', tipo: 'Gasto', codigo: '5100' }
             ]);
             console.log('✅ Cuentas contables inicializadas');
         }

@@ -3,77 +3,101 @@
     <Sidebar_Admin />
 
     <main class="container-xl py-5">
+      <h1 class="titulo-modulo text-center mb-5">Módulo Contable</h1>
 
-      <h1 class="text-center mb-4 titulo-admin">Movimientos Contables</h1>
-
-      <!-- FILTROS -->
-      <div class="card p-3 mb-4 shadow-sm">
-
-        <div class="row g-3">
-
-          <div class="col-md-4">
-            <label>Factura:</label>
-            <input type="number" v-model="filtros.factura" class="form-control" placeholder="ID factura">
+      <!-- FILTROS DE BÚSQUEDA -->
+      <div class="card p-4 mb-5 shadow-sm rounded-4 filtros-container">
+        <h4 class="mb-3 text-warning fw-bold">Filtros de Búsqueda</h4>
+        
+        <div class="row g-3 align-items-end">
+          
+          <!-- Filtro Factura -->
+          <div class="col-md-2">
+            <label class="form-label fw-bold">ID Factura:</label>
+            <input type="number" v-model="filtros.factura" class="form-control" placeholder="# ID">
           </div>
 
-          <div class="col-md-4">
-            <label>Fecha:</label>
-            <input type="date" v-model="filtros.fecha" class="form-control">
-          </div>
-
-          <div class="col-md-4">
-            <label>Cuenta Contable:</label>
-            <select v-model="filtros.cuenta" class="form-control">
+          <!-- Filtro Cuenta -->
+          <div class="col-md-3">
+            <label class="form-label fw-bold">Cuenta Contable:</label>
+            <select v-model="filtros.cuenta" class="form-select">
               <option value="">Todas</option>
               <option v-for="c in cuentas" :key="c.id_cuenta" :value="c.id_cuenta">
-                {{ c.nombre }} ({{ c.tipo }})
+                {{ c.codigo }} - {{ c.nombre }}
               </option>
             </select>
           </div>
 
-        </div>
+          <!-- Filtro Movimiento -->
+          <div class="col-md-2">
+            <label class="form-label fw-bold">Movimiento:</label>
+            <select v-model="filtros.tipoMov" class="form-select">
+              <option value="">Todos</option>
+              <option value="Debe">Debe</option>
+              <option value="Haber">Haber</option>
+            </select>
+          </div>
 
-        <div class="mt-3 text-end">
-          <button class="btn btn-primary" @click="buscar">Buscar</button>
-          <button class="btn btn-secondary ms-2" @click="resetFiltro">Limpiar</button>
-        </div>
+          <!-- Filtro Fecha Desde -->
+          <div class="col-md-2">
+            <label class="form-label fw-bold">Desde:</label>
+            <input type="date" v-model="filtros.fechaInicio" class="form-control">
+          </div>
 
+          <!-- Filtro Fecha Hasta -->
+          <div class="col-md-2">
+            <label class="form-label fw-bold">Hasta:</label>
+            <input type="date" v-model="filtros.fechaFin" class="form-control">
+          </div>
+          
+           <!-- Botones -->
+          <div class="col-md-1 d-flex gap-2">
+             <button class="btn btn-secondary w-100 fw-bold" @click="resetFiltros" title="Limpiar"><i class="fas fa-undo"></i></button>
+          </div>
+
+        </div>
       </div>
 
-      <!-- TABLA -->
-      <div class="card contenido shadow-lg">
-        <div class="card-header encabezado">
-          <h3 class="mb-0">Registros Contables</h3>
+      <!-- TABLA DE RESULTADOS -->
+      <div class="card shadow-lg rounded-4 overflow-hidden">
+        <div class="card-header bg-white p-3">
+            <h4 class="mb-0 text-warning fw-bold">Movimientos Registrados</h4>
         </div>
-
+        
         <div class="card-body p-0">
-          
-          <table class="tabla">
-            <thead>
+          <table class="table table-hover mb-0 tabla-movimientos">
+            <thead class="bg-orange text-white">
               <tr>
-                <th>ID</th>
-                <th>Factura</th>
-                <th>Cuenta</th>
-                <th>Tipo</th>
-                <th>Monto</th>
-                <th>Fecha</th>
-                <th>Descripción</th>
+                <th class="py-3 px-4">ID</th>
+                <th class="py-3 px-4">Factura</th>
+                <th class="py-3 px-4">Código Contable</th>
+                <th class="py-3 px-4">Nombre</th>
+                <th class="py-3 px-4">Tipo Contable</th>
+                <th class="py-3 px-4">Movimiento</th>
+                <th class="py-3 px-4">Fecha</th>
+                <th class="py-3 px-4">Monto</th>
+                <th class="py-3 px-4">Descripción</th>
               </tr>
             </thead>
-
             <tbody>
-              <tr v-for="m in movimientos" :key="m.id_registro">
-                <td>{{ m.id_registro }}</td>
-                <td>{{ m.id_factura }}</td>
-                <td>{{ m.cuenta_nombre }}</td>
-                <td>{{ m.tipo_movimiento }}</td>
-                <td>{{ m.monto }} USD</td>
-                <td>{{ m.fecha_mov }}</td>
-                <td>{{ m.descripcion }}</td>
+              <tr v-for="m in movimientosFiltrados" :key="m.id_registro">
+                <td class="px-4 fw-bold">{{ m.id_registro }}</td>
+                <td class="px-4 text-center">{{ m.id_factura ? '#' + m.id_factura : '-' }}</td>
+                <td class="px-4 fw-bold text-secondary">{{ m.cuenta_codigo }}</td>
+                <td class="px-4">{{ m.cuenta_nombre }}</td>
+                <td class="px-4">{{ m.cuenta_tipo }}</td>
+                <td class="px-4 fw-bold" :class="m.tipo_movimiento === 'Debe' ? 'text-danger' : 'text-success'">
+                    {{ m.tipo_movimiento }}
+                </td>
+                <td class="px-4">{{ m.fecha_mov }}</td>
+                <td class="px-4 fw-bold">{{ m.monto }} USD</td>
+                <td class="px-4 text-muted">{{ m.descripcion }}</td>
+              </tr>
+              <tr v-if="movimientosFiltrados.length === 0">
+                  <td colspan="9" class="text-center py-4 text-muted">No se encontraron registros</td>
               </tr>
             </tbody>
           </table>
-
         </div>
       </div>
 
@@ -85,7 +109,7 @@
 
 <script>
 import axios from "axios";
-import { ref, onMounted } from "vue";
+import { ref, computed, onMounted } from "vue";
 import Sidebar_Admin from "./components/Sidebar_Admin.vue";
 import Footer_Admin from "./components/Footer_Admin.vue";
 
@@ -98,34 +122,59 @@ export default {
 
     const filtros = ref({
       factura: "",
-      fecha: "",
-      cuenta: ""
+      cuenta: "",
+      tipoMov: "",
+      fechaInicio: "",
+      fechaFin: ""
     });
 
     const cargarMovimientos = async () => {
-      const res = await axios.get("http://localhost:3000/api/movimientos-contables");
-      movimientos.value = res.data;
+      try {
+        const res = await axios.get("http://localhost:3000/api/movimientos-contables");
+        movimientos.value = res.data;
+      } catch(e) { console.error(e); }
     };
 
     const cargarCuentas = async () => {
-      const res = await axios.get("http://localhost:3000/api/cuentas-contables");
-      cuentas.value = res.data;
+      try {
+        const res = await axios.get("http://localhost:3000/api/cuentas-contables");
+        cuentas.value = res.data;
+      } catch(e) { console.error(e); }
     };
 
-    const buscar = async () => {
-      const res = await axios.get("http://localhost:3000/api/movimientos-contables/filtro", {
-        params: filtros.value
-      });
-      movimientos.value = res.data;
+    // Filtrado en el cliente
+    const movimientosFiltrados = computed(() => {
+        return movimientos.value.filter(m => {
+            // Filtro Factura
+            if (filtros.value.factura && m.id_factura != filtros.value.factura) return false;
+
+            // Filtro Cuenta
+            if (filtros.value.cuenta && m.id_cuenta !== filtros.value.cuenta) return false;
+
+            // Filtro Movimiento
+            if (filtros.value.tipoMov && m.tipo_movimiento !== filtros.value.tipoMov) return false;
+
+            // Filtro Fechas
+            if (filtros.value.fechaInicio && new Date(m.fecha_mov) < new Date(filtros.value.fechaInicio)) return false;
+            if (filtros.value.fechaFin && new Date(m.fecha_mov) > new Date(filtros.value.fechaFin)) return false;
+
+            return true;
+        });
+    });
+
+    const buscar = () => {
+        // En este caso, como cargamos todo al inicio, el buscar es solo visual (trigger reactivity si fuera manual, pero computed lo hace auto)
+        // Podríamos recargar datos del server si quisiéramos asegurar frescura.
+        cargarMovimientos();
     };
 
-    const resetFiltro = () => {
+    const resetFiltros = () => {
       filtros.value = {
-        factura: "",
-        fecha: "",
-        cuenta: ""
+        cuenta: "",
+        tipoMov: "",
+        fechaInicio: "",
+        fechaFin: ""
       };
-      cargarMovimientos();
     };
 
     onMounted(() => {
@@ -133,49 +182,47 @@ export default {
       cargarCuentas();
     });
 
-    return { movimientos, cuentas, filtros, buscar, resetFiltro };
+    return { movimientos, cuentas, filtros, movimientosFiltrados, buscar, resetFiltros };
   }
 };
 </script>
 
 <style scoped>
-/* Usa tu propio CSS tal cual */
 .pag-ADMIN {
   min-height: 100vh;
-  background: #f3f3f3;
+  background: #f1f3f5; /* Color de fondo suave */
+  background-image: url('https://user-images.githubusercontent.com/123/bg-texture.png'); /* Opcional textura */
+  background-size: cover;
 }
 
-.contenido {
-  background: white;
-  border-radius: 12px;
+.titulo-modulo {
+    color: white;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    font-weight: 800;
 }
 
-.encabezado {
-  background: #ff6600;
-  color: white;
-  padding: 15px;
-  border-radius: 12px 12px 0 0;
+.filtros-container {
+    background: #f8f9fa;
+    border: none;
 }
 
-.titulo-admin {
-  color: #ff6600;
-  font-weight: bold;
+.bg-orange {
+    background-color: #ff6600 !important;
 }
 
-.tabla {
-  width: 100%;
-  border-collapse: collapse;
+.tabla-movimientos th {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.tabla th {
-  background: #ffc189;
-  padding: 10px;
-  color: #333;
-  font-weight: bold;
+.tabla-movimientos td {
+    vertical-align: middle;
+    font-size: 0.95rem;
 }
 
-.tabla td {
-  padding: 10px;
-  border-bottom: 1px solid #eee;
+/* Scrollbar para la tabla si es muy ancha */
+.table-responsive {
+    overflow-x: auto;
 }
 </style>

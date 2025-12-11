@@ -36,18 +36,40 @@ exports.create = async (req, res) => {
     const nuevo = await RegistroEgresos.create(req.body);
 
     // 2️⃣ Registrar asiento contable automático (Salida de dinero)
-    const caja = await db.NombreCuenta.findOne({ where: { nombre: 'Caja General' } }); // O Bancos
+    const caja = await db.NombreCuenta.findOne({ where: { nombre: 'Efectivo en bancos' } }); // O Bancos
     const egresoTipo = await db.TipoMovimiento.findOne({ where: { tipo: 'Egreso' } });
 
     if (caja && egresoTipo) {
+      // 1. Salida de Caja (Activo disminuye -> Haber)
       await db.RegistroContable.create({
-        id_factura: null, // No asociado a factura de cliente, sino a egreso (falta foreign key en modelo? o usamos referencia en descripcion)
+        id_factura: null,
         id_cuenta: caja.id_cuenta,
         id_tipo_mov: egresoTipo.id_tipo_mov,
         monto: nuevo.monto_A_pagar,
         fecha_mov: nuevo.fecha_generacion,
-        descripcion: 'Egreso #' + nuevo.id_egreso + ': ' + nuevo.tipo_PROV
+        descripcion: 'Salida de Caja: ' + nuevo.tipo_PROV
       });
+
+      // 2. Registro del Gasto (Gasto aumenta -> Debe)
+      // Buscamos una cuenta de gasto adecuada. Por defecto 'Bienes y suministros'
+      let cuentaGasto = await db.NombreCuenta.findOne({ where: { nombre: 'Bienes y suministros' } });
+
+      // Lógica de asignación de cuenta de gasto (se podría mejorar con input del usuario)
+      if (nuevo.tipo_PROV.includes('Nomina') || nuevo.tipo_PROV.includes('Servicios')) {
+        const gastoAdmin = await db.NombreCuenta.findOne({ where: { nombre: 'Gastos diversos' } });
+        if (gastoAdmin) cuentaGasto = gastoAdmin;
+      }
+
+      if (cuentaGasto) {
+        await db.RegistroContable.create({
+          id_factura: null,
+          id_cuenta: cuentaGasto.id_cuenta,
+          id_tipo_mov: egresoTipo.id_tipo_mov, // Gasto con Egreso -> Debe (segun nueva logica)
+          monto: nuevo.monto_A_pagar,
+          fecha_mov: nuevo.fecha_generacion,
+          descripcion: 'Causación Gasto: ' + nuevo.tipo_PROV
+        });
+      }
     }
 
     res.status(201).json(nuevo);

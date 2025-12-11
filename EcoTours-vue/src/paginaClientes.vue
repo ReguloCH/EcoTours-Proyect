@@ -102,6 +102,7 @@
 import menuPrincipal1 from "./components/menuPrincipal1.vue";
 import Footer_Cliente from "./components/Footer_Cliente.vue";
 import PaginaPago from "./paginaPago.vue";
+import axios from "axios";
 
 
 export default {
@@ -114,70 +115,57 @@ export default {
 
   data() {
     return {
-      vuelos: [
-        {
-          origen: "Caracas ",
-          destino: "Los Roques ",
-          fechaInicio: "Ene 22, 2026",
-          fechaFin: "Ene 27, 2026",
-          precio: 539,
-          aerolinea: "Copa Airlines",
-          hotel: "El Roques Club",
-          imagen: "/img/losROQUES.jpg",
-        },
-        {
-          origen: "Caracas ",
-          destino: "Valencia",
-          fechaInicio: "Nov 13, 2025",
-          fechaFin: "Nov 21, 2025",
-          precio: 790,
-          aerolinea: "Latam Airlines",
-          hotel: "Lidotel Valencia",
-          imagen: "/img/valencia.jpg",
-        },
-        {
-          origen: "Caracas ",
-          destino: "Maracaibo",
-          fechaInicio: "Feb 01, 2026",
-          fechaFin: "Feb 17, 2026",
-          precio: 750,
-          aerolinea: "Avianca",
-          hotel: "Hotel Maracaibo",
-          imagen: "/img/maracaibo.jpg",
-        },
-        {
-          origen: "Barquisimeto",
-          destino: "Caracas ",
-          fechaInicio: "Dic 15, 2025",
-          fechaFin: "Ene 05, 2026",
-          precio: 791,
-          aerolinea: "Aeroméxico",
-          hotel: "Hotel Eurobuilding",
-          imagen: "/img/caracas.webp",
-        },
-      ],
+      vuelos: [],
     };
   },
 
+  mounted() {
+    this.cargarPaquetes();
+  },
+
   methods: {
+    async cargarPaquetes() {
+      try {
+        const res = await axios.get("http://localhost:3000/api/paquete-turistico");
+        // Mapear respuesta del backend al formato visual
+        this.vuelos = res.data.map(p => ({
+            id: p.id_paquete,
+            origen: "Caracas", // Default
+            destino: p.destino_paquete,
+            fechaInicio: this.formatDate(new Date()), // Default a hoy
+            fechaFin: this.formatDate(new Date(Date.now() + 5 * 86400000)), // +5 dias
+            precio: parseFloat(p.total_con_iva),
+            aerolinea: "Copa Airlines", // Default o buscar de p.id_tarifa_aerolinea
+            hotel: "Hotel Estándar", // Default
+            imagen: "/img/losROQUES.jpg" // Default
+        }));
+      } catch (error) {
+        console.error("Error cargando paquetes:", error);
+      }
+    },
+
+    formatDate(date) {
+        return date.toLocaleDateString("es-ES", { day: 'numeric', month: 'short', year: 'numeric' });
+    },
 
     irAPago(vuelo) {
       this.$router.push({
         name: "paginaPago",
         query: {
+          idPaquete: vuelo.id,
           origen: vuelo.origen,
           destino: vuelo.destino,
-          fechaInicio: vuelo.fechaInicio,
-          fechaFin: vuelo.fechaFin,
           precio: vuelo.precio,
-          aerolinea: vuelo.aerolinea,
-          hotel: vuelo.hotel,
+          // Convertir fechas a YYYY-MM-DD para input type=date
+          fechaInicio: new Date().toISOString().split('T')[0], 
+          fechaFin: new Date(Date.now() + 5 * 86400000).toISOString().split('T')[0]
         },
       });
+    },
 
     PaginaPago() {
-      this.$router.push({ name: 'pagina-pago' });
-
+       // Placeholder generico
+       this.$router.push({ name: 'paginaPago' });
     },
   },
 };

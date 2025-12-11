@@ -7,54 +7,47 @@
 
       <div class="card contenido shadow-lg">
         <div class="card-header encabezado">
-          <h3 class="mb-0">Registros de Pagos</h3>
+          <h3 class="mb-0">Gestión de Pagos a Proveedores</h3>
         </div>
 
         <div class="card-body p-0">
           <table class="tabla">
             <thead>
               <tr>
-                <th>ID</th>
+                <th>ID Factura</th>
                 <th>Cliente</th>
                 <th>Paquete</th>
-                <th>Monto</th>
-                <th>Fecha Generación</th>
-                <th>Fecha Pago Real</th>
-                <th>Referencia</th>
-                <th>Estado</th>
-                <th>Editar</th>
+                <th>Monto Total (Ingreso)</th>
+                <th>Estado Pagos Prov.</th>
+                <th>Acción</th>
               </tr>
             </thead>
 
             <tbody>
               <tr v-for="item in historial" :key="item.id">
-                <td>{{ item.id }}</td>
+                <td>#{{ item.id }}</td>
                 <td>{{ item.cliente }}</td>
                 <td>{{ item.paquete }}</td>
                 <td>{{ item.monto }} USD</td>
-                <td>{{ item.fecha_generacion }}</td>
-                <td>{{ item.fecha_pago_real || "---" }}</td>
-                <td>{{ item.referencia || "---" }}</td>
-
+                
                 <td>
                   <span
                     class="estado"
                     :class="{
-                      pendiente: item.estado === 'Pendiente',
-                      confirmado: item.estado === 'Confirmado'
+                      pendiente: estadoGeneral(item) === 'Pendiente',
+                      parcial: estadoGeneral(item) === 'Parcial',
+                      confirmado: estadoGeneral(item) === 'Completo'
                     }"
                   >
-                    {{ item.estado }}
+                    {{ estadoGeneral(item) }}
                   </span>
                 </td>
 
                 <td>
-                  <button class="btn-editar" @click="abrirModal(item)">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#ff6600" viewBox="0 0 16 16">
-                      <path
-                        d="M12.146.854a.5.5 0 0 1 .708 0L15 3l-2 2-2.146-2.146a.5.5 0 0 1 0-.708l1.292-1.292zM11.207 3.5 
-                           3 11.707V14h2.293L13.5 6.793l-2.293-2.293z"
-                      />
+                  <button class="btn-editar" @click="abrirModal(item)" title="Gestionar Pagos">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#ff6600" viewBox="0 0 16 16">
+                      <path d="M4 0h5.293A1 1 0 0 1 10 .293L13.707 4a1 1 0 0 1 .293.707V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm5.5 1.5v2a1 1 0 0 0 1 1h2l-3-3z"/>
+                      <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 2a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5z"/>
                     </svg>
                   </button>
                 </td>
@@ -64,29 +57,126 @@
         </div>
       </div>
 
-      <!-- MODAL -->
+      <!-- MODAL DE GESTIÓN DE PAGOS -->
       <div v-if="modalVisible" class="modal-backdrop">
-        <div class="modal-container">
+        <div class="modal-container p-4">
+          
+          <h3 class="modal-title text-center text-primary mb-4">Gestionar Pagos a Proveedores</h3>
+          <p class="text-center text-muted">Factura #{{ form.id }}</p>
 
-          <h3 class="modal-title">Editar Registro</h3>
+          <div class="modal-body-scroll">
+              
+              <!-- SECCIÓN AEROLINEA -->
+              <div class="card mb-3 border-info">
+                  <div class="card-header bg-info text-white d-flex justify-content-between">
+                      <span>✈️ Aerolínea</span>
+                      <span class="fw-bold">{{ form.pagos.aerolinea.nombre }}</span>
+                  </div>
+                  <div class="card-body bg-light">
+                      <div class="row">
+                          <div class="col-6 mb-2">
+                             <label class="small fw-bold">Monto a Pagar:</label>
+                             <div class="input-group input-group-sm">
+                                <span class="input-group-text">$</span>
+                                <input type="number" v-model="form.pagos.aerolinea.monto" class="form-control" readonly />
+                             </div>
+                          </div>
+                          <div class="col-6 mb-2 d-flex align-items-center">
+                              <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" v-model="form.pagos.aerolinea.confirmado">
+                                <label class="form-check-label fw-bold" :class="form.pagos.aerolinea.confirmado ? 'text-success' : 'text-danger'">
+                                    {{ form.pagos.aerolinea.confirmado ? 'PAGADO' : 'PENDIENTE' }}
+                                </label>
+                              </div>
+                          </div>
+                          
+                          <div class="col-6 mb-2">
+                             <label class="small">Referencia:</label>
+                             <input type="text" v-model="form.pagos.aerolinea.referencia" class="form-control form-control-sm" placeholder="# Ref" :disabled="!form.pagos.aerolinea.confirmado">
+                          </div>
+                           <div class="col-6 mb-2">
+                             <label class="small">Fecha Pago:</label>
+                             <input type="date" v-model="form.pagos.aerolinea.fecha_pago" class="form-control form-control-sm" :disabled="!form.pagos.aerolinea.confirmado">
+                          </div>
+                      </div>
+                  </div>
+              </div>
 
-          <div class="modal-body">
-            <label>Fecha de Pago Real:</label>
-            <input type="date" v-model="form.fecha_pago_real" class="input-modal">
+              <!-- SECCIÓN HOTEL -->
+              <div class="card mb-3 border-warning">
+                  <div class="card-header bg-warning text-dark d-flex justify-content-between">
+                      <span>🏨 Hotel</span>
+                      <span class="fw-bold">{{ form.pagos.hotel.nombre }}</span>
+                  </div>
+                  <div class="card-body bg-light">
+                      <div class="row">
+                          <div class="col-6 mb-2">
+                             <label class="small fw-bold">Monto a Pagar:</label>
+                             <div class="input-group input-group-sm">
+                                <span class="input-group-text">$</span>
+                                <input type="number" v-model="form.pagos.hotel.monto" class="form-control" readonly />
+                             </div>
+                          </div>
+                          <div class="col-6 mb-2 d-flex align-items-center">
+                              <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" v-model="form.pagos.hotel.confirmado">
+                                <label class="form-check-label fw-bold" :class="form.pagos.hotel.confirmado ? 'text-success' : 'text-danger'">
+                                    {{ form.pagos.hotel.confirmado ? 'PAGADO' : 'PENDIENTE' }}
+                                </label>
+                              </div>
+                          </div>
+                          <div class="col-6 mb-2">
+                             <label class="small">Referencia:</label>
+                             <input type="text" v-model="form.pagos.hotel.referencia" class="form-control form-control-sm" placeholder="# Ref" :disabled="!form.pagos.hotel.confirmado">
+                          </div>
+                           <div class="col-6 mb-2">
+                             <label class="small">Fecha Pago:</label>
+                             <input type="date" v-model="form.pagos.hotel.fecha_pago" class="form-control form-control-sm" :disabled="!form.pagos.hotel.confirmado">
+                          </div>
+                      </div>
+                  </div>
+              </div>
 
-            <label>Número de Referencia:</label>
-            <input type="text" v-model="form.referencia" class="input-modal">
+               <!-- SECCIÓN RESTAURANTE -->
+               <div class="card mb-3 border-success">
+                  <div class="card-header bg-success text-white d-flex justify-content-between">
+                      <span>🍽️ Restaurante</span>
+                      <span class="fw-bold">{{ form.pagos.restaurante.nombre }}</span>
+                  </div>
+                  <div class="card-body bg-light">
+                      <div class="row">
+                          <div class="col-6 mb-2">
+                             <label class="small fw-bold">Monto a Pagar:</label>
+                             <div class="input-group input-group-sm">
+                                <span class="input-group-text">$</span>
+                                <input type="number" v-model="form.pagos.restaurante.monto" class="form-control" readonly />
+                             </div>
+                          </div>
+                           <div class="col-6 mb-2 d-flex align-items-center">
+                              <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" v-model="form.pagos.restaurante.confirmado">
+                                <label class="form-check-label fw-bold" :class="form.pagos.restaurante.confirmado ? 'text-success' : 'text-danger'">
+                                    {{ form.pagos.restaurante.confirmado ? 'PAGADO' : 'PENDIENTE' }}
+                                </label>
+                              </div>
+                          </div>
+                          <div class="col-6 mb-2">
+                             <label class="small">Referencia:</label>
+                             <input type="text" v-model="form.pagos.restaurante.referencia" class="form-control form-control-sm" placeholder="# Ref" :disabled="!form.pagos.restaurante.confirmado">
+                          </div>
+                           <div class="col-6 mb-2">
+                             <label class="small">Fecha Pago:</label>
+                             <input type="date" v-model="form.pagos.restaurante.fecha_pago" class="form-control form-control-sm" :disabled="!form.pagos.restaurante.confirmado">
+                          </div>
+                      </div>
+                  </div>
+              </div>
 
-            <label>Estado del Pago:</label>
-            <select v-model="form.estado" class="input-modal">
-              <option value="Pendiente">Pendiente</option>
-              <option value="Confirmado">Confirmado</option>
-            </select>
           </div>
 
-          <div class="modal-footer">
-            <button class="btn-cerrar" @click="cerrarModal">Cerrar</button>
-            <button class="btn-guardar" @click="guardarCambios">Guardar</button>
+          <div class="modal-footer mt-3">
+            <button class="btn btn-secondary" @click="cerrarModal">Cancelar</button>
+            <button class="btn btn-primary fw-bold" @click="guardarCambios">Guardar Cambios</button>
           </div>
 
         </div>
@@ -115,11 +205,14 @@ export default {
     const historial = ref([]);
     const modalVisible = ref(false);
 
+    // Estado del formulario (3 secciones)
     const form = ref({
       id: null,
-      fecha_pago_real: "",
-      referencia: "",
-      estado: "Pendiente"
+      pagos: {
+          aerolinea: { confirmado: false, referencia: '', fecha_pago: '', monto: 0, nombre: '' },
+          hotel: { confirmado: false, referencia: '', fecha_pago: '', monto: 0, nombre: '' },
+          restaurante: { confirmado: false, referencia: '', fecha_pago: '', monto: 0, nombre: '' },
+      }
     });
 
     const cargarHistorial = async () => {
@@ -133,12 +226,37 @@ export default {
     };
 
     const abrirModal = (item) => {
+      console.log("Abriendo modal para item:", item);
+      console.log("Pagos data:", item.pagos);
+
+      // Clonar datos del item para no mutar lista directamente antes de guardar
+      // Aseguramos valores por defecto
+      const p = item.pagos;
+      // Usamos la referencia de la factura si no hay una especifica del pago
+      const refDefault = item.referencia_factura || '';
+      
       form.value = {
         id: item.id,
-        fecha_pago_real: item.fecha_pago_real || "",
-        referencia: item.referencia || "",
-        estado: item.estado
+        pagos: {
+            aerolinea: { 
+                ...p.aerolinea, 
+                fecha_pago: p.aerolinea.fecha_pago || new Date().toISOString().split('T')[0],
+                referencia: p.aerolinea.referencia || refDefault
+            },
+            hotel: { 
+                ...p.hotel, 
+                fecha_pago: p.hotel.fecha_pago || new Date().toISOString().split('T')[0],
+                referencia: p.hotel.referencia || refDefault
+            },
+            restaurante: { 
+                ...p.restaurante, 
+                fecha_pago: p.restaurante.fecha_pago || new Date().toISOString().split('T')[0],
+                referencia: p.restaurante.referencia || refDefault
+            }
+        }
       };
+      console.log("Formulario cargado:", form.value);
+      
       modalVisible.value = true;
     };
 
@@ -149,18 +267,25 @@ export default {
     const guardarCambios = async () => {
       try {
         await axios.put(`http://localhost:3000/api/historial-compras/${form.value.id}`, {
-          fecha_pago_real: form.value.fecha_pago_real,
-          numReferenciaPago: form.value.referencia,
-          id_estado_transaccion: form.value.estado === "Confirmado" ? 2 : 1
+          pagos: form.value.pagos
         });
 
-        alert("Actualizado con éxito");
+        alert("Pagos actualizados y contabilizados con éxito");
         cerrarModal();
-        cargarHistorial();
+        cargarHistorial(); // Refrescar para ver nuevos estados
       } catch (e) {
         console.error(e);
-        alert("Error al actualizar el registro");
+        alert("Error al actualizar: " + (e.response?.data?.error || e.message));
       }
+    };
+
+    // Computada simple o metodo para ver estado general en tabla
+    const estadoGeneral = (item) => {
+        const p = item.pagos;
+        const total = (p.aerolinea.confirmado ? 1 : 0) + (p.hotel.confirmado ? 1 : 0) + (p.restaurante.confirmado ? 1 : 0);
+        if (total === 3) return 'Completo';
+        if (total > 0) return 'Parcial';
+        return 'Pendiente';
     };
 
     cargarHistorial();
@@ -171,7 +296,8 @@ export default {
       abrirModal,
       cerrarModal,
       guardarCambios,
-      form
+      form,
+      estadoGeneral
     };
   }
 };
@@ -255,10 +381,24 @@ export default {
 
 .modal-container {
   background: white;
-  width: 420px;
-  padding: 20px;
+  width: 500px; /* Mas ancho */
+  max-width: 95vw;
+  max-height: 90vh; /* Limite altura */
   border-radius: 14px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-body-scroll {
+    overflow-y: auto;
+    padding: 10px;
+    flex-grow: 1;
+}
+
+.parcial {
+  background-color: #ffc107;
+  color: #333;
 }
 
 .modal-title {

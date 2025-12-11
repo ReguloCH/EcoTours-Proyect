@@ -43,8 +43,9 @@ app.get('/', (req, res) => {
 });
 
 // 🟢 Cargar relaciones de Sequelize y sincronizar modelos
-// 🟢 Cargar relaciones de Sequelize y sincronizar modelos
-db.sequelize.sync({ alter: true })
+db.sequelize.query('SET FOREIGN_KEY_CHECKS = 0')
+  .then(() => db.sequelize.sync())
+  .then(() => db.sequelize.query('SET FOREIGN_KEY_CHECKS = 1'))
   .then(async () => {
     console.log('¡Modelos sincronizados con la base de datos!');
 

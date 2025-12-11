@@ -1,28 +1,4 @@
 <template>
-<<<<<<< HEAD
-  <div class="pagina-viajes">
-    <menuPrincipal1 />
-
-    <section class="formulario-pago">
-
-      <h2>Registro de Pago</h2>
-
-      <!-- DATOS PERSONALES -->
-      <div class="form-section">
-        <h3>Datos Personales</h3>
-
-        <label>Cédula:</label>
-        <input v-model="form.cedula" type="text" placeholder="Ej: V-12345678" />
-
-        <label>Nombre:</label>
-        <input v-model="form.nombre" type="text" placeholder="Nombre" />
-
-        <label>Apellido:</label>
-        <input v-model="form.apellido" type="text" placeholder="Apellido" />
-
-        <label>Dirección:</label>
-        <input v-model="form.direccion" type="text" placeholder="Dirección completa" />
-=======
   <div class="pagina-pago d-flex flex-column min-vh-100">
     <menuPrincipal1 />
 
@@ -59,12 +35,12 @@
 
                 <div class="col-md-4 mb-3 campo">
                   <label>Precio del paquete</label>
-                  <input type="text" :value="'USD ' + (vueloSeleccionado ? vueloSeleccionado.precio : 539)" readonly />
+                  <input type="text" :value="'USD ' + (form.precio || 539)" readonly />
                 </div>
 
                 <div class="col-md-4 mb-3 campo">
-                  <label>Cantidad de personas</label>
-                  <input v-model.number="form.personas" type="number" required min="1" />
+                  <label>Cantidad de personas (Fijo por Paquete)</label>
+                  <input v-model.number="form.personas" type="number" readonly class="bg-light" />
                 </div>
                 
                 <div class="col-md-4 mb-3 campo">
@@ -77,31 +53,46 @@
               <hr class="my-4" />
               
               <h2 class="mb-3 text-center">Datos del Cliente</h2>
+              
+              <!-- Selector de Usuario (Solo si hay usuarios cargados) -->
+              <div class="row mb-3" v-if="listaUsuarios.length > 0">
+                 <div class="col-12 campo">
+                    <label class="text-primary">Seleccionar Usuario Registrado:</label>
+                    <select v-model="usuarioSeleccionadoId" @change="actualizarDatosCliente" class="form-select border-primary">
+                        <option :value="null" disabled>-- Quién realiza la compra? --</option>
+                        <option v-for="u in listaUsuarios" :key="u.cedula_usuario" :value="u.cedula_usuario">
+                            {{ u.nombre_usuario }} ({{ u.cedula_usuario }})
+                        </option>
+                    </select>
+                 </div>
+              </div>
+
               <div class="row">
                   
                   <div class="col-md-6 mb-3 campo">
                       <label>Cédula</label>
-                      <input type="text" :value="cliente.cedula" readonly />
+                      <input type="text" v-model="cliente.cedula" readonly class="bg-light" />
                   </div>
                   
                   <div class="col-md-6 mb-3 campo">
-                      <label>Nombre</label>
-                      <input type="text" :value="cliente.nombre" readonly />
+                      <label>Nombre Completo</label>
+                      <input type="text" v-model="cliente.nombre" readonly class="bg-light" />
                   </div>
 
                   <div class="col-md-6 mb-3 campo">
-                      <label>Apellido</label>
-                      <input type="text" :value="cliente.apellido" readonly />
+                      <label>Usuario</label>
+                       <!-- Usando apellido para mostrar el username si no hay apellido real -->
+                      <input type="text" v-model="cliente.apellido" readonly class="bg-light" />
                   </div>
 
                   <div class="col-md-6 mb-3 campo">
                       <label>Teléfono</label>
-                      <input type="text" :value="cliente.telefono" readonly />
+                      <input type="text" v-model="cliente.telefono" readonly class="bg-light" />
                   </div>
                   
                   <div class="col-12 mb-3 campo">
                       <label>Correo Electrónico</label>
-                      <input type="text" :value="cliente.correo" readonly />
+                      <input type="text" v-model="cliente.correo" readonly class="bg-light" />
                   </div>
                   
               </div>
@@ -179,61 +170,8 @@
             </form>
           </div>
         </div>
->>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
       </div>
-
-<<<<<<< HEAD
-      <!-- DATOS DEL PAQUETE -->
-      <div class="form-section">
-        <h3>Datos del Paquete</h3>
-
-        <label>Origen:</label>
-        <input type="text" v-model="form.origen" readonly />
-
-        <label>Destino:</label>
-        <input type="text" v-model="form.destino" readonly />
-
-        <label>Aerolínea:</label>
-        <input type="text" v-model="form.aerolinea" readonly />
-
-        <label>Hotel:</label>
-        <input type="text" v-model="form.hotel" readonly />
-
-        <label>Fecha inicio:</label>
-        <input type="text" v-model="form.fechaInicio" readonly />
-
-        <label>Fecha fin:</label>
-        <input type="text" v-model="form.fechaFin" readonly />
-      </div>
-
-      <!-- DATOS DEL PAGO -->
-      <div class="form-section">
-        <h3>Datos del Pago</h3>
-
-        <label>Precio del paquete:</label>
-        <input type="text" :value="'USD ' + form.precio" readonly />
-
-        <label>Cantidad de personas:</label>
-        <input v-model.number="form.personas" type="number" min="1" />
-
-        <label>Total a pagar:</label>
-        <input type="text" :value="'USD ' + totalPagar" readonly />
-
-        <label>Método de pago:</label>
-        <select v-model="form.metodoPago">
-          <option disabled value="">Seleccione un método</option>
-          <option>Transferencia Bancaria</option>
-          <option>Pago Móvil</option>
-          <option>Tarjeta de Crédito</option>
-          <option>PayPal</option>
-        </select>
-      </div>
-
-      <button class="btn-enviar" @click="enviarFormulario">Confirmar Reserva</button>
-    </section>
-
-=======
->>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
+    </div>
     <Footer_Cliente />
   </div>
 </template>
@@ -241,127 +179,141 @@
 <script>
 import menuPrincipal1 from "./components/menuPrincipal1.vue";
 import Footer_Cliente from "./components/Footer_Cliente.vue";
+import axios from "axios";
 
 export default {
   name: "paginaPago",
-<<<<<<< HEAD
-
-=======
->>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
   components: { menuPrincipal1, Footer_Cliente },
 
   data() {
     return {
-<<<<<<< HEAD
-      form: {
-        cedula: "",
-        nombre: "",
-        apellido: "",
-        direccion: "",
-        origen: "",
-        destino: "",
-        aerolinea: "",
-        hotel: "",
-        fechaInicio: "",
-        fechaFin: "",
-        precio: 0,
-        personas: 1,
-        metodoPago: "",
-=======
-      pago: {
-        nombre: "", 
-        tarjeta: "",
-        expiracion: "",
-        cvv: "",
-        monto: 0, 
+      // === DATOS DE CLIENTES ===
+      listaUsuarios: [],
+      usuarioSeleccionadoId: null, // Model para el select
+      cliente: { // Datos visuales del usuario seleccionado
+          cedula: '',
+          nombre: '',
+          apellido: '',
+          telefono: '',
+          correo: '',
       },
-      // === DATOS DEL CLIENTE (Placeholder para la visualización) ===
-      cliente: {
-          cedula: 'V-15876543',
-          nombre: 'Juan',
-          apellido: 'Pérez',
-          telefono: '+58 412-1234567',
-          correo: 'juan.perez@email.com',
-      },
-      // ============================================================
       
-      // === DATOS PRECARGADOS PARA PAGOS (Actualizados) ===
+      // === DATOS PRECARGADOS PARA PAGOS ===
       datosPago: {
           pagoMovil: {
-              telefono: '0412-0553988', // Actualizado
+              telefono: '0412-0553988',
               rif: 'J-12345678-9',
               banco: '0108 - Banco Provincial',
           },
           transferencia: {
-              beneficiario: 'EcoTours, C.A.', // Actualizado
+              beneficiario: 'EcoTours, C.A.',
               cedula: 'J-12345678-9',
               cuenta: '0108-0102-0304-0506-0708',
               banco: 'Provincial',
           }
       },
-      // =================================
       
-      vuelos: [
-        {
-          origen: "Caracas (CCS)",
-          destino: "Panamá (PTY)",
-          fechaInicio: "2026-01-22", 
-          fechaFin: "2026-01-27",   
-          precio: 539,
-          aerolinea: "Copa Airlines",
-          hotel: "Hotel Panamá City",
-          imagen: "/img/vueloCaracas-Panama.webp",
-        },
-      ],
-      vueloSeleccionado: null, 
       form: {
-        fechaInicio: "2026-01-22", 
-        fechaFin: "2026-01-27",   
-        personas: 1, 
-        metodoPago: "", 
-        referenciaPago: '', 
->>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
+        origen: "",
+        destino: "",
+        aerolinea: "",
+        hotel: "",
+        fechaInicio: "2026-01-22",
+        fechaFin: "2026-01-27",
+        precio: 0,
+        personas: 1,
+        metodoPago: "",
+        referenciaPago: '',
       },
     };
   },
 
-  mounted() {
-    if (!this.vueloSeleccionado && this.vuelos.length > 0) {
-      this.seleccionarVuelo(this.vuelos[0]);
-    }
-  },
-
   computed: {
     totalPagar() {
-<<<<<<< HEAD
-      return this.form.precio * this.form.personas;
-=======
-      const precioUnitario = this.vueloSeleccionado?.precio || 539; 
+      const precioUnitario = this.form.precio || 0;
       const personas = this.form.personas || 1;
-      return (precioUnitario * personas).toFixed(2); 
->>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
+      return (precioUnitario * personas).toFixed(2);
     },
   },
 
-  created() {
+  async created() {
     const q = this.$route.query;
+    
+    // 1. Intentar recuperar del LocalStorage si no hay query param (persistencia)
+    const storedPackage = JSON.parse(localStorage.getItem('temp_reserva_paquete') || '{}');
 
-    this.form.origen = q.origen;
-    this.form.destino = q.destino;
-    this.form.aerolinea = q.aerolinea;
-    this.form.hotel = q.hotel;
-    this.form.fechaInicio = q.fechaInicio;
-    this.form.fechaFin = q.fechaFin;
-    this.form.precio = Number(q.precio);
+    if (q && q.idPaquete) {
+        // Prioridad: Query Params
+        this.form.origen = q.origen || "";
+        this.form.destino = q.destino || "";
+        this.form.fechaInicio = q.date || "2026-01-22"; 
+        this.form.precio = Number(q.precio) || 0;
+        this.form.idPaquete = Number(q.idPaquete);
+        
+        // Guardar en Storage para futuras recargas
+        localStorage.setItem('temp_reserva_paquete', JSON.stringify({
+            id: this.form.idPaquete,
+            precio: this.form.precio,
+            destino: this.form.destino
+        }));
+    } else if (storedPackage.id) {
+        // Fallback: LocalStorage
+        this.form.idPaquete = storedPackage.id;
+        this.form.precio = storedPackage.precio;
+        this.form.destino = storedPackage.destino;
+        console.log("Restaurado del almacenamiento local:", storedPackage);
+    }
+    
+    // 2. Fetch de Datos Reales (Personas)
+    if (this.form.idPaquete) {
+        await this.cargarDetallesPaquete(this.form.idPaquete);
+    }
+    
+    // Cargar usuarios
+    try {
+        const res = await axios.get('http://localhost:3000/api/usuario');
+        this.listaUsuarios = Array.isArray(res.data) ? res.data : [];
+    } catch (e) {
+        console.error("Error cargando usuarios:", e);
+    }
+  },
+  
+  watch: {
+    'form.idPaquete': {
+      handler(newId, oldId) {
+        if (newId && newId !== oldId) {
+          this.cargarDetallesPaquete(newId);
+        }
+      },
+      immediate: false, // No ejecutar en la creación, ya se maneja en created
+    },
   },
 
   methods: {
-<<<<<<< HEAD
-    enviarFormulario() {
-      alert(`✅ Reserva confirmada para ${this.form.nombre}.
-Destino: ${this.form.destino}
-Total: USD ${this.totalPagar}`);
-=======
+    async cargarDetallesPaquete(id) {
+        try {
+            console.log("Consultando paquete:", id);
+            const resPaq = await axios.get(`http://localhost:3000/api/paquete-turistico/${id}`);
+            const paqueteData = resPaq.data; 
+            if (paqueteData) {
+                // FORZAR la cantidad de personas del paquete
+                this.form.personas = paqueteData.cantidad_personas || 1;
+                console.log("Cantidad de personas actualizada:", this.form.personas);
+            }
+        } catch (error) {
+            console.error("Error cargando detalles del paquete:", error);
+        }
+    },
+    actualizarDatosCliente() {
+        const u = this.listaUsuarios.find(user => user.cedula_usuario === this.usuarioSeleccionadoId);
+        if (u) {
+            this.cliente.cedula = u.cedula_usuario.toString();
+            this.cliente.nombre = u.nombre_usuario || '';
+            this.cliente.apellido = u.user_usuario || ''; // Usamos user como apellido placeholder
+            this.cliente.telefono = u.telefono_usuario || '';
+            this.cliente.correo = u.correo_usuario || '';
+        }
+    },
     todayDate() {
         const now = new Date();
         const year = now.getFullYear();
@@ -370,52 +322,66 @@ Total: USD ${this.totalPagar}`);
         return `${year}-${month}-${day}`;
     },
     
-    seleccionarVuelo(vuelo) {
-      this.vueloSeleccionado = vuelo;
-      this.form.fechaInicio = vuelo.fechaInicio;
-      this.form.fechaFin = vuelo.fechaFin;
-    },
-    
-    procesarPago() {
+    async procesarPago() {
       const today = this.todayDate();
       const startDate = this.form.fechaInicio;
-      const endDate = this.form.fechaFin;
+      // const endDate = this.form.fechaFin;
       
-      // === VALIDACIONES DE FECHAS ===
+      // === VALIDACIONES ===
       if (startDate < today) {
-          alert("❌ Error: La fecha de inicio de la reserva no puede ser un día que ya pasó.");
-          return;
-      }
-      if (endDate < startDate) {
-          alert("❌ Error: La fecha de fin de la reserva no puede ser anterior a la fecha de inicio.");
-          return;
+          alert("❌ Error: La fecha de inicio no puede ser anterior a hoy.");
+          return; 
       }
       
-      // === VALIDACIONES DE PAGO Y REFERENCIA ===
       if (!this.form.metodoPago) {
          alert("Por favor, seleccione un método de pago.");
          return;
       }
       if (!this.form.referenciaPago) {
-         alert(`Por favor, ingrese el número de referencia para la ${this.form.metodoPago === 'pago-movil' ? 'Pago Móvil' : 'Transferencia'}.`);
+         alert(`Por favor, ingrese el número de referencia.`);
          return;
       }
+      if (!this.usuarioSeleccionadoId) {
+          alert("Debe seleccionar un usuario para facturar.");
+          return;
+      }
       
-      alert(`✅ Reserva CONFIRMADA por USD ${this.totalPagar}. Método: ${this.form.metodoPago === 'pago-movil' ? 'Pago Móvil' : 'Transferencia'}. Referencia: ${this.form.referenciaPago}.`);
+      // Mapeo básico de métodos de pago (Ajustar según IDs reales de la BD: 1=PagoMovil, 2=Transferencia, etc)
+      // Asumiremos: 1: Pago Movil, 2: Transferencia, 3: Efectivo, etc.
+      let idMetodo = 3; // Default
+      if (this.form.metodoPago === 'pago-movil') idMetodo = 1; 
+      if (this.form.metodoPago === 'transferencia') idMetodo = 2;
+
+      const payload = {
+        cedula_usuario: this.usuarioSeleccionadoId, // ID directo del select (es INT)
+        id_paquete: this.form.idPaquete, 
+        id_metodoP: idMetodo,
+        id_estado_transaccion: 1, // 1 = Aprobado/Pagado (Asumido)
+        monto_pagado: parseFloat(this.totalPagar),
+        fecha_pago: new Date(),
+        num_referencia: this.form.referenciaPago // CORREGIDO: Debe coincidir con BD
+      };
+
+      try {
+        await axios.post('http://localhost:3000/api/facturas-clientes', payload);
+        
+        alert(`✅ ¡Reserva Exitosa!\n\nSe ha generado la factura y el registro contable automáticamente.\nMonto: USD ${this.totalPagar}`);
+        this.$router.push('/movimientos-contables'); // Redirigir a contabilidad para ver el resultado
+      } catch (error) {
+        console.error(error);
+        alert("❌ Error al procesar el pago: " + (error.response?.data?.error || error.message));
+      }
     },
     
     cancelarPago() {
       this.$router.push('/pagina-clientes'); 
->>>>>>> 682b119356ef687eac453c3d9066f92d0f9530d8
     },
   },
 };
 </script>
 
 <style scoped>
-/* ------------------------------------------------ */
 /* ESTILOS DE LA PÁGINA DE PAGO */
-/* ------------------------------------------------ */
 
 .pagina-pago {
   font-family: "Poppins", sans-serif;
@@ -463,7 +429,7 @@ input.precio {
     font-size: 1.1em;
 }
 
-/* Estilos para el botón Confirmar Reserva */
+/* Botones */
 .btn-pagar {
   display: block;
   width: 100%;
@@ -481,7 +447,6 @@ input.precio {
   background-color: #ff8a33;
 }
 
-/* Estilos para el botón Cancelar */
 .btn-cancelar {
   background: none;
   border: 1px solid #ff6600;
