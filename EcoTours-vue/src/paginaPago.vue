@@ -172,9 +172,7 @@
         </div>
       </div>
     </div>
-
     <Footer_Cliente />
-  </div>
   </div>
 </template>
 

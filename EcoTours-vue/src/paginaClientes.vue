@@ -167,5 +167,5 @@ export default {
        this.$router.push({ name: 'paginaPago' });
     },
   },
-}}
+}
 </script>

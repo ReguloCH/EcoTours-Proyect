@@ -57,3 +57,22 @@
 2025-12-11T06:04:05.987Z [LOGIN] contraseña parece ser bcrypt hash
 2025-12-11T06:04:06.059Z [LOGIN] resultado compararContraseñas: true
 2025-12-11T06:29:58.793Z Modelo Usuario: usuario
+2025-12-11T14:12:20.827Z Modelo Usuario: usuario
+2025-12-11T14:16:17.401Z Modelo Usuario: usuario
+2025-12-11T14:16:28.604Z Modelo Usuario: usuario
+2025-12-11T14:16:45.688Z Modelo Usuario: usuario
+2025-12-11T14:16:50.281Z [LOGIN] identifier: abreu
+2025-12-11T14:16:50.314Z [LOGIN] usuario encontrado?: true
+2025-12-11T14:16:50.319Z [LOGIN] contraseña almacenada (prefijo): $2b$10$FFY
+2025-12-11T14:16:50.331Z [LOGIN] contraseña parece ser bcrypt hash
+2025-12-11T14:16:50.415Z [LOGIN] resultado compararContraseñas: false
+2025-12-11T14:16:58.153Z [LOGIN] identifier: abreu
+2025-12-11T14:16:58.165Z [LOGIN] usuario encontrado?: true
+2025-12-11T14:16:58.168Z [LOGIN] contraseña almacenada (prefijo): $2b$10$FFY
+2025-12-11T14:16:58.171Z [LOGIN] contraseña parece ser bcrypt hash
+2025-12-11T14:16:58.242Z [LOGIN] resultado compararContraseñas: false
+2025-12-11T14:18:53.270Z [LOGIN] identifier: abreu
+2025-12-11T14:18:53.294Z [LOGIN] usuario encontrado?: true
+2025-12-11T14:18:53.295Z [LOGIN] contraseña almacenada (prefijo): hola123
+2025-12-11T14:18:53.295Z [LOGIN] contraseña almacenada no parece ser hash, comparando texto plano
+2025-12-11T14:18:53.394Z [LOGIN] contraseña migrada a hash y guardada

@@ -58,9 +58,9 @@
                         </table>
                     </div>
                 </div>
-                <div class="card-footer bg-white border-0">
-                    <router-link to="/C_Cliente" class="btn btn-naranja-principal w-100">
-                        <i class="bi bi-person-plus-fill me-2"></i>Registrar Nuevo Cliente
+                <div class="card-footer border-0">
+                    <router-link to="/C_Cliente" class="btn btn-naranja-principal w-100 text-black">
+                        <i class="bi bi-person-plus-fill me-2 text-black"></i>Registrar Nuevo Cliente
                     </router-link>
                 </div>
             </div>
