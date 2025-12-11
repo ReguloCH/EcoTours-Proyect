@@ -268,9 +268,6 @@
             </div>
         </main>
 
-
-
-
         <Footer_Admin />
     </div>
 </template>

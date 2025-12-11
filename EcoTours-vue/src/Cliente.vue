@@ -41,8 +41,8 @@
                                     <td class="text-center">
                                         <!-- Botones de Acción -->
                                         <div class="btn-group" role="group">
-                                            <!-- Editar (Por implementar funcionalidad real) -->
-                                            <button class="btn btn-sm btn-outline-warning" title="Editar">
+                                            <!-- Editar -->
+                                            <button class="btn btn-sm btn-outline-warning me-1" title="Editar" @click="editCliente(usuario.cedula_usuario)">
                                                 <i class="bi bi-pencil-square"></i>
                                             </button>
                                             
@@ -71,11 +71,13 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import axios from 'axios';
 import Sidebar_Admin from './components/Sidebar_Admin.vue';
 import Footer_Admin from './components/Footer_Admin.vue';
 
 const usuarios = ref([]);
+const router = useRouter();
 
 // Configuración axios local si no es global
 axios.defaults.baseURL = 'http://localhost:3000';
@@ -92,6 +94,12 @@ async function cargarUsuarios() {
     } catch (error) {
         console.error("Error cargando usuarios:", error);
     }
+}
+
+// Navegar a la página de edición pasando la cédula en query
+function editCliente(cedula) {
+    if (!cedula) return;
+    router.push({ path: '/E_Cliente', query: { cedula } });
 }
 
 // Función para eliminar cliente por cédula

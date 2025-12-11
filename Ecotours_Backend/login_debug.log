@@ -1,0 +1,59 @@
+2025-12-11T05:16:21.015Z Modelo Usuario: usuario
+2025-12-11T05:18:03.352Z [LOGIN] identifier: JAASSA
+2025-12-11T05:18:03.373Z [LOGIN] usuario encontrado?: true
+2025-12-11T05:18:03.375Z [LOGIN] contraseña almacenada (prefijo): hola123456
+2025-12-11T05:18:03.376Z [LOGIN] contraseña almacenada no parece ser hash, comparando texto plano
+2025-12-11T05:18:03.462Z [LOGIN] contraseña migrada a hash y guardada
+2025-12-11T05:18:51.362Z Modelo Usuario: usuario
+2025-12-11T05:19:43.742Z [LOGIN] identifier: JAASSA
+2025-12-11T05:19:43.771Z [LOGIN] usuario encontrado?: true
+2025-12-11T05:19:43.773Z [LOGIN] contraseña almacenada (prefijo): $2b$10$I.e
+2025-12-11T05:19:43.774Z [LOGIN] contraseña parece ser bcrypt hash
+2025-12-11T05:19:43.849Z [LOGIN] resultado compararContraseñas: true
+2025-12-11T05:19:53.341Z [LOGIN] identifier: yuyuc
+2025-12-11T05:19:53.345Z [LOGIN] usuario encontrado?: false
+2025-12-11T05:20:16.570Z [LOGIN] identifier: esteeef
+2025-12-11T05:20:16.595Z [LOGIN] usuario encontrado?: true
+2025-12-11T05:20:16.596Z [LOGIN] contraseña almacenada (prefijo): dqiwudq
+2025-12-11T05:20:16.597Z [LOGIN] contraseña almacenada no parece ser hash, comparando texto plano
+2025-12-11T05:20:16.715Z [LOGIN] contraseña migrada a hash y guardada
+2025-12-11T05:24:32.445Z Modelo Usuario: usuario
+2025-12-11T05:24:46.185Z [LOGIN] identifier: JAASSA
+2025-12-11T05:24:46.220Z [LOGIN] usuario encontrado?: true
+2025-12-11T05:24:46.221Z [LOGIN] contraseña almacenada (prefijo): $2b$10$I.e
+2025-12-11T05:24:46.222Z [LOGIN] contraseña parece ser bcrypt hash
+2025-12-11T05:24:46.318Z [LOGIN] resultado compararContraseñas: true
+2025-12-11T05:24:59.619Z [LOGIN] identifier: esteeef
+2025-12-11T05:24:59.627Z [LOGIN] usuario encontrado?: true
+2025-12-11T05:24:59.627Z [LOGIN] contraseña almacenada (prefijo): $2b$10$qUR
+2025-12-11T05:24:59.628Z [LOGIN] contraseña parece ser bcrypt hash
+2025-12-11T05:24:59.705Z [LOGIN] resultado compararContraseñas: true
+2025-12-11T05:25:15.860Z [LOGIN] identifier: esteeef
+2025-12-11T05:25:15.876Z [LOGIN] usuario encontrado?: true
+2025-12-11T05:25:15.877Z [LOGIN] contraseña almacenada (prefijo): $2b$10$qUR
+2025-12-11T05:25:15.878Z [LOGIN] contraseña parece ser bcrypt hash
+2025-12-11T05:25:15.966Z [LOGIN] resultado compararContraseñas: true
+2025-12-11T05:30:11.986Z Modelo Usuario: usuario
+2025-12-11T05:31:14.453Z Modelo Usuario: usuario
+2025-12-11T05:31:20.084Z [LOGIN] identifier: esteeef
+2025-12-11T05:31:20.099Z [LOGIN] usuario encontrado?: true
+2025-12-11T05:31:20.103Z [LOGIN] contraseña almacenada (prefijo): $2b$10$qUR
+2025-12-11T05:31:20.105Z [LOGIN] contraseña parece ser bcrypt hash
+2025-12-11T05:31:20.181Z [LOGIN] resultado compararContraseñas: true
+2025-12-11T05:32:19.466Z Modelo Usuario: usuario
+2025-12-11T05:32:37.148Z [LOGIN] identifier: esteeef
+2025-12-11T05:32:37.166Z [LOGIN] usuario encontrado?: true
+2025-12-11T05:32:37.167Z [LOGIN] contraseña almacenada (prefijo): $2b$10$qUR
+2025-12-11T05:32:37.168Z [LOGIN] contraseña parece ser bcrypt hash
+2025-12-11T05:32:37.242Z [LOGIN] resultado compararContraseñas: true
+2025-12-11T05:33:22.376Z [LOGIN] identifier: abreu
+2025-12-11T05:33:22.398Z [LOGIN] usuario encontrado?: true
+2025-12-11T05:33:22.401Z [LOGIN] contraseña almacenada (prefijo): $2b$10$hq4
+2025-12-11T05:33:22.403Z [LOGIN] contraseña parece ser bcrypt hash
+2025-12-11T05:33:22.492Z [LOGIN] resultado compararContraseñas: true
+2025-12-11T06:04:05.932Z [LOGIN] identifier: abreu
+2025-12-11T06:04:05.977Z [LOGIN] usuario encontrado?: true
+2025-12-11T06:04:05.982Z [LOGIN] contraseña almacenada (prefijo): $2b$10$FFY
+2025-12-11T06:04:05.987Z [LOGIN] contraseña parece ser bcrypt hash
+2025-12-11T06:04:06.059Z [LOGIN] resultado compararContraseñas: true
+2025-12-11T06:29:58.793Z Modelo Usuario: usuario

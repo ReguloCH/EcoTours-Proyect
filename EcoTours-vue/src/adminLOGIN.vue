@@ -9,12 +9,11 @@
 
         <form @submit.prevent="iniciarSesion">
           <div class="campo">
-            <label>Correo Electronico</label>
+            <label>Correo Electronico o usuario</label>
             <input
-              v-model="email"
-              type="email"
+              v-model="identifier"
+              type="text"
               required
-              placeholder="ejemplo@correo.com"
             />
           </div>
 
@@ -27,27 +26,25 @@
               placeholder="••••••••"
             />
           </div>
-                <router-link to="/iniADMIN" class="nav-link action-button">Acceder</router-link>   
-          </form>
+
+          <div v-if="errorMessage" style="color: #b00020; margin-bottom: 12px; text-align: left">{{ errorMessage }}</div>
+
+          <div class="d-grid">
+            <button type="submit" class="btn-entrar">Acceder</button>
+          </div>
+        </form>
 
        <!-- <p class="texto-secundario">¿No tienes cuenta?
           <button @click="irARegistro" class="nav-link action-button text-center">Regístrate</button>
         </p>-->
       </div>
     </div>
-
-     
-
-
-    
     <!-- aqui se va a mostrar en la vista el footer entonces esta es la ultima parte del codigo-->
     <Footer_Admin />
     </div>
     
 
 </template>
-
-
 
 <script>
 //ESTE SCRIPT TIENE COMO FIN definir y controlar la lógica central dE ESTA VISTA, EXPLICA QUE OTROS COMPONENTES ESTAN INCLUIDOS
@@ -61,12 +58,50 @@ export default {
     // 3. Los componentes usados (menú)
     components: {
         Footer_Admin
-    },
-    
-  
+    },  
+    data() {
+    return {
+      identifier: '', // correo o usuario
+      password: '',
+      errorMessage: ''
+    };
+  },
+  methods: {
+    async iniciarSesion() {
+      this.errorMessage = '';
+      if (!this.identifier || !this.password) {
+        this.errorMessage = 'Por favor completa todos los campos.';
+        return;
+      }
+
+      try {
+        const res = await fetch('http://localhost:3000/api/usuario/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ identifier: this.identifier, password: this.password })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          // manejar 403 separado
+          if (res.status === 403) {
+            this.errorMessage = data.error || 'No tienes permisos de administrador.';
+            return;
+          }
+          this.errorMessage = data.error || 'Error en autenticación.';
+          return;
+        }
+
+        // Si el usuario existe y es admin, servidor ya lo validó
+        this.$router.push('/iniADMIN');
+      } catch (err) {
+        this.errorMessage = 'No se pudo conectar al servidor.';
+      }
+    }
+  }
 };
 </script>
-
 
 <style>
 .pag-ADMIN {

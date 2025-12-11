@@ -16,6 +16,7 @@ import proveedoresADMIN from '../proveedoresADMIN.vue';
 import aerolineasPROV from '../aerolineasPROV.vue';
 import C_Aerolinea from '../C_Aerolinea.vue';
 import C_Cliente from '../C_Cliente.vue';
+import E_Cliente from '../E_Cliente.vue';
 import E_Aerolinea from '../E_Aerolinea.vue';
 import hospedajePROV from '../hospedajePROV.vue';
 import alimentacionPROV from '../alimentacionPROV.vue';
@@ -127,6 +128,12 @@ const router = createRouter({
       path: '/C_Cliente',
       name: 'C_Cliente',
       component: C_Cliente
+    },
+
+    {
+      path: '/E_Cliente',
+      name: 'E_Cliente',
+      component: E_Cliente
     },
 
     {

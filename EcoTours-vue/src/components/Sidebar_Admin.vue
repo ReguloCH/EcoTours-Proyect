@@ -43,9 +43,9 @@
               <router-link to="/historial-compras" class="nav-link">Historial de Compras</router-link>
           </li>
           <li class="nav-item">
+          <li class="nav-item">
               <router-link to="/movimientos-contables" class="nav-link">Movimientos Contables</router-link>
           </li>
-          
           <li class="nav-item">
             <router-link to="/adminLOGIN" class="nav-link">Salir</router-link>
           </li>

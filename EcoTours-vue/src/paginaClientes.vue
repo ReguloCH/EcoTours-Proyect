@@ -104,7 +104,6 @@ import Footer_Cliente from "./components/Footer_Cliente.vue";
 import PaginaPago from "./paginaPago.vue";
 import axios from "axios";
 
-
 export default {
   name: "paginaClientes",
 
@@ -168,6 +167,5 @@ export default {
        this.$router.push({ name: 'paginaPago' });
     },
   },
-};
-
+}}
 </script>

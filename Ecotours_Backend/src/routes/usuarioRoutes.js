@@ -20,7 +20,9 @@ const validarCedula = [
 
 
 router.post('/', usuarioController.crearUsuario);
+router.post('/login', usuarioController.login);
 router.get('/', usuarioController.obtenerUsuarios);
+router.get('/:cedula', usuarioController.buscarUsuarioPorCedula);
 router.put('/:cedula', usuarioController.actualizarUsuario);
 router.delete('/:cedula', usuarioController.eliminarUsuario);
 
