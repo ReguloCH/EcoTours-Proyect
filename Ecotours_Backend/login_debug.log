@@ -76,3 +76,5 @@
 2025-12-11T14:18:53.295Z [LOGIN] contraseña almacenada (prefijo): hola123
 2025-12-11T14:18:53.295Z [LOGIN] contraseña almacenada no parece ser hash, comparando texto plano
 2025-12-11T14:18:53.394Z [LOGIN] contraseña migrada a hash y guardada
+2025-12-11T15:40:50.863Z Modelo Usuario: usuario
+2025-12-11T16:10:24.559Z Modelo Usuario: usuario

@@ -5,11 +5,14 @@
     <main class="container-xl py-5">
       <h1 class="text-center mb-4 titulo-admin">Historial de Compras</h1>
 
-      <div class="card contenido shadow-lg">
-        <div class="card-header encabezado">
-          <h3 class="mb-0">Gestión de Pagos a Proveedores</h3>
+      <div class="card contenido shadow-lg" id="element-to-print"> 
+        
+        <div class="card-header encabezado" style="margin-bottom: 0px;">
+          <h3 class="mb-0 text-white">Gestión de Pagos a Proveedores</h3>
         </div>
-
+        <button class="btn btn-sm btn-info me-10" @click="pdf()">
+          <i class="bi bi-pencil-square"></i>   Reporte
+        </button>
         <div class="card-body p-0">
           <table class="tabla">
             <thead>
@@ -191,15 +194,28 @@
 
 
 <script>
-import { ref } from "vue";
+import { ref, computed, onMounted } from "vue";
 import axios from "axios";
-
+import html2pdf from 'html2pdf.js'
 import Sidebar_Admin from "./components/Sidebar_Admin.vue";
 import Footer_Admin from "./components/Footer_Admin.vue";
 
 export default {
   name: "HistorialCompras",
   components: { Sidebar_Admin, Footer_Admin },
+  methods: {
+  pdf() {
+    var element = document.getElementById('element-to-print');
+    var opt = {
+      margin:       0.5,
+      filename:     'Reporte de historial de compras.pdf',
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 3 , width: 820},
+      jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' }
+    };
+    html2pdf().from(element).set(opt).save();
+    }
+  },
 
   setup() {
     const historial = ref([]);
